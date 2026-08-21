@@ -3,7 +3,7 @@ import { Worker } from 'bullmq'
 import IORedis from 'ioredis'
 import { env } from '@/lib/env'
 import type { JobData, JobName } from './queue'
-import { handleGenerateAssets, handleGenerateScript } from './handlers'
+import { handleGenerateAssets, handleGenerateKeyframes, handleGenerateScript } from './handlers'
 
 const connection = new IORedis(env.REDIS_URL, { maxRetriesPerRequest: null })
 
@@ -16,6 +16,9 @@ export const worker = new Worker<JobData, unknown, JobName>(
         break
       case 'generate-assets':
         await handleGenerateAssets(job.data.episodeId)
+        break
+      case 'generate-keyframes':
+        await handleGenerateKeyframes(job.data.episodeId)
         break
       default:
         throw new Error(`unknown job: ${job.name}`)

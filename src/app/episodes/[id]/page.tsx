@@ -40,6 +40,7 @@ export default async function EpisodePage({
         <div className="mb-12 flex flex-wrap gap-4">
           <GenerateButton label="生成剧本" endpoint={`/api/episodes/${episode.id}/generate`} />
           <GenerateButton label="生成资产图" endpoint={`/api/episodes/${episode.id}/assets`} />
+          <GenerateButton label="生成关键帧" endpoint={`/api/episodes/${episode.id}/keyframes`} />
         </div>
 
         <section className="mt-10">
@@ -117,6 +118,14 @@ export default async function EpisodePage({
                   key={s.id}
                   className="rounded-lg border border-neutral-200 bg-white px-4 py-3 text-sm"
                 >
+                  {s.keyframeUrl && (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={s.keyframeUrl}
+                      alt={`镜 ${s.index + 1}`}
+                      className="mb-2 h-40 w-full rounded-lg object-cover"
+                    />
+                  )}
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-medium text-neutral-400">镜 {s.index + 1}</span>
                     <span className="text-xs text-neutral-400">

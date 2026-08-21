@@ -2,11 +2,17 @@ import { Queue } from 'bullmq'
 import IORedis from 'ioredis'
 import { env } from '@/lib/env'
 
-export type JobName = 'generate-script' | 'generate-assets' | 'generate-voice' | 'render'
+export type JobName =
+  | 'generate-script'
+  | 'generate-assets'
+  | 'generate-keyframes'
+  | 'generate-voice'
+  | 'render'
 
 export type JobData =
   | { type: 'generate-script'; episodeId: string }
   | { type: 'generate-assets'; episodeId: string }
+  | { type: 'generate-keyframes'; episodeId: string }
   | { type: 'generate-voice'; episodeId: string }
   | { type: 'render'; episodeId: string }
 

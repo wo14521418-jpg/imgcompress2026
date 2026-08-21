@@ -2,7 +2,7 @@ import { Prisma } from '@prisma/client'
 import { prisma } from '@/lib/db'
 import { generateScriptWithLLM } from '@/lib/llm/deepseek'
 import { generateImage } from '@/lib/image/jimeng'
-import { buildCharacterPrompt, buildScenePrompt } from '@/lib/image/prompts'
+import { buildCharacterPrompt, buildKeyframePrompt, buildScenePrompt } from '@/lib/image/prompts'
 
 export async function handleGenerateScript(episodeId: string): Promise<void> {
   const episode = await prisma.episode.findUniqueOrThrow({ where: { id: episodeId } })
@@ -56,5 +56,23 @@ export async function handleGenerateAssets(episodeId: string): Promise<void> {
   for (const s of episode.scenes) {
     const { url } = await generateImage(buildScenePrompt(s.name, s.description), [])
     await prisma.scene.update({ where: { id: s.id }, data: { refImageUrl: url } })
+  }
+}
+
+export async function handleGenerateKeyframes(episodeId: string): Promise<void> {
+  const episode = await prisma.episode.findUniqueOrThrow({
+    where: { id: episodeId },
+    include: { shots: { orderBy: { index: 'asc' } }, scenes: true, characters: true },
+  })
+
+  const sceneDesc = episode.scenes.map((s) => s.name).join('、')
+  const characterNames = episode.characters.map((c) => c.name)
+
+  for (const shot of episode.shots) {
+    const { url } = await generateImage(
+      buildKeyframePrompt(shot.description, sceneDesc, characterNames),
+      [],
+    )
+    await prisma.shot.update({ where: { id: shot.id }, data: { keyframeUrl: url } })
   }
 }

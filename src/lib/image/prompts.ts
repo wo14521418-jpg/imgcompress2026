@@ -27,3 +27,18 @@ export function buildScenePrompt(
     .filter(Boolean)
     .join('，')
 }
+
+export function buildKeyframePrompt(
+  shotDescription: string,
+  sceneDesc: string,
+  characterNames: string[],
+): string {
+  return [
+    '动态漫画关键帧，竖屏 9:16，电影级构图，高细节',
+    characterNames.length ? `人物：${characterNames.join('、')}` : '',
+    sceneDesc ? `场景：${sceneDesc}` : '',
+    `画面：${shotDescription}`,
+  ]
+    .filter(Boolean)
+    .join('，')
+}
