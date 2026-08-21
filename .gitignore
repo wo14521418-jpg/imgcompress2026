@@ -44,3 +44,6 @@ next-env.d.ts
 .superpowers/
 .claude/
 .agents/
+
+# rendered videos
+public/renders/

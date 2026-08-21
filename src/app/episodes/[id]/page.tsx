@@ -18,6 +18,7 @@ export default async function EpisodePage({
       characters: true,
       scenes: true,
       shots: { orderBy: { index: 'asc' } },
+      renderJobs: { orderBy: { createdAt: 'desc' }, take: 1 },
     },
   })
   if (!episode) notFound()
@@ -41,7 +42,18 @@ export default async function EpisodePage({
           <GenerateButton label="生成剧本" endpoint={`/api/episodes/${episode.id}/generate`} />
           <GenerateButton label="生成资产图" endpoint={`/api/episodes/${episode.id}/assets`} />
           <GenerateButton label="生成关键帧" endpoint={`/api/episodes/${episode.id}/keyframes`} />
+          <GenerateButton label="渲染视频" endpoint={`/api/episodes/${episode.id}/render`} />
         </div>
+
+        {episode.renderJobs[0]?.outputUrl && (
+          <section className="mb-12">
+            <h2 className="mb-4 text-xs font-medium uppercase tracking-wider text-neutral-400">
+              成片预览
+            </h2>
+            {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+            <video controls className="w-full rounded-lg" src={episode.renderJobs[0].outputUrl} />
+          </section>
+        )}
 
         <section className="mt-10">
           <h2 className="mb-4 text-xs font-medium uppercase tracking-wider text-neutral-400">

@@ -3,6 +3,7 @@ import { prisma } from '@/lib/db'
 import { generateScriptWithLLM } from '@/lib/llm/deepseek'
 import { generateImage } from '@/lib/image/jimeng'
 import { buildCharacterPrompt, buildKeyframePrompt, buildScenePrompt } from '@/lib/image/prompts'
+import { renderEpisode } from '@/lib/render/render'
 
 export async function handleGenerateScript(episodeId: string): Promise<void> {
   const episode = await prisma.episode.findUniqueOrThrow({ where: { id: episodeId } })
@@ -74,5 +75,27 @@ export async function handleGenerateKeyframes(episodeId: string): Promise<void> 
       [],
     )
     await prisma.shot.update({ where: { id: shot.id }, data: { keyframeUrl: url } })
+  }
+}
+
+export async function handleRender(episodeId: string): Promise<void> {
+  const job = await prisma.renderJob.create({ data: { episodeId, status: 'rendering' } })
+  try {
+    const { outputUrl } = await renderEpisode(episodeId, async (progress) => {
+      await prisma.renderJob.update({
+        where: { id: job.id },
+        data: { progress: Math.round(progress * 100) },
+      })
+    })
+    await prisma.renderJob.update({
+      where: { id: job.id },
+      data: { status: 'done', outputUrl, progress: 100 },
+    })
+  } catch (e) {
+    await prisma.renderJob.update({
+      where: { id: job.id },
+      data: { status: 'failed', error: e instanceof Error ? e.message : String(e) },
+    })
+    throw e
   }
 }

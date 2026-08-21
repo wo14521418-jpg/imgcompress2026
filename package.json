@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@prisma/client": "^6.19.3",
+    "@remotion/bundler": "^4.0.514",
+    "@remotion/renderer": "^4.0.514",
     "@tanstack/react-query": "^5.101.4",
     "bullmq": "^6.1.2",
     "ioredis": "^6.0.0",
@@ -18,6 +20,7 @@
     "openai": "^7.5.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
+    "remotion": "^4.0.514",
     "zod": "^4.4.3",
     "zustand": "^5.0.15"
   },
