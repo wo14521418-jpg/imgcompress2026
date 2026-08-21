@@ -53,16 +53,19 @@ export default async function ProjectPage({
           ) : (
             <ul className="space-y-2">
               {project.episodes.map((e) => (
-                <li
-                  key={e.id}
-                  className="flex items-center justify-between rounded-lg border border-neutral-200 bg-white px-4 py-3 text-sm"
-                >
-                  <div>
-                    <p className="font-medium">{e.title}</p>
-                    <p className="mt-0.5 text-xs text-neutral-400">
-                      第 {e.index + 1} 集 · {e.status}
-                    </p>
-                  </div>
+                <li key={e.id}>
+                  <Link
+                    href={`/episodes/${e.id}`}
+                    className="flex items-center justify-between rounded-lg border border-neutral-200 bg-white px-4 py-3 text-sm transition-colors hover:border-neutral-400"
+                  >
+                    <div>
+                      <p className="font-medium">{e.title}</p>
+                      <p className="mt-0.5 text-xs text-neutral-400">
+                        第 {e.index + 1} 集 · {e.status}
+                      </p>
+                    </div>
+                    <span className="text-xs text-neutral-400">→</span>
+                  </Link>
                 </li>
               ))}
             </ul>
