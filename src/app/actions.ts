@@ -18,3 +18,15 @@ export async function createProject(formData: FormData) {
   })
   revalidatePath('/')
 }
+
+export async function createEpisode(projectId: string, formData: FormData) {
+  const title = formData.get('title')
+  if (typeof title !== 'string' || !title.trim()) {
+    return
+  }
+  const count = await prisma.episode.count({ where: { projectId } })
+  await prisma.episode.create({
+    data: { projectId, index: count, title: title.trim() },
+  })
+  revalidatePath(`/projects/${projectId}`)
+}
