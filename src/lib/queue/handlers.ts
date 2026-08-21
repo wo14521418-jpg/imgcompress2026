@@ -1,6 +1,8 @@
 import { Prisma } from '@prisma/client'
 import { prisma } from '@/lib/db'
 import { generateScriptWithLLM } from '@/lib/llm/deepseek'
+import { generateImage } from '@/lib/image/jimeng'
+import { buildCharacterPrompt, buildScenePrompt } from '@/lib/image/prompts'
 
 export async function handleGenerateScript(episodeId: string): Promise<void> {
   const episode = await prisma.episode.findUniqueOrThrow({ where: { id: episodeId } })
@@ -38,5 +40,21 @@ export async function handleGenerateScript(episodeId: string): Promise<void> {
         durationSec: s.durationSec,
       },
     })
+  }
+}
+
+export async function handleGenerateAssets(episodeId: string): Promise<void> {
+  const episode = await prisma.episode.findUniqueOrThrow({
+    where: { id: episodeId },
+    include: { characters: true, scenes: true },
+  })
+
+  for (const c of episode.characters) {
+    const { url } = await generateImage(buildCharacterPrompt(c.name, c.description), [])
+    await prisma.character.update({ where: { id: c.id }, data: { refImageUrl: url } })
+  }
+  for (const s of episode.scenes) {
+    const { url } = await generateImage(buildScenePrompt(s.name, s.description), [])
+    await prisma.scene.update({ where: { id: s.id }, data: { refImageUrl: url } })
   }
 }

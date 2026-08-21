@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
-export function GenerateScriptButton({ episodeId }: { episodeId: string }) {
+export function GenerateButton({ label, endpoint }: { label: string; endpoint: string }) {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
   const [status, setStatus] = useState('')
@@ -12,7 +12,7 @@ export function GenerateScriptButton({ episodeId }: { episodeId: string }) {
     setLoading(true)
     setStatus('入队中…')
 
-    const resp = await fetch(`/api/episodes/${episodeId}/generate`, { method: 'POST' })
+    const resp = await fetch(endpoint, { method: 'POST' })
     if (!resp.ok) {
       setStatus(`入队失败（HTTP ${resp.status}）`)
       setLoading(false)
@@ -49,7 +49,7 @@ export function GenerateScriptButton({ episodeId }: { episodeId: string }) {
         disabled={loading}
         className="rounded-lg bg-neutral-900 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-neutral-700 disabled:opacity-50"
       >
-        {loading ? '生成中…' : '生成剧本'}
+        {loading ? '生成中…' : label}
       </button>
       {status && <span className="text-xs text-neutral-500">{status}</span>}
     </div>

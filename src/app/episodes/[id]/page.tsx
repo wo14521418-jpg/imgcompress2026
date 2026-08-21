@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { prisma } from '@/lib/db'
-import { GenerateScriptButton } from '@/components/generate-script-button'
+import { GenerateButton } from '@/components/generate-button'
 
 export const dynamic = 'force-dynamic'
 
@@ -32,32 +32,79 @@ export default async function EpisodePage({
           ← 返回 {episode.project.title}
         </Link>
 
-        <header className="mb-8 mt-6">
+        <header className="mb-6 mt-6">
           <h1 className="text-2xl font-semibold tracking-tight">{episode.title}</h1>
           <p className="mt-2 text-sm text-neutral-500">状态：{episode.status}</p>
         </header>
 
-        <GenerateScriptButton episodeId={episode.id} />
-
-        <Section title={`角色（${episode.characters.length}）`} empty="生成剧本后显示角色">
-          {episode.characters.map((c) => (
-            <li key={c.id} className="rounded-lg border border-neutral-200 bg-white px-4 py-3 text-sm">
-              <p className="font-medium">{c.name}</p>
-              <p className="mt-0.5 text-xs text-neutral-500">{c.description}</p>
-            </li>
-          ))}
-        </Section>
-
-        <Section title={`场景（${episode.scenes.length}）`} empty="生成剧本后显示场景">
-          {episode.scenes.map((s) => (
-            <li key={s.id} className="rounded-lg border border-neutral-200 bg-white px-4 py-3 text-sm">
-              <p className="font-medium">{s.name}</p>
-              <p className="mt-0.5 text-xs text-neutral-500">{s.description}</p>
-            </li>
-          ))}
-        </Section>
+        <div className="mb-12 flex flex-wrap gap-4">
+          <GenerateButton label="生成剧本" endpoint={`/api/episodes/${episode.id}/generate`} />
+          <GenerateButton label="生成资产图" endpoint={`/api/episodes/${episode.id}/assets`} />
+        </div>
 
         <section className="mt-10">
+          <h2 className="mb-4 text-xs font-medium uppercase tracking-wider text-neutral-400">
+            角色（{episode.characters.length}）
+          </h2>
+          {episode.characters.length === 0 ? (
+            <p className="text-sm text-neutral-400">生成剧本后显示角色。</p>
+          ) : (
+            <ul className="space-y-2">
+              {episode.characters.map((c) => (
+                <li
+                  key={c.id}
+                  className="flex items-center gap-4 rounded-lg border border-neutral-200 bg-white px-4 py-3 text-sm"
+                >
+                  {c.refImageUrl && (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={c.refImageUrl}
+                      alt={c.name}
+                      className="h-20 w-20 shrink-0 rounded-lg object-cover"
+                    />
+                  )}
+                  <div>
+                    <p className="font-medium">{c.name}</p>
+                    <p className="mt-0.5 text-xs text-neutral-500">{c.description}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
+
+        <section className="mt-8">
+          <h2 className="mb-4 text-xs font-medium uppercase tracking-wider text-neutral-400">
+            场景（{episode.scenes.length}）
+          </h2>
+          {episode.scenes.length === 0 ? (
+            <p className="text-sm text-neutral-400">生成剧本后显示场景。</p>
+          ) : (
+            <ul className="space-y-2">
+              {episode.scenes.map((s) => (
+                <li
+                  key={s.id}
+                  className="flex items-center gap-4 rounded-lg border border-neutral-200 bg-white px-4 py-3 text-sm"
+                >
+                  {s.refImageUrl && (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={s.refImageUrl}
+                      alt={s.name}
+                      className="h-20 w-20 shrink-0 rounded-lg object-cover"
+                    />
+                  )}
+                  <div>
+                    <p className="font-medium">{s.name}</p>
+                    <p className="mt-0.5 text-xs text-neutral-500">{s.description}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
+
+        <section className="mt-8">
           <h2 className="mb-4 text-xs font-medium uppercase tracking-wider text-neutral-400">
             镜头（{episode.shots.length}）
           </h2>
@@ -66,7 +113,10 @@ export default async function EpisodePage({
           ) : (
             <ul className="space-y-2">
               {episode.shots.map((s) => (
-                <li key={s.id} className="rounded-lg border border-neutral-200 bg-white px-4 py-3 text-sm">
+                <li
+                  key={s.id}
+                  className="rounded-lg border border-neutral-200 bg-white px-4 py-3 text-sm"
+                >
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-medium text-neutral-400">镜 {s.index + 1}</span>
                     <span className="text-xs text-neutral-400">
@@ -85,24 +135,5 @@ export default async function EpisodePage({
         </section>
       </div>
     </main>
-  )
-}
-
-function Section({
-  title,
-  empty,
-  children,
-}: {
-  title: string
-  empty: string
-  children: React.ReactNode
-}) {
-  const items = Array.isArray(children) ? children : [children]
-  const isEmpty = items.filter(Boolean).length === 0
-  return (
-    <section className="mt-10">
-      <h2 className="mb-4 text-xs font-medium uppercase tracking-wider text-neutral-400">{title}</h2>
-      {isEmpty ? <p className="text-sm text-neutral-400">{empty}</p> : <ul className="space-y-2">{children}</ul>}
-    </section>
   )
 }
