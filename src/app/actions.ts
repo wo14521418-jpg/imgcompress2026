@@ -8,6 +8,13 @@ export async function createProject(formData: FormData) {
   if (typeof premise !== 'string' || !premise.trim()) {
     return
   }
-  await prisma.project.create({ data: { premise: premise.trim() } })
+  const trimmed = premise.trim()
+  await prisma.project.create({
+    data: {
+      // title 暂用题材前 20 字；完整工作台会提供独立标题字段
+      title: trimmed.slice(0, 20),
+      premise: trimmed,
+    },
+  })
   revalidatePath('/')
 }

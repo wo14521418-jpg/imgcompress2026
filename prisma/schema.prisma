@@ -8,8 +8,72 @@ datasource db {
 }
 
 model Project {
+  id              String    @id @default(cuid())
+  title           String
+  premise         String
+  visualDirection String?
+  status          String    @default("draft")
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  episodes        Episode[]
+}
+
+model Episode {
+  id         String      @id @default(cuid())
+  projectId  String
+  project    Project     @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  index      Int
+  title      String
+  script     Json?
+  status     String      @default("draft")
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  characters Character[]
+  scenes     Scene[]
+  shots      Shot[]
+  renderJobs RenderJob[]
+}
+
+model Character {
+  id          String  @id @default(cuid())
+  episodeId   String
+  episode     Episode @relation(fields: [episodeId], references: [id], onDelete: Cascade)
+  name        String
+  description String
+  refImageUrl String?
+  voiceId     String?
+}
+
+model Scene {
+  id          String  @id @default(cuid())
+  episodeId   String
+  episode     Episode @relation(fields: [episodeId], references: [id], onDelete: Cascade)
+  name        String
+  description String
+  refImageUrl String?
+}
+
+model Shot {
+  id          String  @id @default(cuid())
+  episodeId   String
+  episode     Episode @relation(fields: [episodeId], references: [id], onDelete: Cascade)
+  index       Int
+  description String
+  cameraMove  String?
+  dialogue    String?
+  durationSec Float?
+  keyframeUrl String?
+  voiceUrl    String?
+}
+
+model RenderJob {
   id        String   @id @default(cuid())
-  premise   String
+  episodeId String
+  episode   Episode  @relation(fields: [episodeId], references: [id], onDelete: Cascade)
+  status    String   @default("pending")
+  progress  Int      @default(0)
+  outputUrl String?
+  error     String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
