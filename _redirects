@@ -1,0 +1,2 @@
+# Static multi-page site — no SPA rewrite.
+# Existing files are served directly; unknown paths fall back to 404.html.

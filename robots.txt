@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://imgcompress2026.netlify.app/sitemap.xml

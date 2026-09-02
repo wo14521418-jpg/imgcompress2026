@@ -47,3 +47,10 @@ next-env.d.ts
 
 # rendered videos
 public/renders/
+
+# Netlify deployment files — never ignore
+!_redirects
+!_headers
+!robots.txt
+!sitemap.xml
+!ads.txt

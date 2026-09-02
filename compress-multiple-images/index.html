@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compress Multiple Images Online — Batch Compressor</title>
+<meta name="description" content="Compress multiple images at once online for free. Batch compress JPG, PNG and WebP and download them all as a single ZIP — in your browser.">
+<link rel="canonical" href="https://imgcompress2026.netlify.app/compress-multiple-images/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Compress Multiple Images Online — Batch Compressor">
+<meta property="og:description" content="Compress multiple images at once online for free and download them as a ZIP.">
+<meta property="og:url" content="https://imgcompress2026.netlify.app/compress-multiple-images/">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20rx='22'%20fill='%232563eb'/%3E%3Ctext%20x='50'%20y='50'%20font-size='58'%20text-anchor='middle'%20dominant-baseline='central'%20fill='white'%20font-weight='bold'%3E%E5%9B%BE%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Compress Multiple Images Online","url":"https://imgcompress2026.netlify.app/compress-multiple-images/","applicationCategory":"MultimediaApplication","operatingSystem":"Any","description":"Batch compress JPG, PNG and WebP images online for free and download as ZIP."}
+</script>
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Content-Security-Policy" content="frame-ancestors 'none'">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9000494688678902" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body data-default-format="webp">
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#2563eb"/><circle cx="9" cy="9" r="1.8" fill="#fff"/><path d="M3.5 17.5l5-5 3 3 4-4 5 5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg><span>Image Compressor</span></a>
+    <nav class="site-nav">
+      <a href="/">Home</a>
+      <a href="/compress-image/">Compress Image</a>
+      <a href="/compress-jpg/">Compress JPG</a>
+      <a href="/compress-png/">Compress PNG</a>
+      <a href="/compress-webp/">Compress WebP</a>
+      <a href="/compress-multiple-images/">Batch</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <h1>Compress Multiple Images Online</h1>
+    <p class="subtitle">Batch compress many images at once and download them all as a single ZIP — free.</p>
+  </section>
+
+  <section class="card">
+    <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload images">
+      <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" multiple hidden>
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 16V6m0 0l-4 4m4-4l4 4" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round"/></svg>
+      <p class="dz-title">Drag &amp; drop multiple images here, or click to select</p>
+      <p class="dz-hint">Select several images at once — processed locally, never uploaded</p>
+    </div>
+    <p class="error" id="errorMsg" hidden></p>
+
+    <div class="results" id="results" hidden>
+      <div class="file-info">
+        <div class="fi-item"><span class="fi-label">File name</span><span class="fi-value" id="fileName">—</span></div>
+        <div class="fi-item"><span class="fi-label">Original size</span><span class="fi-value" id="origSize">—</span></div>
+      </div>
+      <div class="level-row">
+        <span class="level-label">Compression level</span>
+        <div class="level-options" role="radiogroup" aria-label="Compression level">
+          <button type="button" class="level-btn active" data-level="75"><span class="level-name">Normal</span><span class="level-q">Quality 75</span></button>
+          <button type="button" class="level-btn" data-level="55"><span class="level-name">Strong</span><span class="level-q">Quality 55</span></button>
+          <button type="button" class="level-btn" data-level="30"><span class="level-name">Extreme</span><span class="level-q">Quality 30</span></button>
+        </div>
+      </div>
+      <div class="format-row">
+        <span class="format-label">Output format</span>
+        <select id="formatSelect" aria-label="Output format">
+          <option value="webp">WebP</option>
+          <option value="jpeg">JPG</option>
+          <option value="png">PNG</option>
+          <option value="auto">Auto (keep original)</option>
+        </select>
+      </div>
+      <p class="png-hint" id="pngHint" hidden>PNG is lossless and usually does not shrink the file further.</p>
+      <div class="compare">
+        <figure class="preview"><figcaption>Original</figcaption><div class="preview-box"><img id="beforeImg" alt="" width="400" height="400" hidden><span class="preview-empty" id="beforeEmpty">Preview appears after upload</span></div><span class="preview-meta" id="beforeSize"></span></figure>
+        <figure class="preview"><figcaption>Compressed</figcaption><div class="preview-box"><img id="afterImg" alt="" width="400" height="400" hidden><span class="preview-empty" id="afterEmpty">Compressed preview</span></div><span class="preview-meta" id="afterSize"></span></figure>
+      </div>
+      <div class="stats">
+        <div class="stat"><span class="stat-label">Compressed size</span><span class="stat-value" id="compressedSize">—</span></div>
+        <div class="stat"><span class="stat-label">Saved</span><span class="stat-value badge is-none" id="savedVal">—</span></div>
+      </div>
+      <p class="status" id="status" hidden></p>
+      <button class="btn btn-primary download" id="downloadBtn" type="button" disabled>Download compressed image</button>
+    </div>
+
+    <div class="batch-results" id="batchResults" hidden>
+      <h3 class="batch-title">Batch compression</h3>
+      <div class="batch-progress"><div class="progress-bar"><div class="progress-fill" id="batchProgressFill"></div></div><span class="progress-text" id="batchProgressText">0/0</span></div>
+      <div class="level-row">
+        <span class="level-label">Compression level</span>
+        <div class="level-options" role="radiogroup" aria-label="Compression level">
+          <button type="button" class="level-btn active" data-level="75"><span class="level-name">Normal</span><span class="level-q">Quality 75</span></button>
+          <button type="button" class="level-btn" data-level="55"><span class="level-name">Strong</span><span class="level-q">Quality 55</span></button>
+          <button type="button" class="level-btn" data-level="30"><span class="level-name">Extreme</span><span class="level-q">Quality 30</span></button>
+        </div>
+      </div>
+      <ul class="batch-list" id="batchList"></ul>
+      <button class="btn btn-primary download" id="downloadZipBtn" type="button" disabled>Download all as ZIP</button>
+    </div>
+  </section>
+
+  <section class="content-block">
+    <h2>How to compress multiple images at once</h2>
+    <ol>
+      <li>Select several images (use Ctrl/Cmd to multi-select, or drag them in).</li>
+      <li>Choose a compression level — it applies to every image.</li>
+      <li>Watch the progress as each image is compressed.</li>
+      <li>Download all compressed images as a single ZIP file.</li>
+    </ol>
+  </section>
+
+  <section class="content-block">
+    <h2>Why batch compress images?</h2>
+    <p>If you have a folder of photos or a set of product images, compressing them one by one is slow. Batch compression lets you process them all at once with a single quality setting, then download everything as one ZIP archive. It all happens locally in your browser.</p>
+  </section>
+
+  <section class="content-block">
+    <h2>Batch compression FAQ</h2>
+    <div class="faq-item"><h4>How many images can I compress at once?</h4><p>There is no hard limit. A very large batch may take longer depending on your device's performance.</p></div>
+    <div class="faq-item"><h4>Do I need to download each image separately?</h4><p>No — all compressed images are bundled into a single ZIP file.</p></div>
+    <div class="faq-item"><h4>Are my images uploaded?</h4><p>No. Everything is processed locally in your browser.</p></div>
+  </section>
+
+  <section class="content-block">
+    <h2>Related tools and guides</h2>
+    <ul>
+      <li><a href="/compress-image/">Compress a Single Image</a></li>
+      <li><a href="/compress-jpg/">Compress JPG</a></li>
+      <li><a href="/guides/how-to-compress-images-for-a-website/">How to Compress Images for a Website</a></li>
+    </ul>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="ad-slot" role="complementary" aria-label="Advertisement"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9000494688678902" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+      <a href="/privacy-policy/">Privacy Policy</a>
+      <a href="/terms-of-service/">Terms of Service</a>
+      <a href="/cookie-policy/">Cookie Policy</a>
+    </nav>
+    <p class="copyright">© 2026 Image Compressor</p>
+  </div>
+</footer>
+
+<div class="cookie-banner" id="cookieBanner" hidden>
+  <div class="cookie-inner">
+    <p>This site uses local browser storage to remember your preferences. No personal data is collected or uploaded.</p>
+    <div class="cookie-actions"><button class="btn btn-ghost" id="cookieReject" type="button">Reject</button><button class="btn btn-primary" id="cookieAccept" type="button">Accept</button></div>
+  </div>
+</div>
+
+<script src="/assets/app.js" defer></script>
+</body>
+</html>
