@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Compress Images for WordPress Without Losing Quality</title>
+<meta name="description" content="A practical workflow for WordPress images: pick the right pixel size, export at the right quality, and keep the media library clean so pages load fast.">
+<link rel="canonical" href="https://imgcompress2026.netlify.app/guides/how-to-compress-images-for-wordpress/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to Compress Images for WordPress Without Losing Quality">
+<meta property="og:description" content="Pick the right pixel size, export at the right quality and keep WordPress media light.">
+<meta property="og:url" content="https://imgcompress2026.netlify.app/guides/how-to-compress-images-for-wordpress/">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20rx='22'%20fill='%232563eb'/%3E%3Ctext%20x='50'%20y='50'%20font-size='58'%20text-anchor='middle'%20dominant-baseline='central'%20fill='white'%20font-weight='bold'%3EIC%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"How to Compress Images for WordPress Without Losing Quality","description":"A practical workflow for WordPress images: sizing, export quality and media library hygiene.","url":"https://imgcompress2026.netlify.app/guides/how-to-compress-images-for-wordpress/","inLanguage":"en"}
+</script>
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9000494688678902" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#2563eb"/><circle cx="9" cy="9" r="1.8" fill="#fff"/><path d="M3.5 17.5l5-5 3 3 4-4 5 5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg><span>Image Compressor</span></a>
+    <nav class="site-nav">
+      <a href="/">Home</a>
+      <a href="/compress-image/">Compress Image</a>
+      <a href="/resize-image/">Resize Image</a>
+      <a href="/crop-image/">Crop Image</a>
+      <a href="/compress-to-size/">Compress to Size</a>
+      <a href="/compress-multiple-images/">Batch</a>
+      <a href="/guides/">Guides</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero"><h1>How to compress images for WordPress</h1></section>
+
+  <article class="content-block page-content">
+    <p>WordPress will happily accept a 6 MB photo straight from your phone, resize it into six thumbnails, and serve it to every visitor. It will also make your pages crawl. The fix is not a plugin installed on top of a messy media library — it is getting the file right before you upload it.</p>
+
+    <h2>Start with pixels, not kilobytes</h2>
+    <p>WordPress itself creates the sizes it needs — thumbnail, medium, large and whatever your theme registers. What it cannot do is repair an image that is far too big to begin with, because every one of those generated copies inherits the problem.</p>
+    <p>So decide the largest size the image will actually be shown at, and upload that:</p>
+    <ul>
+      <li><strong>Article images</strong> — the content column is rarely wider than about 800–900 pixels. Uploading 1280 px gives you room for high-density screens without waste.</li>
+      <li><strong>Full-width header or hero</strong> — 1600–1920 px. There is almost never a reason to go wider.</li>
+      <li><strong>Logo</strong> — export at roughly twice the height it is displayed at, so it stays crisp on retina screens. A logo is vector artwork, so a PNG or WebP export works better than a JPEG.</li>
+      <li><strong>Product photo</strong> — 1600 px on the long edge is a good balance between zoom quality and file size.</li>
+    </ul>
+
+    <h2>Then choose a format and a quality</h2>
+    <p>For photographs, WebP is the sensible default: the same visual quality lands in a substantially smaller file than JPEG, and every browser WordPress has to support on current versions can display it. Keep JPEG for anything that must stay compatible with older external tools, and PNG only when you need transparency or perfectly crisp flat colour — a screenshot of text, for example.</p>
+    <p>Aim for a final file of roughly 100–250 KB for a photo that fills the content column. If you are far above that, the problem is almost always resolution rather than quality: dropping the quality slider to 40 gets you a blurry mess, while resizing to the right pixel width gets you the same smaller file with no visible damage.</p>
+
+    <h2>The order that works</h2>
+    <ol>
+      <li>Work from the original camera or design file.</li>
+      <li><a href="/resize-image/">Resize</a> to the largest size the image will be displayed at.</li>
+      <li><a href="/compress-image/">Compress</a> the smaller image, keeping the quality around 70–80 for photos.</li>
+      <li>Convert to WebP if the rest of your site is served in WebP too.</li>
+      <li>Check the result on a phone before you upload it.</li>
+    </ol>
+    <p>If you have a folder of images ready to go, the <a href="/compress-multiple-images/">batch tool</a> applies the same settings to all of them and hands back a ZIP, which saves a lot of clicking.</p>
+
+    <h2>Before you upload: two things that catch people out</h2>
+    <p><strong>Filename.</strong> Rename <em>IMG_4821.jpg</em> to something descriptive such as <em>walnut-desk-organiser-side-view.jpg</em> before uploading. WordPress derives the attachment slug from the filename, and descriptive names are one of the few image SEO details you fully control.</p>
+    <p><strong>Alt text.</strong> Alt text is what a screen reader announces and what shows when an image fails to load. Describe the image rather than stuffing in keywords: "walnut desk organiser with two pen cups" beats "desk organiser, pen holder, gift".</p>
+
+    <h2>If images are still slow after all this</h2>
+    <p>Compression is only half of it. Modern browsers pick a file based on the width attribute of your theme and the reported device width, so the markup matters too. If you are debugging with a page speed tool and the report points at images, compare the reported file size against the dimensions it says are being downloaded: if a 300-pixel thumbnail is being served as a 1600-pixel file, the media library has the wrong version, and re-uploading a correctly sized file is faster than installing another plugin.</p>
+
+    <h2>Frequently asked questions</h2>
+    <div class="faq-item"><h4>What is a good image file size for WordPress?</h4><p>Around 100–250 KB for a photograph in the content column, and up to about 300–400 KB for a full-width hero. Anything above that is worth investigating, unless it is a deliberately detailed illustration or a print-quality download.</p></div>
+    <div class="faq-item"><h4>Does WordPress compress images automatically?</h4><p>It generates several resized copies of each upload and applies a moderate JPEG quality setting, but it does not turn a 6000-pixel camera file into a sensibly sized one. Uploading an image that is already the right size gives a better result.</p></div>
+    <div class="faq-item"><h4>Should I upload WebP or JPEG to WordPress?</h4><p>WebP is safe on current WordPress versions and gives smaller files for the same visible quality. The one caution is external systems — email clients, print services or plugins that expect a JPEG. When in doubt for a photo, JPEG is never a wrong answer.</p></div>
+    <div class="faq-item"><h4>Will compressing hurt my image SEO?</h4><p>No. Search engines weigh page experience heavily, and a smaller image that displays at the correct size is better for SEO than a large one. Image search also prefers files that load quickly.</p></div>
+    <div class="faq-item"><h4>Can I compress images that are already in my media library?</h4><p>Yes, but replacing a file in place is awkward: download the image you want to shrink, compress it, then upload it as a new attachment and update the page. Alternatively, regenerate your thumbnails after the swap.</p></div>
+
+    <div class="rel-links">
+      <p><strong>Related:</strong> <a href="/guides/how-to-compress-images-for-a-website/">Compress images for a website</a> · <a href="/guides/jpg-vs-webp-which-is-better/">JPG vs WebP</a> · <a href="/compress-image/">Compress Image</a> · <a href="/compress-multiple-images/">Batch compress</a></p>
+    </div>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="/compress-image/">Compress Image</a>
+      <a href="/compress-jpg/">Compress JPG</a>
+      <a href="/compress-png/">Compress PNG</a>
+      <a href="/compress-webp/">Compress WebP</a>
+      <a href="/resize-image/">Resize Image</a>
+      <a href="/crop-image/">Crop Image</a>
+      <a href="/compress-to-size/">Compress to Size</a>
+      <a href="/compress-multiple-images/">Batch Compress</a>
+      <a href="/guides/">Guides</a>
+      <a href="/sitemap/">Sitemap</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+      <a href="/privacy-policy/">Privacy Policy</a>
+      <a href="/terms-of-service/">Terms of Service</a>
+      <a href="/cookie-policy/">Cookie Policy</a>
+    </nav>
+    <p class="copyright">© 2026 Image Compressor</p>
+  </div>
+</footer>
+
+<div class="cookie-banner" id="cookieBanner" hidden>
+  <div class="cookie-inner">
+    <p>This site uses local browser storage to remember your preferences. No personal data is collected or uploaded.</p>
+    <div class="cookie-actions"><button class="btn btn-ghost" id="cookieReject" type="button">Reject</button><button class="btn btn-primary" id="cookieAccept" type="button">Accept</button></div>
+  </div>
+</div>
+
+<script src="/assets/app.js" defer></script>
+</body>
+</html>

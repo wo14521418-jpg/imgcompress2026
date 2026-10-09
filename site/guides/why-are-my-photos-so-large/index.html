@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Why Are My Photos So Large? Megapixels, Pixels and File Size</title>
+<meta name="description" content="A 12 megapixel photo only needs about 2 megapixels to fill a screen. Here is where the extra weight comes from and the quickest way to get rid of it.">
+<link rel="canonical" href="https://imgcompress2026.netlify.app/guides/why-are-my-photos-so-large/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Why Are My Photos So Large? Megapixels, Pixels and File Size">
+<meta property="og:description" content="Where the megabytes in a phone photo actually come from, and the fastest way to shrink them.">
+<meta property="og:url" content="https://imgcompress2026.netlify.app/guides/why-are-my-photos-so-large/">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20rx='22'%20fill='%232563eb'/%3E%3Ctext%20x='50'%20y='50'%20font-size='58'%20text-anchor='middle'%20dominant-baseline='central'%20fill='white'%20font-weight='bold'%3EIC%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Why Are My Photos So Large? Megapixels, Pixels and File Size","description":"Why phone photos reach several megabytes and how resolution, format and quality each affect the size.","url":"https://imgcompress2026.netlify.app/guides/why-are-my-photos-so-large/","inLanguage":"en"}
+</script>
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9000494688678902" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#2563eb"/><circle cx="9" cy="9" r="1.8" fill="#fff"/><path d="M3.5 17.5l5-5 3 3 4-4 5 5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg><span>Image Compressor</span></a>
+    <nav class="site-nav">
+      <a href="/">Home</a>
+      <a href="/compress-image/">Compress Image</a>
+      <a href="/resize-image/">Resize Image</a>
+      <a href="/crop-image/">Crop Image</a>
+      <a href="/compress-to-size/">Compress to Size</a>
+      <a href="/compress-multiple-images/">Batch</a>
+      <a href="/guides/">Guides</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero"><h1>Why are my photos so large?</h1></section>
+
+  <article class="content-block page-content">
+    <p>You take one photo, attach it to an email, and the message is suddenly 4 MB. Nothing about the picture looks four megabytes worth of complicated. The explanation is simple arithmetic: file size is driven by how many pixels the camera recorded, not by how interesting the subject is.</p>
+
+    <h2>Megapixels are just multiplication</h2>
+    <p>A camera advertised as 12 megapixels produces images about 4032 pixels wide and 3024 pixels tall. Multiply those and you get a little over 12 million pixels — twelve megapixels. Every one of those pixels has to be stored with a colour value.</p>
+    <p>Now compare that with the screen you are reading this on. A typical laptop displays about 2 million pixels; a phone about 2 to 3 million. So a single 12 megapixel photo carries roughly four to six times more detail than the entire screen it will be shown on. The rest is stored, uploaded, downloaded and decoded for nobody.</p>
+
+    <h2>The four things that decide the file size</h2>
+    <ul>
+      <li><strong>Pixel count</strong> — the dominant factor. Double the width and height and you have four times the pixels to encode.</li>
+      <li><strong>Format</strong> — a JPEG stores a photo in far fewer bytes than a PNG of identical dimensions, because PNG is lossless and records every pixel exactly.</li>
+      <li><strong>Quality setting</strong> — JPEG and WebP let the encoder throw away detail the eye is unlikely to notice. Dropping from 95 to 75 typically halves the file with no visible change at normal viewing sizes.</li>
+      <li><strong>Content</strong> — fine texture costs more than flat areas. A photo of gravel is heavier than a photo of a wall, at the same dimensions and settings.</li>
+    </ul>
+
+    <h2>Why screenshots are so much bigger than they look</h2>
+    <p>A screenshot is usually saved as PNG, which is lossless. That is the right choice for text and interface graphics, because lossy compression smears the edges of letters. The price is that a full-screen screenshot of a detailed page can easily be 2–5 MB, and one of a spreadsheet larger still. If the screenshot is a photograph of a document rather than crisp UI, saving it as JPEG or WebP instead can cut it by 80% or more with no meaningful loss.</p>
+
+    <h2>Modern phone formats are not always the culprit</h2>
+    <p>iPhones and many Android phones capture in HEIC, which is smaller than JPEG for the same quality, and then convert to JPEG when you share the file with other apps. That conversion is why an image that looked small in your gallery arrives at 5 MB. Nothing is broken; you are simply receiving the full-resolution original.</p>
+    <p>Phones with a 48 or 50 megapixel sensor add another wrinkle: many only use the full resolution in a special mode or in good light, and otherwise combine pixels into a 12 megapixel result with better low-light performance. Check the actual dimensions of the file — the number on the camera spec sheet is not always the number in the file.</p>
+
+    <h2>What actually shrinks a photo</h2>
+    <ol>
+      <li><strong>Resize it.</strong> Decide the largest size it will be displayed at — 1280 pixels wide for a blog image, 1920 for a full-width banner — and reduce it to that. This is where most of the saving comes from. Use the <a href="/resize-image/">image resizer</a>.</li>
+      <li><strong>Compress it.</strong> Re-encode at a sensible quality: 70–80 for photos, lower for thumbnails. Use the <a href="/compress-image/">compressor</a>.</li>
+      <li><strong>Pick the right format.</strong> WebP for the web, JPEG for maximum compatibility, PNG only when you need transparency or lossless flat colour.</li>
+      <li><strong>Check the result at 100%.</strong> If you cannot see a difference on screen, there is no difference that matters.</li>
+    </ol>
+    <p>If a form or a portal demands an exact limit — "under 500 KB", "maximum 200 KB" — skip the guesswork and use the <a href="/compress-to-size/">target size tool</a>, which finds the highest quality that still fits.</p>
+
+    <h2>When you should keep the big file</h2>
+    <p>Compression is for delivery, not for archiving. Keep the originals on a drive or in cloud storage. You will want the full-resolution version for printing, for a future website redesign that uses larger images, or for the day a better format arrives and you want to re-export. Deleting the original to save space is a decision you cannot undo.</p>
+
+    <h2>Frequently asked questions</h2>
+    <div class="faq-item"><h4>Why is a 12 MP photo 4 MB when a 2 MP version is 400 KB?</h4><p>Because file size tracks the number of pixels. Six times the pixels, at the same quality setting, is roughly six times the data — which is exactly the ratio you noticed.</p></div>
+    <div class="faq-item"><h4>Does a smaller file mean worse quality?</h4><p>Only if you shrink it the wrong way. Resizing to the size the image is actually displayed at is invisible to viewers. Dropping quality to 30% on a full-resolution photo is where the blur comes from.</p></div>
+    <div class="faq-item"><h4>How do I check the pixel dimensions of a photo?</h4><p>On Windows, right-click the file and choose Properties, then the Details tab. On a Mac, open it in Preview and use Tools, Show Inspector. On a phone, the gallery app usually shows the resolution in the file information panel.</p></div>
+    <div class="faq-item"><h4>Can I make a photo smaller without losing detail?</h4><p>Only up to a point. Removing pixels that would never be displayed loses nothing visible. Beyond that you are trading quality for size, and the honest answer is to choose the trade-off deliberately.</p></div>
+    <div class="faq-item"><h4>Are my photos uploaded when I compress them here?</h4><p>No. Every tool on this site processes the file inside your browser, so nothing is sent to a server. You can test it by going offline after the page loads.</p></div>
+
+    <div class="rel-links">
+      <p><strong>Related:</strong> <a href="/guides/how-to-reduce-image-file-size/">How to reduce image file size</a> · <a href="/guides/image-compression-vs-resizing/">Compression vs resizing</a> · <a href="/compress-to-size/">Compress to a target size</a> · <a href="/resize-image/">Resize Image</a></p>
+    </div>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="/compress-image/">Compress Image</a>
+      <a href="/compress-jpg/">Compress JPG</a>
+      <a href="/compress-png/">Compress PNG</a>
+      <a href="/compress-webp/">Compress WebP</a>
+      <a href="/resize-image/">Resize Image</a>
+      <a href="/crop-image/">Crop Image</a>
+      <a href="/compress-to-size/">Compress to Size</a>
+      <a href="/compress-multiple-images/">Batch Compress</a>
+      <a href="/guides/">Guides</a>
+      <a href="/sitemap/">Sitemap</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+      <a href="/privacy-policy/">Privacy Policy</a>
+      <a href="/terms-of-service/">Terms of Service</a>
+      <a href="/cookie-policy/">Cookie Policy</a>
+    </nav>
+    <p class="copyright">© 2026 Image Compressor</p>
+  </div>
+</footer>
+
+<div class="cookie-banner" id="cookieBanner" hidden>
+  <div class="cookie-inner">
+    <p>This site uses local browser storage to remember your preferences. No personal data is collected or uploaded.</p>
+    <div class="cookie-actions"><button class="btn btn-ghost" id="cookieReject" type="button">Reject</button><button class="btn btn-primary" id="cookieAccept" type="button">Accept</button></div>
+  </div>
+</div>
+
+<script src="/assets/app.js" defer></script>
+</body>
+</html>

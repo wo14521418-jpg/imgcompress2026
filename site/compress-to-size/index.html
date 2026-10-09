@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compress Image to a Target Size in KB - Free Online Tool</title>
+<meta name="description" content="Compress an image to an exact file size such as 100 KB, 200 KB or 500 KB. The tool searches for the highest quality that still fits your limit. Free, in your browser, no upload.">
+<link rel="canonical" href="https://imgcompress2026.netlify.app/compress-to-size/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Compress Image to a Target Size in KB - Free Online Tool">
+<meta property="og:description" content="Set a target file size such as 100 KB or 200 KB and get the highest quality that still fits it. Free and processed in your browser.">
+<meta property="og:url" content="https://imgcompress2026.netlify.app/compress-to-size/">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20rx='22'%20fill='%232563eb'/%3E%3Ctext%20x='50'%20y='50'%20font-size='58'%20text-anchor='middle'%20dominant-baseline='central'%20fill='white'%20font-weight='bold'%3EIC%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Compress Image to Target Size","url":"https://imgcompress2026.netlify.app/compress-to-size/","applicationCategory":"MultimediaApplication","operatingSystem":"Any","description":"Compress a JPG, PNG or WebP image to a target file size in kilobytes, keeping the highest quality that still fits."}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How do I compress an image to exactly 200 KB?","acceptedAnswer":{"@type":"Answer","text":"Upload the image, set the target size to 200 KB and the tool automatically searches for the highest quality setting whose output is 200 KB or less. If no quality setting fits, it scales the image down and searches again."}},
+{"@type":"Question","name":"Why is the result slightly under my target size?","acceptedAnswer":{"@type":"Answer","text":"The tool returns the largest file it can produce that still fits your limit, so the result is usually just under the target rather than exactly on it. That is deliberate: a file that overshoots by a few kilobytes can fail a strict upload limit."}},
+{"@type":"Question","name":"Can it compress an image to 100 KB or less?","acceptedAnswer":{"@type":"Answer","text":"Yes. Any target from about 10 KB upwards works. Very small targets on large photos require downscaling, which the tool does automatically and reports in the output dimensions."}},
+{"@type":"Question","name":"Does the tool upload my image?","acceptedAnswer":{"@type":"Answer","text":"No. Everything runs locally in your browser using the canvas API. Your image never leaves your device."}},
+{"@type":"Question","name":"Why can I not choose PNG as the output format?","acceptedAnswer":{"@type":"Answer","text":"PNG is a lossless format, so there is no quality dial to turn down. Use WebP or JPG when the file has to fit a size limit."}}
+]}
+</script>
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9000494688678902" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#2563eb"/><circle cx="9" cy="9" r="1.8" fill="#fff"/><path d="M3.5 17.5l5-5 3 3 4-4 5 5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg><span>Image Compressor</span></a>
+    <nav class="site-nav">
+      <a href="/">Home</a>
+      <a href="/compress-image/">Compress Image</a>
+      <a href="/resize-image/">Resize Image</a>
+      <a href="/crop-image/">Crop Image</a>
+      <a href="/compress-to-size/">Compress to Size</a>
+      <a href="/compress-multiple-images/">Batch</a>
+      <a href="/guides/">Guides</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <h1>Compress an image to a target size</h1>
+    <p class="subtitle">Set a limit such as 100 KB, 200 KB or 500 KB and get the highest quality that still fits it — in your browser, free, nothing uploaded.</p>
+  </section>
+
+  <section class="card">
+    <div class="dropzone" id="sizeDropzone" tabindex="0" role="button" aria-label="Upload an image">
+      <input type="file" id="sizeFileInput" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" hidden>
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M12 16V6m0 0l-4 4m4-4l4 4" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+      <p class="dz-title">Drag &amp; drop an image here, or click to upload</p>
+      <p class="dz-hint">One image at a time — processed locally, never uploaded</p>
+    </div>
+    <p class="error" id="sizeError" hidden></p>
+
+    <div class="format-row">
+      <span class="format-label">Target file size</span>
+      <input class="target-input" id="targetKb" type="number" inputmode="numeric" min="5" max="20000" step="5" value="200" aria-label="Target file size in kilobytes">
+      <span class="dz-hint">KB</span>
+    </div>
+    <div class="quick-targets" role="group" aria-label="Common target sizes">
+      <button type="button" class="quick-target" data-kb="50">50 KB</button>
+      <button type="button" class="quick-target" data-kb="100">100 KB</button>
+      <button type="button" class="quick-target active" data-kb="200">200 KB</button>
+      <button type="button" class="quick-target" data-kb="500">500 KB</button>
+      <button type="button" class="quick-target" data-kb="1024">1 MB</button>
+    </div>
+
+    <div class="format-row">
+      <span class="format-label">Maximum width</span>
+      <select id="sizeMaxWidth" aria-label="Maximum width">
+        <option value="0">Keep original size</option>
+        <option value="1920">Fit within 1920 px</option>
+        <option value="1280">Fit within 1280 px</option>
+        <option value="800">Fit within 800 px</option>
+      </select>
+    </div>
+    <div class="format-row">
+      <span class="format-label">Output format</span>
+      <select id="sizeFormat" aria-label="Output format">
+        <option value="webp">WebP (smallest)</option>
+        <option value="jpeg">JPG</option>
+      </select>
+    </div>
+  </section>
+
+  <section class="card" id="sizeResults" hidden>
+    <div class="compare">
+      <figure class="preview"><figcaption>Original</figcaption><div class="preview-box"><img id="sizeBefore" alt="" width="400" height="400" hidden></div><span class="preview-meta" id="sizeBeforeMeta"></span></figure>
+      <figure class="preview"><figcaption>Result</figcaption><div class="preview-box"><img id="sizeAfter" alt="" width="400" height="400" hidden></div><span class="preview-meta" id="sizeAfterMeta"></span></figure>
+    </div>
+    <div class="stats">
+      <div class="stat"><span class="stat-label">Original size</span><span class="stat-value" id="sizeOrig">-</span></div>
+      <div class="stat"><span class="stat-label">Output size</span><span class="stat-value" id="sizeOut">-</span></div>
+      <div class="stat"><span class="stat-label">Saved</span><span class="stat-value badge is-none" id="sizeSaved">-</span></div>
+      <div class="stat"><span class="stat-label">Output dimensions</span><span class="stat-value" id="sizeDims">-</span></div>
+      <div class="stat"><span class="stat-label">Quality used</span><span class="stat-value" id="sizeQuality">-</span></div>
+    </div>
+    <p class="status" id="sizeStatus" hidden></p>
+    <button class="btn btn-primary download" id="sizeDownload" type="button" disabled>Download image</button>
+  </section>
+
+  <section class="content-block">
+    <h2>How the target size search works</h2>
+    <p>Most compressors ask you to guess a quality number and then check the resulting file size yourself, adjusting and exporting again until it happens to fit. This tool flips that around: you give it the limit that matters — the one an upload form, a job portal or an email gateway enforces — and it finds the quality setting for you.</p>
+    <ol>
+      <li>It encodes the image at the highest quality and checks the size.</li>
+      <li>If that already fits, it stops there and hands you the file.</li>
+      <li>If it does not, it tests the lowest quality, then repeatedly halves the gap between the two to zero in on the best setting that still fits.</li>
+      <li>If even the lowest quality overshoots, it scales the image down slightly and runs the same search again — a photo with fewer pixels needs fewer bytes at the same quality.</li>
+    </ol>
+    <p>You get the sharpest file that stays inside your limit, along with the output dimensions and the quality setting that was used, so you can see exactly what happened.</p>
+
+    <h2>Which target size should you pick?</h2>
+    <ul>
+      <li><strong>100 KB</strong> — a common ceiling for email attachments, forums and older upload forms.</li>
+      <li><strong>200 KB</strong> — a good all-round web image: sharp on a retina screen, light enough to load fast.</li>
+      <li><strong>500 KB</strong> — full-width hero images, online marketplaces and print-on-demand uploads.</li>
+      <li><strong>1 MB and above</strong> — when a gallery or marketplace wants a high-resolution original but still enforces a cap.</li>
+      <li><strong>Under 100 KB</strong> — thumbnails, avatars and email signatures where the image is displayed small anyway.</li>
+    </ul>
+    <p>If you do not know the limit, aim for the smallest file that still looks clean at the size it will be displayed. For a web page that is usually 100–200 KB; for a phone-only thumbnail it can be 30 KB.</p>
+
+    <h2>Why resize as well as compress?</h2>
+    <p>File size tracks the number of pixels. Quality settings shrink a file by storing the same pixels more economically; resizing removes pixels that nobody will see. When a target is very small — say 50 KB for a photo straight off a phone — resizing is the only honest way to get there, which is why the tool falls back to it automatically and shows you the new dimensions.</p>
+
+    <h2>Frequently asked questions</h2>
+    <div class="faq-item"><h4>How do I compress an image to exactly 200 KB?</h4><p>Upload it, type 200 in the target size box (or click the 200 KB button) and wait a moment. The tool searches for the best quality setting whose output is 200 KB or less and downloads as soon as you click the button.</p></div>
+    <div class="faq-item"><h4>The result is under my target. Is that a problem?</h4><p>No, it is intentional. The tool returns the largest file that still fits, so it usually lands just under your limit instead of overshooting it. Upload forms that reject a 201 KB file will accept a 199 KB one.</p></div>
+    <div class="faq-item"><h4>Can it compress a PNG to 100 KB?</h4><p>Yes, but the output will be WebP or JPG, because PNG has no quality setting to lower. If the image has to stay a PNG, reduce its dimensions instead and keep the transparent areas small.</p></div>
+    <div class="faq-item"><h4>Is there a file size limit for uploading?</h4><p>No hard limit, but very large images take longer because several encodings are tested. Anything up to about 50 MB is fine on a normal laptop.</p></div>
+    <div class="faq-item"><h4>Are my images uploaded to a server?</h4><p>No. The whole search runs in your browser with the canvas API, so the file never leaves your device. You can confirm this by turning off your internet connection after the page has loaded.</p></div>
+
+    <div class="rel-links">
+      <p><strong>Related:</strong> <a href="/compress-image/">Compress Image</a> · <a href="/resize-image/">Resize Image</a> · <a href="/compress-multiple-images/">Batch compress</a> · <a href="/guides/compress-image-to-200kb/">Compress an image to 200 KB</a> · <a href="/guides/how-to-reduce-image-file-size/">How to reduce image file size</a></p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="/compress-image/">Compress Image</a>
+      <a href="/compress-jpg/">Compress JPG</a>
+      <a href="/compress-png/">Compress PNG</a>
+      <a href="/compress-webp/">Compress WebP</a>
+      <a href="/resize-image/">Resize Image</a>
+      <a href="/crop-image/">Crop Image</a>
+      <a href="/compress-to-size/">Compress to Size</a>
+      <a href="/compress-multiple-images/">Batch Compress</a>
+      <a href="/guides/">Guides</a>
+      <a href="/sitemap/">Sitemap</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+      <a href="/privacy-policy/">Privacy Policy</a>
+      <a href="/terms-of-service/">Terms of Service</a>
+      <a href="/cookie-policy/">Cookie Policy</a>
+    </nav>
+    <p class="copyright">© 2026 Image Compressor</p>
+  </div>
+</footer>
+
+<div class="cookie-banner" id="cookieBanner" hidden>
+  <div class="cookie-inner">
+    <p>This site uses local browser storage to remember your preferences. No personal data is collected or uploaded.</p>
+    <div class="cookie-actions"><button class="btn btn-ghost" id="cookieReject" type="button">Reject</button><button class="btn btn-primary" id="cookieAccept" type="button">Accept</button></div>
+  </div>
+</div>
+
+<script src="/assets/app.js" defer></script>
+<script src="/assets/compress-to-size.js" defer></script>
+</body>
+</html>

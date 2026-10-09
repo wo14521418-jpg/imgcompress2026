@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crop Image Online - Free Cropper for JPG, PNG and WebP</title>
+<meta name="description" content="Crop an image online for free. Drag to select the area, lock a square or 16:9 ratio, then download the cropped JPG, PNG or WebP - processed in your browser, nothing uploaded.">
+<link rel="canonical" href="https://imgcompress2026.netlify.app/crop-image/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Crop Image Online - Free Cropper for JPG, PNG and WebP">
+<meta property="og:description" content="Crop photos and screenshots in your browser. Drag to select, lock an aspect ratio, download the result. Free and private.">
+<meta property="og:url" content="https://imgcompress2026.netlify.app/crop-image/">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20rx='22'%20fill='%232563eb'/%3E%3Ctext%20x='50'%20y='50'%20font-size='58'%20text-anchor='middle'%20dominant-baseline='central'%20fill='white'%20font-weight='bold'%3EIC%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Crop Image Online","url":"https://imgcompress2026.netlify.app/crop-image/","applicationCategory":"MultimediaApplication","operatingSystem":"Any","description":"Crop JPG, PNG and WebP images in the browser with a free-drag selection and preset aspect ratios."}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How do I crop an image online for free?","acceptedAnswer":{"@type":"Answer","text":"Upload the image, drag on the preview to draw the area you want to keep, fine-tune it with the corner handles, then press Crop image to download the result. Nothing is uploaded."}},
+{"@type":"Question","name":"Can I crop an image to a square or a 16:9 shape?","acceptedAnswer":{"@type":"Answer","text":"Yes. Choose 1:1 for squares, 16:9 for video thumbnails, 4:5 or 9:16 for portrait social posts, or 1200 x 630 style wide crops for link previews. The selection keeps that ratio while you drag."}},
+{"@type":"Question","name":"Does cropping reduce the image quality?","acceptedAnswer":{"@type":"Answer","text":"No. Cropping keeps the pixels inside the selection exactly as they were; it only discards the rest. Any loss comes from the output format you choose, not from the crop itself."}},
+{"@type":"Question","name":"Will the cropped image be uploaded to your server?","acceptedAnswer":{"@type":"Answer","text":"No. Cropping happens on a canvas inside your browser, so the photo never leaves your device."}},
+{"@type":"Question","name":"Can I crop on a phone or tablet?","acceptedAnswer":{"@type":"Answer","text":"Yes. Drag with one finger to set the area and use the corner handles to adjust. The page works in mobile Safari and Chrome."}}
+]}
+</script>
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9000494688678902" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#2563eb"/><circle cx="9" cy="9" r="1.8" fill="#fff"/><path d="M3.5 17.5l5-5 3 3 4-4 5 5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg><span>Image Compressor</span></a>
+    <nav class="site-nav">
+      <a href="/">Home</a>
+      <a href="/compress-image/">Compress Image</a>
+      <a href="/resize-image/">Resize Image</a>
+      <a href="/crop-image/">Crop Image</a>
+      <a href="/compress-to-size/">Compress to Size</a>
+      <a href="/compress-multiple-images/">Batch</a>
+      <a href="/guides/">Guides</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <h1>Crop an image online</h1>
+    <p class="subtitle">Drag to choose the part you want to keep, lock a square or widescreen ratio if you need one, then download the cropped file — free, in your browser, nothing uploaded.</p>
+  </section>
+
+  <section class="card">
+    <div class="dropzone" id="cropDropzone" tabindex="0" role="button" aria-label="Upload an image">
+      <input type="file" id="cropFileInput" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" hidden>
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M12 16V6m0 0l-4 4m4-4l4 4" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+      <p class="dz-title">Drag &amp; drop an image here, or click to upload</p>
+      <p class="dz-hint">Supports JPG / PNG / WebP — processed locally, never uploaded</p>
+    </div>
+    <p class="error" id="cropError" hidden></p>
+
+    <div id="cropEditor" hidden>
+      <div class="crop-wrap">
+        <div class="crop-stage" id="cropStage">
+          <img id="cropImg" alt="Image to crop">
+          <div class="crop-mask" id="cropMaskTop" hidden></div>
+          <div class="crop-mask" id="cropMaskBottom" hidden></div>
+          <div class="crop-mask" id="cropMaskLeft" hidden></div>
+          <div class="crop-mask" id="cropMaskRight" hidden></div>
+          <div class="crop-rect" id="cropRect" hidden>
+            <span class="crop-size" id="cropSizeLabel"></span>
+            <span class="crop-handle" data-h="nw"></span>
+            <span class="crop-handle" data-h="ne"></span>
+            <span class="crop-handle" data-h="sw"></span>
+            <span class="crop-handle" data-h="se"></span>
+          </div>
+        </div>
+      </div>
+      <p class="crop-info" id="cropInfo">Drag on the image to choose the crop area.</p>
+
+      <div class="aspect-row" role="group" aria-label="Aspect ratio">
+        <button type="button" class="aspect-btn active" data-aspect="0">Free</button>
+        <button type="button" class="aspect-btn" data-aspect="1">1:1</button>
+        <button type="button" class="aspect-btn" data-aspect="1.3333">4:3</button>
+        <button type="button" class="aspect-btn" data-aspect="1.5">3:2</button>
+        <button type="button" class="aspect-btn" data-aspect="1.7778">16:9</button>
+        <button type="button" class="aspect-btn" data-aspect="0.8">4:5</button>
+        <button type="button" class="aspect-btn" data-aspect="0.5625">9:16</button>
+      </div>
+
+      <div id="cropControls">
+        <div class="format-row">
+          <span class="format-label">Output format</span>
+          <select id="cropFormat" aria-label="Output format">
+            <option value="webp">WebP (smallest)</option>
+            <option value="jpeg">JPG</option>
+            <option value="png">PNG (keeps transparency)</option>
+            <option value="auto">Keep original format</option>
+          </select>
+        </div>
+        <div class="format-row">
+          <span class="format-label">Quality</span>
+          <div class="level-options" role="radiogroup" aria-label="Output quality">
+            <button type="button" class="level-btn" data-level="92"><span class="level-name">High</span><span class="level-q">Quality 92</span></button>
+            <button type="button" class="level-btn active" data-level="80"><span class="level-name">Normal</span><span class="level-q">Quality 80</span></button>
+            <button type="button" class="level-btn" data-level="60"><span class="level-name">Small</span><span class="level-q">Quality 60</span></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="format-row">
+        <button class="btn btn-primary" id="cropApply" type="button">Crop image</button>
+        <button class="btn btn-ghost" id="cropReset" type="button">Reset selection</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="card" id="cropResult" hidden>
+    <figure class="preview"><figcaption>Cropped result</figcaption><div class="preview-box"><img id="cropResultImg" alt="Cropped result" width="400" height="400"></div><span class="preview-meta" id="cropResultMeta"></span></figure>
+    <button class="btn btn-primary download" id="cropDownload" type="button" disabled>Download cropped image</button>
+  </section>
+
+  <section class="content-block">
+    <h2>How to crop an image</h2>
+    <ol>
+      <li>Upload a JPG, PNG or WebP file — or drag one onto the box above.</li>
+      <li>Drag across the preview to draw the area you want to keep. The area outside your selection is dimmed so you can see exactly what will be cut.</li>
+      <li>Adjust it: drag inside the frame to move it, or pull a corner handle to resize. Pick a preset ratio first if the destination needs one.</li>
+      <li>Press <strong>Crop image</strong> and download the result. The cropped dimensions in pixels are shown above the button.</li>
+    </ol>
+
+    <h2>Common ratios and where they are used</h2>
+    <ul>
+      <li><strong>1:1</strong> — profile pictures, avatars, Instagram grid posts, Etsy and marketplace thumbnails.</li>
+      <li><strong>4:3</strong> — older camera output, presentation slides, some marketplace listing images.</li>
+      <li><strong>3:2</strong> — standard DSLR photos and print sizes such as 6x4 inches.</li>
+      <li><strong>16:9</strong> — YouTube thumbnails, video stills, widescreen headers.</li>
+      <li><strong>4:5</strong> — Instagram and Facebook portrait posts, which take more screen space than a square.</li>
+      <li><strong>9:16</strong> — Stories, Reels, Shorts and TikTok covers.</li>
+    </ul>
+    <p>For link previews, cropping to roughly 1200 x 630 pixels gives the wide card shape that most social platforms and chat apps expect.</p>
+
+    <h2>Cropping, resizing and compressing are three different jobs</h2>
+    <p>Cropping keeps the pixels inside your selection untouched and throws the rest away, so it never softens the image. Resizing rewrites every pixel to a new dimension, which is how you shrink a file without touching its composition. Compressing reduces the file size at the same dimensions. In practice you often want all three: crop to fix the framing, resize so the image is no larger than it will be displayed, then compress to keep the download light.</p>
+    <p>When you crop, remember that the result is a new file — the pixels you removed are gone. Keep the original if you might want a different framing later.</p>
+
+    <h2>Frequently asked questions</h2>
+    <div class="faq-item"><h4>Is this crop tool free?</h4><p>Yes, and there is no sign-up. The whole page runs in your browser, so there is no upload queue and no waiting.</p></div>
+    <div class="faq-item"><h4>Does cropping lower the quality?</h4><p>Not by itself. Cropping copies the pixels inside the selection as they are. If the output looks softer, it is because of the format you exported to — choose PNG or a high quality setting to avoid that.</p></div>
+    <div class="faq-item"><h4>Can I crop a screenshot to a specific size?</h4><p>Yes. Draw the area, watch the crop size readout above the frame, and nudge the handles until it reads the pixel size you need. The readout shows the real output dimensions, not the on-screen size.</p></div>
+    <div class="faq-item"><h4>Can I crop several images at once?</h4><p>The cropper handles one image at a time, because each photo usually needs its own framing. For bulk work, use <a href="/compress-multiple-images/">batch compression</a> instead.</p></div>
+    <div class="faq-item"><h4>Will the transparency survive?</h4><p>Yes, if you choose PNG. JPG has no transparency and the transparent areas will become white, so pick PNG or WebP when cropping a logo or sticker.</p></div>
+
+    <div class="rel-links">
+      <p><strong>Related:</strong> <a href="/compress-image/">Compress Image</a> · <a href="/resize-image/">Resize Image</a> · <a href="/compress-to-size/">Compress to a target size</a> · <a href="/guides/how-to-resize-an-image/">How to resize an image</a></p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="/compress-image/">Compress Image</a>
+      <a href="/compress-jpg/">Compress JPG</a>
+      <a href="/compress-png/">Compress PNG</a>
+      <a href="/compress-webp/">Compress WebP</a>
+      <a href="/resize-image/">Resize Image</a>
+      <a href="/crop-image/">Crop Image</a>
+      <a href="/compress-to-size/">Compress to Size</a>
+      <a href="/compress-multiple-images/">Batch Compress</a>
+      <a href="/guides/">Guides</a>
+      <a href="/sitemap/">Sitemap</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+      <a href="/privacy-policy/">Privacy Policy</a>
+      <a href="/terms-of-service/">Terms of Service</a>
+      <a href="/cookie-policy/">Cookie Policy</a>
+    </nav>
+    <p class="copyright">© 2026 Image Compressor</p>
+  </div>
+</footer>
+
+<div class="cookie-banner" id="cookieBanner" hidden>
+  <div class="cookie-inner">
+    <p>This site uses local browser storage to remember your preferences. No personal data is collected or uploaded.</p>
+    <div class="cookie-actions"><button class="btn btn-ghost" id="cookieReject" type="button">Reject</button><button class="btn btn-primary" id="cookieAccept" type="button">Accept</button></div>
+  </div>
+</div>
+
+<script src="/assets/app.js" defer></script>
+<script src="/assets/crop-image.js" defer></script>
+</body>
+</html>
