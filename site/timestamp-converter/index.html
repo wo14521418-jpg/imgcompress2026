@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unix Timestamp Converter — Epoch to Date and Back</title>
+<meta name="description" content="Convert Unix timestamps to readable dates, and dates back to timestamps, free in your browser. Shows UTC, local time, ISO 8601 and a relative age.">
+<link rel="canonical" href="https://imgcompress2026.netlify.app/timestamp-converter/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Unix Timestamp Converter — Epoch to Date and Back">
+<meta property="og:description" content="Turn Unix timestamps into readable dates and dates into timestamps, in your browser.">
+<meta property="og:url" content="https://imgcompress2026.netlify.app/timestamp-converter/">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20rx='22'%20fill='%232563eb'/%3E%3Ctext%20x='50'%20y='50'%20font-size='58'%20text-anchor='middle'%20dominant-baseline='central'%20fill='white'%20font-weight='bold'%3ETB%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Unix Timestamp Converter","url":"https://imgcompress2026.netlify.app/timestamp-converter/","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","description":"Convert Unix timestamps to readable dates and back, entirely in the browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}]}
+</script>
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9000494688678902" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Is the timestamp in seconds or milliseconds?","acceptedAnswer":{"@type":"Answer","text":"The tool decides by length. Values up to ten digits are read as seconds, which is the classic Unix time used by most APIs; longer values are read as milliseconds, which is what JavaScript's Date object and many mobile SDKs produce."}},
+{"@type":"Question","name":"Why does the local time differ from UTC?","acceptedAnswer":{"@type":"Answer","text":"A Unix timestamp is always a point in time, not a local clock reading. The same instant is a different hour in every time zone, so UTC is shown alongside your own local time to remove any ambiguity."}},
+{"@type":"Question","name":"What is the Unix epoch?","acceptedAnswer":{"@type":"Answer","text":"Midnight on 1 January 1970, UTC. Unix time counts the seconds since that moment, which makes timestamps small, sortable and free of time zone rules."}},
+{"@type":"Question","name":"When will Unix time run out?","acceptedAnswer":{"@type":"Answer","text":"A signed 32-bit counter overflows on 19 January 2038, the problem known as Y2K38. Any modern system that stores Unix time in a 64-bit integer is unaffected."}}
+]}
+</script>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body data-tool="timestamp">
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#2563eb"/><circle cx="9" cy="9" r="1.8" fill="#fff"/><path d="M3.5 17.5l5-5 3 3 4-4 5 5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg><span>Toolbox</span></a>
+    <nav class="site-nav">
+      <a href="/">Home</a>
+      <a href="/image-tools/">Image Tools</a>
+      <a href="/text-tools/">Text Tools</a>
+      <a href="/developer-tools/">Developer Tools</a>
+      <a href="/guides/">Guides</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <h1>Unix Timestamp Converter</h1>
+    <p class="subtitle">Turn a Unix timestamp into a readable date, or a date back into a timestamp — with UTC, local time and the relative age.</p>
+  </section>
+
+  <section class="card">
+    <label class="tool-label" for="toolInput">Timestamp or date</label>
+    <input class="tool-input mono" id="toolInput" type="text" autocomplete="off" placeholder="1735689600  or  2026-01-01 00:00  or  Jan 1 2026">
+    <div class="action-row">
+      <button class="btn btn-primary" data-act="convert" type="button">Convert</button>
+      <button class="btn btn-ghost" data-act="now" type="button">Use the current time</button>
+      <button class="btn btn-ghost" data-act="copy" type="button">Copy</button>
+      <button class="btn btn-ghost" data-act="clear" type="button">Clear</button>
+    </div>
+    <p class="error" id="toolError" hidden></p>
+    <p class="status" id="toolStatus" hidden></p>
+    <div class="tool-field">
+      <label class="tool-label" for="toolOutput">Result</label>
+      <textarea class="tool-textarea" id="toolOutput" readonly spellcheck="false"></textarea>
+    </div>
+  </section>
+
+  <section class="content-block">
+    <h2>How to convert a timestamp</h2>
+    <ol>
+      <li>Paste a Unix timestamp in seconds or milliseconds, or type a date in almost any common form.</li>
+      <li>Press <strong>Convert</strong>, or press <strong>Use the current time</strong> to fill in the timestamp for right now.</li>
+      <li>Read the result: Unix seconds, Unix milliseconds, ISO 8601, UTC, local time and how long ago it was — all from one input.</li>
+    </ol>
+    <p>The tool tells you which way it read your input. A value of ten digits or fewer is treated as seconds; anything longer is treated as milliseconds.</p>
+  </section>
+
+  <section class="content-block">
+    <h2>Reading timestamps out of logs and APIs</h2>
+    <p>A Unix timestamp is the number of seconds that have elapsed since midnight on 1 January 1970, UTC — the Unix epoch. It is popular for a simple reason: it is a single integer, it sorts correctly as a number, it takes no account of daylight saving or time zone rules, and it is identical no matter where in the world the machine reading it happens to be.</p>
+    <p>The cost of that simplicity is that the number means nothing to a human. When an API returns <code>1735689600</code> or a log line ends in <code>1735689600</code>, the only way to know what it refers to is to convert it. That is what this page does, and it deliberately shows several forms at once, because the right one depends on what you are doing.</p>
+    <p>ISO 8601 — <code>2025-01-01T00:00:00.000Z</code> — is the form to use in data and in code, since it sorts correctly as text and states its time zone explicitly. UTC is the form to use when talking to someone in another country, because there is no ambiguity about which midnight you mean. Local time is the form to use when you are working out whether an event happened before or after something you remember. The relative age is usually the fastest sanity check of all: if a log entry says "3 days ago" when you expected it to be from this morning, you have found your bug.</p>
+  </section>
+
+  <section class="content-block">
+    <h2>Timestamp converter FAQ</h2>
+    <div class="faq-item"><h4>Is the timestamp in seconds or milliseconds?</h4><p>The tool decides by length. Values up to ten digits are treated as seconds, the classic Unix time used by most APIs. Longer values are treated as milliseconds, which is what JavaScript's <code>Date</code> and many mobile SDKs produce.</p></div>
+    <div class="faq-item"><h4>Why does the local time differ from UTC?</h4><p>A Unix timestamp is a point in time, not a clock reading. The same instant is a different hour in every time zone, so UTC is shown next to your own local time to remove the ambiguity.</p></div>
+    <div class="faq-item"><h4>What is the Unix epoch?</h4><p>Midnight on 1 January 1970, UTC. Unix time counts the seconds since that moment, which keeps timestamps small, sortable and free of time zone rules.</p></div>
+    <div class="faq-item"><h4>When will Unix time run out?</h4><p>A signed 32-bit counter overflows on 19 January 2038 — the Y2K38 problem. Any system that stores Unix time in a 64-bit integer is unaffected.</p></div>
+  </section>
+
+  <section class="content-block">
+    <h2>Related tools</h2>
+    <ul>
+      <li><a href="/json-formatter/">JSON Formatter and Validator</a> — read the API response the timestamp came from.</li>
+      <li><a href="/uuid-generator/">UUID Generator</a> — identifiers for log correlation.</li>
+      <li><a href="/hash-generator/">SHA Hash Generator</a> — checksums for payloads.</li>
+      <li><a href="/developer-tools/">All developer tools</a> — eight browser-based utilities.</li>
+    </ul>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h4>Image tools</h4>
+        <a href="/compress-image/">Compress Image</a>
+        <a href="/compress-jpg/">Compress JPG</a>
+        <a href="/compress-png/">Compress PNG</a>
+        <a href="/compress-webp/">Compress WebP</a>
+        <a href="/compress-multiple-images/">Batch Compress</a>
+        <a href="/resize-image/">Resize Image</a>
+        <a href="/crop-image/">Crop Image</a>
+        <a href="/compress-to-size/">Compress to Size</a>
+      </div>
+      <div class="footer-col">
+        <h4>Convert and PDF</h4>
+        <a href="/convert/">Image Converter</a>
+        <a href="/png-to-jpg/">PNG to JPG</a>
+        <a href="/jpg-to-png/">JPG to PNG</a>
+        <a href="/webp-to-jpg/">WebP to JPG</a>
+        <a href="/image-to-pdf/">Image to PDF</a>
+        <a href="/image-tools/">All image tools</a>
+      </div>
+      <div class="footer-col">
+        <h4>Text tools</h4>
+        <a href="/word-counter/">Word Counter</a>
+        <a href="/case-converter/">Case Converter</a>
+        <a href="/line-sorter/">Line Sorter</a>
+        <a href="/lorem-ipsum-generator/">Lorem Ipsum</a>
+        <a href="/text-tools/">All text tools</a>
+      </div>
+      <div class="footer-col">
+        <h4>Developer tools</h4>
+        <a href="/json-formatter/">JSON Formatter</a>
+        <a href="/base64-encoder/">Base64 Encoder</a>
+        <a href="/url-encoder/">URL Encoder</a>
+        <a href="/hash-generator/">Hash Generator</a>
+        <a href="/uuid-generator/">UUID Generator</a>
+        <a href="/password-generator/">Password Generator</a>
+        <a href="/timestamp-converter/">Timestamp Converter</a>
+        <a href="/color-converter/">Color Converter</a>
+        <a href="/developer-tools/">All developer tools</a>
+      </div>
+      <div class="footer-col">
+        <h4>Site</h4>
+        <a href="/guides/">Guides</a>
+        <a href="/sitemap/">Sitemap</a>
+        <a href="/about/">About</a>
+        <a href="/contact/">Contact</a>
+        <a href="/privacy-policy/">Privacy Policy</a>
+        <a href="/terms-of-service/">Terms of Service</a>
+        <a href="/cookie-policy/">Cookie Policy</a>
+      </div>
+    </div>
+    <p class="copyright">© 2026 Toolbox</p>
+  </div>
+</footer>
+
+<div class="cookie-banner" id="cookieBanner" hidden>
+  <div class="cookie-inner">
+    <p>This site uses local browser storage to remember your preferences. No personal data is collected or uploaded.</p>
+    <div class="cookie-actions"><button class="btn btn-ghost" id="cookieReject" type="button">Reject</button><button class="btn btn-primary" id="cookieAccept" type="button">Accept</button></div>
+  </div>
+</div>
+
+<script src="/assets/app.js" defer></script>
+<script src="/assets/toolkit.js" defer></script>
+</body>
+</html>

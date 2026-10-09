@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JSON Formatter and Validator — Free Online JSON Beautifier</title>
+<meta name="description" content="Format, validate and minify JSON in your browser for free. No upload, no sign-up, and syntax errors are reported with the exact line and column.">
+<link rel="canonical" href="https://imgcompress2026.netlify.app/json-formatter/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="JSON Formatter and Validator — Free Online JSON Beautifier">
+<meta property="og:description" content="Pretty-print, validate or minify JSON in one click. Nothing you paste leaves your browser.">
+<meta property="og:url" content="https://imgcompress2026.netlify.app/json-formatter/">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20rx='22'%20fill='%232563eb'/%3E%3Ctext%20x='50'%20y='50'%20font-size='58'%20text-anchor='middle'%20dominant-baseline='central'%20fill='white'%20font-weight='bold'%3ETB%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"JSON Formatter and Validator","url":"https://imgcompress2026.netlify.app/json-formatter/","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","description":"Format, validate and minify JSON entirely in the browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}]}
+</script>
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9000494688678902" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Is my JSON uploaded anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. The formatter is plain JavaScript running in your browser tab. The text you paste is never sent to a server, logged or stored."}},
+{"@type":"Question","name":"What does minifying do?","acceptedAnswer":{"@type":"Answer","text":"Minifying removes every space, tab and line break that JSON does not need, which makes the payload smaller. The data itself is unchanged."}},
+{"@type":"Question","name":"Why does my JSON fail to parse?","acceptedAnswer":{"@type":"Answer","text":"The usual causes are a trailing comma before a closing brace or bracket, keys or strings wrapped in single quotes, an unquoted key, a comment, and values such as NaN or undefined. JSON only allows double-quoted strings, no comments and no trailing commas."}},
+{"@type":"Question","name":"How large a file can it handle?","acceptedAnswer":{"@type":"Answer","text":"Anything your browser can comfortably hold in memory. A few megabytes formats instantly; very large documents are limited by your device rather than by the tool."}}
+]}
+</script>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body data-tool="json">
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#2563eb"/><circle cx="9" cy="9" r="1.8" fill="#fff"/><path d="M3.5 17.5l5-5 3 3 4-4 5 5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg><span>Toolbox</span></a>
+    <nav class="site-nav">
+      <a href="/">Home</a>
+      <a href="/image-tools/">Image Tools</a>
+      <a href="/text-tools/">Text Tools</a>
+      <a href="/developer-tools/">Developer Tools</a>
+      <a href="/guides/">Guides</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <h1>JSON Formatter and Validator</h1>
+    <p class="subtitle">Pretty-print, validate or minify JSON in one click — nothing you paste leaves your browser.</p>
+  </section>
+
+  <section class="card">
+    <label class="tool-label" for="toolInput">Paste your JSON</label>
+    <textarea class="tool-textarea" id="toolInput" spellcheck="false" autocomplete="off" placeholder='{"name": "Toolbox", "tools": 25, "free": true}'></textarea>
+    <div class="field-row">
+      <label for="jsonIndent">Indent</label>
+      <select id="jsonIndent">
+        <option value="2">2 spaces</option>
+        <option value="4">4 spaces</option>
+        <option value="tab">Tab</option>
+      </select>
+      <label class="opt" for="jsonMinify"><input type="checkbox" id="jsonMinify"> Minify the output</label>
+    </div>
+    <div class="action-row">
+      <button class="btn btn-primary" data-act="format" type="button">Format and validate</button>
+      <button class="btn btn-ghost" data-act="minify" type="button">Minify</button>
+      <button class="btn btn-ghost" data-act="copy" type="button">Copy</button>
+      <button class="btn btn-ghost" data-act="download" data-name="formatted.json" type="button">Download</button>
+      <button class="btn btn-ghost" data-act="clear" type="button">Clear</button>
+    </div>
+    <p class="error" id="toolError" hidden></p>
+    <p class="status" id="toolStatus" hidden></p>
+    <div class="tool-field">
+      <label class="tool-label" for="toolOutput">Result</label>
+      <textarea class="tool-textarea" id="toolOutput" readonly spellcheck="false"></textarea>
+    </div>
+  </section>
+
+  <section class="content-block">
+    <h2>How to format or validate JSON</h2>
+    <ol>
+      <li>Paste your JSON into the box, or type it directly.</li>
+      <li>Pick an indent — two spaces, four spaces or a tab.</li>
+      <li>Press <strong>Format and validate</strong>. Valid JSON comes back as a clean, readable document; invalid JSON comes back as an error naming the line and column.</li>
+      <li>Copy the result or download it as a <code>.json</code> file.</li>
+    </ol>
+    <p><strong>Minify</strong> does the opposite: it strips the indentation back out so the payload is as small as possible, which is what you want when the JSON is going over the wire rather than being read by a person.</p>
+  </section>
+
+  <section class="content-block">
+    <h2>Why JSON breaks, and what a formatter tells you</h2>
+    <p>JSON looks like JavaScript, which is exactly why it is so easy to get wrong. It is a far stricter format than it appears: keys and strings must use double quotes, and there are no comments, no trailing commas and no <code>undefined</code>. A file a JavaScript engine will happily accept can be rejected by every other language that parses JSON — which is usually the moment an API returns a 400 and the payload looks, at a glance, completely fine.</p>
+    <p>That is what re-indenting a document is for. Once every brace and bracket sits in a visible column, a missing comma or an unclosed object stops hiding inside one long line. This tool goes further and names the exact line and column where parsing failed, which is normally enough to find the fault immediately.</p>
+    <p>Minifying is the same operation in reverse. Because real-world JSON is deeply nested, indentation can easily double the size of a payload; on a busy endpoint that is bandwidth you pay for and latency your users feel. Minified and pretty-printed JSON hold exactly the same data — the difference is entirely for the reader.</p>
+  </section>
+
+  <section class="content-block">
+    <h2>JSON formatting FAQ</h2>
+    <div class="faq-item"><h4>Is my JSON uploaded anywhere?</h4><p>No. The formatter is plain JavaScript running in your browser tab. The text you paste is never sent to a server, logged or stored.</p></div>
+    <div class="faq-item"><h4>What does minifying do?</h4><p>Minifying removes every space, tab and line break that JSON does not need, so the payload is smaller. The data itself is unchanged.</p></div>
+    <div class="faq-item"><h4>Why does my JSON fail to parse?</h4><p>The usual causes are a trailing comma before a closing brace or bracket, keys or strings wrapped in single quotes, an unquoted key, a comment, and values such as <code>NaN</code> or <code>undefined</code>. JSON only allows double-quoted strings, no comments and no trailing commas.</p></div>
+    <div class="faq-item"><h4>How large a file can it handle?</h4><p>Anything your browser can comfortably hold in memory. A few megabytes formats instantly; very large documents are limited by your device rather than by the tool.</p></div>
+  </section>
+
+  <section class="content-block">
+    <h2>Related tools</h2>
+    <ul>
+      <li><a href="/base64-encoder/">Base64 Encoder and Decoder</a> — encode a JSON payload so it can travel in a header or a URL.</li>
+      <li><a href="/url-encoder/">URL Encoder and Decoder</a> — escape a JSON string that has to survive a query parameter.</li>
+      <li><a href="/hash-generator/">SHA Hash Generator</a> — produce a checksum for a payload or a file.</li>
+      <li><a href="/developer-tools/">All developer tools</a> — eight browser-based utilities.</li>
+    </ul>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h4>Image tools</h4>
+        <a href="/compress-image/">Compress Image</a>
+        <a href="/compress-jpg/">Compress JPG</a>
+        <a href="/compress-png/">Compress PNG</a>
+        <a href="/compress-webp/">Compress WebP</a>
+        <a href="/compress-multiple-images/">Batch Compress</a>
+        <a href="/resize-image/">Resize Image</a>
+        <a href="/crop-image/">Crop Image</a>
+        <a href="/compress-to-size/">Compress to Size</a>
+      </div>
+      <div class="footer-col">
+        <h4>Convert and PDF</h4>
+        <a href="/convert/">Image Converter</a>
+        <a href="/png-to-jpg/">PNG to JPG</a>
+        <a href="/jpg-to-png/">JPG to PNG</a>
+        <a href="/webp-to-jpg/">WebP to JPG</a>
+        <a href="/image-to-pdf/">Image to PDF</a>
+        <a href="/image-tools/">All image tools</a>
+      </div>
+      <div class="footer-col">
+        <h4>Text tools</h4>
+        <a href="/word-counter/">Word Counter</a>
+        <a href="/case-converter/">Case Converter</a>
+        <a href="/line-sorter/">Line Sorter</a>
+        <a href="/lorem-ipsum-generator/">Lorem Ipsum</a>
+        <a href="/text-tools/">All text tools</a>
+      </div>
+      <div class="footer-col">
+        <h4>Developer tools</h4>
+        <a href="/json-formatter/">JSON Formatter</a>
+        <a href="/base64-encoder/">Base64 Encoder</a>
+        <a href="/url-encoder/">URL Encoder</a>
+        <a href="/hash-generator/">Hash Generator</a>
+        <a href="/uuid-generator/">UUID Generator</a>
+        <a href="/password-generator/">Password Generator</a>
+        <a href="/timestamp-converter/">Timestamp Converter</a>
+        <a href="/color-converter/">Color Converter</a>
+        <a href="/developer-tools/">All developer tools</a>
+      </div>
+      <div class="footer-col">
+        <h4>Site</h4>
+        <a href="/guides/">Guides</a>
+        <a href="/sitemap/">Sitemap</a>
+        <a href="/about/">About</a>
+        <a href="/contact/">Contact</a>
+        <a href="/privacy-policy/">Privacy Policy</a>
+        <a href="/terms-of-service/">Terms of Service</a>
+        <a href="/cookie-policy/">Cookie Policy</a>
+      </div>
+    </div>
+    <p class="copyright">© 2026 Toolbox</p>
+  </div>
+</footer>
+
+<div class="cookie-banner" id="cookieBanner" hidden>
+  <div class="cookie-inner">
+    <p>This site uses local browser storage to remember your preferences. No personal data is collected or uploaded.</p>
+    <div class="cookie-actions"><button class="btn btn-ghost" id="cookieReject" type="button">Reject</button><button class="btn btn-primary" id="cookieAccept" type="button">Accept</button></div>
+  </div>
+</div>
+
+<script src="/assets/app.js" defer></script>
+<script src="/assets/toolkit.js" defer></script>
+</body>
+</html>

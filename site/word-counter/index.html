@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Word Counter — Count Words, Characters and Sentences Online</title>
+<meta name="description" content="Count words, characters, sentences, paragraphs and lines as you type, with reading and speaking time estimates. Free, instant, and entirely in your browser.">
+<link rel="canonical" href="https://imgcompress2026.netlify.app/word-counter/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Word Counter — Count Words, Characters and Sentences Online">
+<meta property="og:description" content="Live word, character, sentence and paragraph counts, plus reading and speaking time.">
+<meta property="og:url" content="https://imgcompress2026.netlify.app/word-counter/">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20rx='22'%20fill='%232563eb'/%3E%3Ctext%20x='50'%20y='50'%20font-size='58'%20text-anchor='middle'%20dominant-baseline='central'%20fill='white'%20font-weight='bold'%3ETB%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Word Counter","url":"https://imgcompress2026.netlify.app/word-counter/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","description":"Count words, characters, sentences, paragraphs and lines as you type, entirely in the browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}]}
+</script>
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9000494688678902" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How is a word counted?","acceptedAnswer":{"@type":"Answer","text":"A word is any run of characters separated by spaces, tabs or line breaks. That matches the everyday meaning of a word closely enough for essays, articles and forms, though it also counts hyphenated compounds and numbers as single words."}},
+{"@type":"Question","name":"Are the counts updated as I type?","acceptedAnswer":{"@type":"Answer","text":"Yes. The figures refresh a fraction of a second after you stop typing, so you always see the count for the text in the box."}},
+{"@type":"Question","name":"How is reading time calculated?","acceptedAnswer":{"@type":"Answer","text":"Reading time assumes about 200 words per minute, a common average for adults reading English. Speaking time assumes roughly 130 words per minute, which is a comfortable pace for a presentation."}},
+{"@type":"Question","name":"Is my text stored or uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. The counting happens in your browser and nothing is transmitted or saved. Closing the page discards the text."}}
+]}
+</script>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body data-tool="count">
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#2563eb"/><circle cx="9" cy="9" r="1.8" fill="#fff"/><path d="M3.5 17.5l5-5 3 3 4-4 5 5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg><span>Toolbox</span></a>
+    <nav class="site-nav">
+      <a href="/">Home</a>
+      <a href="/image-tools/">Image Tools</a>
+      <a href="/text-tools/">Text Tools</a>
+      <a href="/developer-tools/">Developer Tools</a>
+      <a href="/guides/">Guides</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <h1>Word Counter</h1>
+    <p class="subtitle">Live word, character, sentence and paragraph counts — plus how long the text takes to read and to say out loud.</p>
+  </section>
+
+  <section class="card">
+    <label class="tool-label" for="toolInput">Your text</label>
+    <textarea class="tool-textarea" id="toolInput" spellcheck="false" autocomplete="off" placeholder="Start typing or paste your text here — the counts update as you go."></textarea>
+    <div class="stats" id="toolStats"></div>
+    <p class="error" id="toolError" hidden></p>
+    <p class="status" id="toolStatus" hidden></p>
+    <div class="action-row">
+      <button class="btn btn-ghost" data-act="clear" type="button">Clear</button>
+    </div>
+  </section>
+
+  <section class="content-block">
+    <h2>How to count words and characters</h2>
+    <ol>
+      <li>Type or paste your text into the box.</li>
+      <li>Read the counts below it — they update while you type.</li>
+      <li>Press <strong>Clear</strong> when you are done, or simply close the page. Nothing is saved either way.</li>
+    </ol>
+    <p>As well as the headline word count you get the character count with and without spaces, the number of sentences, paragraphs and lines, the estimated reading and speaking times, and the five words that appear most often.</p>
+  </section>
+
+  <section class="content-block">
+    <h2>Why the numbers disagree with your word processor</h2>
+    <p>Word counts differ between tools because the definition of a word is not standardised. This counter treats any run of characters between spaces, tabs or line breaks as one word, which is the simple, predictable rule that suits articles, essays and anything with a stated limit.</p>
+    <p>Word processors often work differently. Microsoft Word counts hyphenated compounds as one word but some editors split them; both Word and Google Docs treat a number with a decimal point as one word or two depending on context. Character counts are more reliable, which is why forms that enforce a limit usually specify one: a tweet, an SMS segment, a meta description and a database column are all measured in characters, not words.</p>
+    <p>The two time estimates are worth understanding before you rely on them. Reading time uses about 200 words per minute, a reasonable average for an adult reading English silently; technical or unfamiliar material runs slower. Speaking time uses roughly 130 words per minute, which is a comfortable presentation pace. Both are estimates, and both are far more useful for spotting a problem — a paragraph that will take four minutes to say when you have one — than for predicting a stopwatch to the second.</p>
+  </section>
+
+  <section class="content-block">
+    <h2>Word counter FAQ</h2>
+    <div class="faq-item"><h4>How is a word counted?</h4><p>A word is any run of characters separated by spaces, tabs or line breaks. That matches the everyday meaning closely enough for essays and forms, though it also counts hyphenated compounds and numbers as single words.</p></div>
+    <div class="faq-item"><h4>Are the counts updated as I type?</h4><p>Yes. The figures refresh a fraction of a second after you stop typing, so they always describe the text currently in the box.</p></div>
+    <div class="faq-item"><h4>How is reading time calculated?</h4><p>Reading time assumes about 200 words per minute, a common average for adults reading English. Speaking time assumes roughly 130 words per minute, a comfortable pace for a presentation.</p></div>
+    <div class="faq-item"><h4>Is my text stored or uploaded?</h4><p>No. The counting happens in your browser and nothing is transmitted or saved. Closing the page discards the text.</p></div>
+  </section>
+
+  <section class="content-block">
+    <h2>Related tools</h2>
+    <ul>
+      <li><a href="/case-converter/">Case Converter</a> — fix the capitalisation of the same text.</li>
+      <li><a href="/line-sorter/">Line Sorter and Duplicate Remover</a> — sort and de-duplicate lists.</li>
+      <li><a href="/lorem-ipsum-generator/">Lorem Ipsum Generator</a> — filler text when you need a specific length.</li>
+      <li><a href="/text-tools/">All text tools</a> — four browser-based utilities.</li>
+    </ul>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h4>Image tools</h4>
+        <a href="/compress-image/">Compress Image</a>
+        <a href="/compress-jpg/">Compress JPG</a>
+        <a href="/compress-png/">Compress PNG</a>
+        <a href="/compress-webp/">Compress WebP</a>
+        <a href="/compress-multiple-images/">Batch Compress</a>
+        <a href="/resize-image/">Resize Image</a>
+        <a href="/crop-image/">Crop Image</a>
+        <a href="/compress-to-size/">Compress to Size</a>
+      </div>
+      <div class="footer-col">
+        <h4>Convert and PDF</h4>
+        <a href="/convert/">Image Converter</a>
+        <a href="/png-to-jpg/">PNG to JPG</a>
+        <a href="/jpg-to-png/">JPG to PNG</a>
+        <a href="/webp-to-jpg/">WebP to JPG</a>
+        <a href="/image-to-pdf/">Image to PDF</a>
+        <a href="/image-tools/">All image tools</a>
+      </div>
+      <div class="footer-col">
+        <h4>Text tools</h4>
+        <a href="/word-counter/">Word Counter</a>
+        <a href="/case-converter/">Case Converter</a>
+        <a href="/line-sorter/">Line Sorter</a>
+        <a href="/lorem-ipsum-generator/">Lorem Ipsum</a>
+        <a href="/text-tools/">All text tools</a>
+      </div>
+      <div class="footer-col">
+        <h4>Developer tools</h4>
+        <a href="/json-formatter/">JSON Formatter</a>
+        <a href="/base64-encoder/">Base64 Encoder</a>
+        <a href="/url-encoder/">URL Encoder</a>
+        <a href="/hash-generator/">Hash Generator</a>
+        <a href="/uuid-generator/">UUID Generator</a>
+        <a href="/password-generator/">Password Generator</a>
+        <a href="/timestamp-converter/">Timestamp Converter</a>
+        <a href="/color-converter/">Color Converter</a>
+        <a href="/developer-tools/">All developer tools</a>
+      </div>
+      <div class="footer-col">
+        <h4>Site</h4>
+        <a href="/guides/">Guides</a>
+        <a href="/sitemap/">Sitemap</a>
+        <a href="/about/">About</a>
+        <a href="/contact/">Contact</a>
+        <a href="/privacy-policy/">Privacy Policy</a>
+        <a href="/terms-of-service/">Terms of Service</a>
+        <a href="/cookie-policy/">Cookie Policy</a>
+      </div>
+    </div>
+    <p class="copyright">© 2026 Toolbox</p>
+  </div>
+</footer>
+
+<div class="cookie-banner" id="cookieBanner" hidden>
+  <div class="cookie-inner">
+    <p>This site uses local browser storage to remember your preferences. No personal data is collected or uploaded.</p>
+    <div class="cookie-actions"><button class="btn btn-ghost" id="cookieReject" type="button">Reject</button><button class="btn btn-primary" id="cookieAccept" type="button">Accept</button></div>
+  </div>
+</div>
+
+<script src="/assets/app.js" defer></script>
+<script src="/assets/toolkit.js" defer></script>
+</body>
+</html>

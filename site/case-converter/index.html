@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Converter — UPPER CASE, lower case, Title Case and camelCase</title>
+<meta name="description" content="Convert text between upper case, lower case, title case, sentence case, camelCase, PascalCase, snake_case, kebab-case and CONSTANT_CASE. Free, instant, in your browser.">
+<link rel="canonical" href="https://imgcompress2026.netlify.app/case-converter/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Case Converter — UPPER CASE, lower case, Title Case and camelCase">
+<meta property="og:description" content="Change the capitalisation of any text in one click, including programming styles such as camelCase and snake_case.">
+<meta property="og:url" content="https://imgcompress2026.netlify.app/case-converter/">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20rx='22'%20fill='%232563eb'/%3E%3Ctext%20x='50'%20y='50'%20font-size='58'%20text-anchor='middle'%20dominant-baseline='central'%20fill='white'%20font-weight='bold'%3ETB%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Case Converter","url":"https://imgcompress2026.netlify.app/case-converter/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","description":"Convert text between sentence, lower, upper, title, camel, pascal, snake, kebab and constant case in the browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}]}
+</script>
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9000494688678902" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What is the difference between title case and sentence case?","acceptedAnswer":{"@type":"Answer","text":"Sentence case capitalises only the first letter of each sentence, the way ordinary prose is written. Title case capitalises the first letter of every word, which is the convention for headlines and headings."}},
+{"@type":"Question","name":"Which case should I use for a variable name?","acceptedAnswer":{"@type":"Answer","text":"It depends on the language and its conventions. JavaScript, Java and Swift conventionally use camelCase for variables and PascalCase for classes. Python and Ruby use snake_case. C and Java static constants conventionally use CONSTANT_CASE."}},
+{"@type":"Question","name":"What does the url-slug option do?","acceptedAnswer":{"@type":"Answer","text":"It turns a title into a URL-friendly slug: lower case, words separated by single hyphens, and every character that is not a letter, a digit or a hyphen removed."}},
+{"@type":"Question","name":"Is my text uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. The conversion happens in your browser as you type and nothing is sent to a server."}}
+]}
+</script>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body data-tool="case">
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#2563eb"/><circle cx="9" cy="9" r="1.8" fill="#fff"/><path d="M3.5 17.5l5-5 3 3 4-4 5 5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg><span>Toolbox</span></a>
+    <nav class="site-nav">
+      <a href="/">Home</a>
+      <a href="/image-tools/">Image Tools</a>
+      <a href="/text-tools/">Text Tools</a>
+      <a href="/developer-tools/">Developer Tools</a>
+      <a href="/guides/">Guides</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <h1>Case Converter</h1>
+    <p class="subtitle">Change the capitalisation of any text instantly — from Title Case to camelCase, snake_case or a URL slug.</p>
+  </section>
+
+  <section class="card">
+    <label class="tool-label" for="toolInput">Your text</label>
+    <textarea class="tool-textarea" id="toolInput" spellcheck="false" autocomplete="off" placeholder="paste a heading, a list of names or a variable name"></textarea>
+    <div class="field-row">
+      <label for="caseMode">Case</label>
+      <select id="caseMode">
+        <option value="sentence">Sentence case</option>
+        <option value="lower">lower case</option>
+        <option value="upper">UPPER CASE</option>
+        <option value="title">Title Case</option>
+        <option value="camel">camelCase</option>
+        <option value="pascal">PascalCase</option>
+        <option value="snake">snake_case</option>
+        <option value="kebab">kebab-case</option>
+        <option value="constant">CONSTANT_CASE</option>
+        <option value="slug">url-slug</option>
+      </select>
+    </div>
+    <div class="action-row">
+      <button class="btn btn-ghost" data-case="upper" type="button">UPPER</button>
+      <button class="btn btn-ghost" data-case="lower" type="button">lower</button>
+      <button class="btn btn-ghost" data-case="title" type="button">Title</button>
+      <button class="btn btn-ghost" data-case="sentence" type="button">Sentence</button>
+      <button class="btn btn-ghost" data-case="camel" type="button">camelCase</button>
+      <button class="btn btn-ghost" data-case="pascal" type="button">PascalCase</button>
+      <button class="btn btn-ghost" data-case="snake" type="button">snake_case</button>
+      <button class="btn btn-ghost" data-case="kebab" type="button">kebab-case</button>
+      <button class="btn btn-ghost" data-case="constant" type="button">CONSTANT_CASE</button>
+      <button class="btn btn-ghost" data-case="slug" type="button">url-slug</button>
+    </div>
+    <p class="error" id="toolError" hidden></p>
+    <p class="status" id="toolStatus" hidden></p>
+    <div class="tool-field">
+      <label class="tool-label" for="toolOutput">Converted text</label>
+      <textarea class="tool-textarea" id="toolOutput" readonly spellcheck="false"></textarea>
+    </div>
+    <div class="action-row">
+      <button class="btn btn-ghost" data-act="copy" type="button">Copy</button>
+      <button class="btn btn-ghost" data-act="download" data-name="converted-text.txt" type="button">Download</button>
+      <button class="btn btn-ghost" data-act="clear" type="button">Clear</button>
+    </div>
+  </section>
+
+  <section class="content-block">
+    <h2>How to convert text case</h2>
+    <ol>
+      <li>Paste or type your text. The result updates as you type.</li>
+      <li>Pick a style from the dropdown, or press one of the buttons for the nine most common conversions.</li>
+      <li>Copy the converted text, or download it as a text file.</li>
+    </ol>
+    <p>Everything happens in the browser, so a list of names or a draft heading never leaves your machine.</p>
+  </section>
+
+  <section class="content-block">
+    <h2>Which case to use, and when</h2>
+    <p>For prose the choice is between two conventions. Sentence case — capitalising only the first letter of each sentence — is how ordinary text is written, and most style guides for the web prefer it for headings too, because it reads the way people speak. Title case capitalises the first letter of every significant word and is still standard in book titles, US newspaper headlines and many marketing pages.</p>
+    <p>For code the conventions are stricter, and following the local one matters more than which looks best. JavaScript, Java, Swift and Kotlin use <code>camelCase</code> for variables and functions and <code>PascalCase</code> for types and classes. Python and Ruby use <code>snake_case</code> for the same things. C, Java and many other languages use <code>CONSTANT_CASE</code> for values that never change. Where a name has to cross from one convention to another — a JSON property arriving from an API into a JavaScript project — converting it in one step is faster and far less error-prone than retyping it.</p>
+    <p>The slug option is a different job again. A URL slug has to survive being pasted into a browser, an email client and a chat app, so it is lower case, uses hyphens rather than spaces, and drops every character that is not a letter or a digit. That keeps the address readable and avoids the long percent-encoded sequences you get from leaving punctuation and non-English characters in place.</p>
+  </section>
+
+  <section class="content-block">
+    <h2>Case converter FAQ</h2>
+    <div class="faq-item"><h4>Title case or sentence case?</h4><p>Sentence case capitalises the first letter of each sentence, the way ordinary prose works. Title case capitalises the first letter of every significant word, the convention for headlines and book titles.</p></div>
+    <div class="faq-item"><h4>Which case should a variable name use?</h4><p>Follow the language. JavaScript, Java and Swift conventionally use camelCase for variables and PascalCase for classes; Python and Ruby use snake_case; C-style constants use CONSTANT_CASE.</p></div>
+    <div class="faq-item"><h4>What does the url-slug option do?</h4><p>It turns a title into a URL-friendly slug: lower case, words joined by single hyphens, and anything that is not a letter, a digit or a hyphen removed.</p></div>
+    <div class="faq-item"><h4>Is my text uploaded?</h4><p>No. The conversion happens in your browser as you type, and nothing is sent to a server.</p></div>
+  </section>
+
+  <section class="content-block">
+    <h2>Related tools</h2>
+    <ul>
+      <li><a href="/word-counter/">Word Counter</a> — count the words and characters in the same text.</li>
+      <li><a href="/line-sorter/">Line Sorter and Duplicate Remover</a> — clean up a list before you convert it.</li>
+      <li><a href="/lorem-ipsum-generator/">Lorem Ipsum Generator</a> — placeholder text for mockups.</li>
+      <li><a href="/text-tools/">All text tools</a> — four browser-based utilities.</li>
+    </ul>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h4>Image tools</h4>
+        <a href="/compress-image/">Compress Image</a>
+        <a href="/compress-jpg/">Compress JPG</a>
+        <a href="/compress-png/">Compress PNG</a>
+        <a href="/compress-webp/">Compress WebP</a>
+        <a href="/compress-multiple-images/">Batch Compress</a>
+        <a href="/resize-image/">Resize Image</a>
+        <a href="/crop-image/">Crop Image</a>
+        <a href="/compress-to-size/">Compress to Size</a>
+      </div>
+      <div class="footer-col">
+        <h4>Convert and PDF</h4>
+        <a href="/convert/">Image Converter</a>
+        <a href="/png-to-jpg/">PNG to JPG</a>
+        <a href="/jpg-to-png/">JPG to PNG</a>
+        <a href="/webp-to-jpg/">WebP to JPG</a>
+        <a href="/image-to-pdf/">Image to PDF</a>
+        <a href="/image-tools/">All image tools</a>
+      </div>
+      <div class="footer-col">
+        <h4>Text tools</h4>
+        <a href="/word-counter/">Word Counter</a>
+        <a href="/case-converter/">Case Converter</a>
+        <a href="/line-sorter/">Line Sorter</a>
+        <a href="/lorem-ipsum-generator/">Lorem Ipsum</a>
+        <a href="/text-tools/">All text tools</a>
+      </div>
+      <div class="footer-col">
+        <h4>Developer tools</h4>
+        <a href="/json-formatter/">JSON Formatter</a>
+        <a href="/base64-encoder/">Base64 Encoder</a>
+        <a href="/url-encoder/">URL Encoder</a>
+        <a href="/hash-generator/">Hash Generator</a>
+        <a href="/uuid-generator/">UUID Generator</a>
+        <a href="/password-generator/">Password Generator</a>
+        <a href="/timestamp-converter/">Timestamp Converter</a>
+        <a href="/color-converter/">Color Converter</a>
+        <a href="/developer-tools/">All developer tools</a>
+      </div>
+      <div class="footer-col">
+        <h4>Site</h4>
+        <a href="/guides/">Guides</a>
+        <a href="/sitemap/">Sitemap</a>
+        <a href="/about/">About</a>
+        <a href="/contact/">Contact</a>
+        <a href="/privacy-policy/">Privacy Policy</a>
+        <a href="/terms-of-service/">Terms of Service</a>
+        <a href="/cookie-policy/">Cookie Policy</a>
+      </div>
+    </div>
+    <p class="copyright">© 2026 Toolbox</p>
+  </div>
+</footer>
+
+<div class="cookie-banner" id="cookieBanner" hidden>
+  <div class="cookie-inner">
+    <p>This site uses local browser storage to remember your preferences. No personal data is collected or uploaded.</p>
+    <div class="cookie-actions"><button class="btn btn-ghost" id="cookieReject" type="button">Reject</button><button class="btn btn-primary" id="cookieAccept" type="button">Accept</button></div>
+  </div>
+</div>
+
+<script src="/assets/app.js" defer></script>
+<script src="/assets/toolkit.js" defer></script>
+</body>
+</html>

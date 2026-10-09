@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UUID Generator — Create Random Version 4 UUIDs Online</title>
+<meta name="description" content="Generate random version 4 UUIDs in bulk, free and in your browser. Options for upper case, braces and plain hex without dashes. Nothing is uploaded.">
+<link rel="canonical" href="https://imgcompress2026.netlify.app/uuid-generator/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="UUID Generator — Create Random Version 4 UUIDs Online">
+<meta property="og:description" content="Generate version 4 UUIDs in bulk, straight from your browser.">
+<meta property="og:url" content="https://imgcompress2026.netlify.app/uuid-generator/">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20rx='22'%20fill='%232563eb'/%3E%3Ctext%20x='50'%20y='50'%20font-size='58'%20text-anchor='middle'%20dominant-baseline='central'%20fill='white'%20font-weight='bold'%3ETB%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"UUID Generator","url":"https://imgcompress2026.netlify.app/uuid-generator/","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","description":"Generate version 4 UUIDs in bulk entirely in the browser, using the browser's cryptographic random number generator.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}]}
+</script>
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9000494688678902" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Are these UUIDs really random?","acceptedAnswer":{"@type":"Answer","text":"Yes. The tool uses the browser's crypto.getRandomValues, the cryptographically secure random number generator built into the platform, and sets the version and variant bits that the UUID specification requires."}},
+{"@type":"Question","name":"Can two UUIDs ever be the same?","acceptedAnswer":{"@type":"Answer","text":"A version 4 UUID has 122 random bits, so the chance of a collision is negligible. You would need to generate around 2.7 trillion UUIDs before a collision became likely, which is far beyond any realistic workload."}},
+{"@type":"Question","name":"Should a UUID be used as a database primary key?","acceptedAnswer":{"@type":"Answer","text":"It works well and is a common choice, especially when rows are created on different machines or before they reach the database. The trade-off is size and index locality compared with a sequential integer, so some projects use a UUID as the public identifier alongside an internal numeric key."}},
+{"@type":"Question","name":"What are braces and plain option for?","acceptedAnswer":{"@type":"Answer","text":"Braces are the canonical form used by Microsoft tooling such as .NET Guid strings. The plain option removes the dashes, which some systems prefer when a UUID has to fit into a fixed-width column or a filename."}}
+]}
+</script>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body data-tool="uuid">
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#2563eb"/><circle cx="9" cy="9" r="1.8" fill="#fff"/><path d="M3.5 17.5l5-5 3 3 4-4 5 5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg><span>Toolbox</span></a>
+    <nav class="site-nav">
+      <a href="/">Home</a>
+      <a href="/image-tools/">Image Tools</a>
+      <a href="/text-tools/">Text Tools</a>
+      <a href="/developer-tools/">Developer Tools</a>
+      <a href="/guides/">Guides</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <h1>UUID Generator</h1>
+    <p class="subtitle">Create random version 4 UUIDs in bulk — generated in your browser with the platform's secure random source.</p>
+  </section>
+
+  <section class="card">
+    <div class="field-row">
+      <label for="uuidCount">How many (1 to 100)</label>
+      <input type="number" id="uuidCount" value="5" min="1" max="100" step="1">
+    </div>
+    <div class="opt-row">
+      <label class="opt" for="uuidUpper"><input type="checkbox" id="uuidUpper"> UPPER CASE</label>
+      <label class="opt" for="uuidBraces"><input type="checkbox" id="uuidBraces"> Wrap in {braces}</label>
+      <label class="opt" for="uuidPlain"><input type="checkbox" id="uuidPlain"> Remove the dashes</label>
+    </div>
+    <div class="action-row">
+      <button class="btn btn-primary" data-act="generate" type="button">Generate UUIDs</button>
+      <button class="btn btn-ghost" data-act="copy" type="button">Copy</button>
+      <button class="btn btn-ghost" data-act="download" data-name="uuids.txt" type="button">Download</button>
+      <button class="btn btn-ghost" data-act="clear" type="button">Clear</button>
+    </div>
+    <p class="error" id="toolError" hidden></p>
+    <p class="status" id="toolStatus" hidden></p>
+    <div class="tool-field">
+      <label class="tool-label" for="toolOutput">UUIDs</label>
+      <textarea class="tool-textarea" id="toolOutput" readonly spellcheck="false"></textarea>
+    </div>
+  </section>
+
+  <section class="content-block">
+    <h2>How to generate UUIDs</h2>
+    <ol>
+      <li>Choose how many identifiers you need — up to 100 in one go.</li>
+      <li>Tick <strong>UPPER CASE</strong>, <strong>braces</strong> or <strong>remove the dashes</strong> if the system you are pasting into expects one of those forms.</li>
+      <li>Press <strong>Generate UUIDs</strong>, then copy the list or download it as a text file.</li>
+    </ol>
+    <p>The page generates a fresh set as soon as it loads, so there is almost always a UUID ready to copy without a click.</p>
+  </section>
+
+  <section class="content-block">
+    <h2>What a version 4 UUID actually is</h2>
+    <p>A UUID — universally unique identifier — is a 128-bit value written as 32 hexadecimal digits in five groups: <code>f47ac10b-58cc-4372-a567-0e02b2c3d479</code>. The pattern of the groups is fixed, and two of the bits inside carry meaning. The thirteenth hexadecimal digit is the version, and for a version 4 UUID it is always a <code>4</code>. The seventeenth digit is the variant, which the specification fixes to one of <code>8</code>, <code>9</code>, <code>a</code> or <code>b</code>. Everything else — the remaining 122 bits — is random.</p>
+    <p>Those 122 bits are the whole point. They are drawn from the browser's cryptographically secure random generator rather than a predictable sequence, so you can hand out identifiers on a server, in a mobile app and on a developer's laptop at the same time without any coordination, and still never collide. The probability is small enough that it is not worth designing around: you would have to generate trillions of UUIDs before a clash became likely.</p>
+    <p>The practical use is anywhere an identifier has to be created before it can be checked for uniqueness — a row inserted on a client, an order referenced in a URL before it reaches the database, a file name that must not be guessable. That last point matters more than people expect: a sequential identifier tells an outsider how many records you have and lets them enumerate them, while a random UUID leaks nothing and cannot be guessed.</p>
+  </section>
+
+  <section class="content-block">
+    <h2>UUID generator FAQ</h2>
+    <div class="faq-item"><h4>Are these UUIDs really random?</h4><p>Yes. The tool uses the browser's <code>crypto.getRandomValues</code>, the cryptographically secure random source built into the platform, and sets the version and variant bits the specification requires.</p></div>
+    <div class="faq-item"><h4>Can two UUIDs ever be the same?</h4><p>A version 4 UUID holds 122 random bits, so a collision is negligible — you would need on the order of 2.7 trillion UUIDs before it became likely.</p></div>
+    <div class="faq-item"><h4>Should a UUID be a database primary key?</h4><p>It works well and is a common choice, especially when records are created on different machines. The trade-off is size and index locality compared with a sequential integer, so many projects keep a numeric key internally and use the UUID as the public identifier.</p></div>
+    <div class="faq-item"><h4>What are the braces and plain options for?</h4><p>Braces are the canonical form used by Microsoft tooling such as .NET <code>Guid</code> strings. The plain option drops the dashes, which some systems want when a UUID has to fit a fixed-width column or a file name.</p></div>
+  </section>
+
+  <section class="content-block">
+    <h2>Related tools</h2>
+    <ul>
+      <li><a href="/password-generator/">Password Generator</a> — random secrets with an entropy estimate.</li>
+      <li><a href="/hash-generator/">SHA Hash Generator</a> — derive a stable identifier from fixed content.</li>
+      <li><a href="/timestamp-converter/">Unix Timestamp Converter</a> — the other half of most log lines.</li>
+      <li><a href="/developer-tools/">All developer tools</a> — eight browser-based utilities.</li>
+    </ul>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h4>Image tools</h4>
+        <a href="/compress-image/">Compress Image</a>
+        <a href="/compress-jpg/">Compress JPG</a>
+        <a href="/compress-png/">Compress PNG</a>
+        <a href="/compress-webp/">Compress WebP</a>
+        <a href="/compress-multiple-images/">Batch Compress</a>
+        <a href="/resize-image/">Resize Image</a>
+        <a href="/crop-image/">Crop Image</a>
+        <a href="/compress-to-size/">Compress to Size</a>
+      </div>
+      <div class="footer-col">
+        <h4>Convert and PDF</h4>
+        <a href="/convert/">Image Converter</a>
+        <a href="/png-to-jpg/">PNG to JPG</a>
+        <a href="/jpg-to-png/">JPG to PNG</a>
+        <a href="/webp-to-jpg/">WebP to JPG</a>
+        <a href="/image-to-pdf/">Image to PDF</a>
+        <a href="/image-tools/">All image tools</a>
+      </div>
+      <div class="footer-col">
+        <h4>Text tools</h4>
+        <a href="/word-counter/">Word Counter</a>
+        <a href="/case-converter/">Case Converter</a>
+        <a href="/line-sorter/">Line Sorter</a>
+        <a href="/lorem-ipsum-generator/">Lorem Ipsum</a>
+        <a href="/text-tools/">All text tools</a>
+      </div>
+      <div class="footer-col">
+        <h4>Developer tools</h4>
+        <a href="/json-formatter/">JSON Formatter</a>
+        <a href="/base64-encoder/">Base64 Encoder</a>
+        <a href="/url-encoder/">URL Encoder</a>
+        <a href="/hash-generator/">Hash Generator</a>
+        <a href="/uuid-generator/">UUID Generator</a>
+        <a href="/password-generator/">Password Generator</a>
+        <a href="/timestamp-converter/">Timestamp Converter</a>
+        <a href="/color-converter/">Color Converter</a>
+        <a href="/developer-tools/">All developer tools</a>
+      </div>
+      <div class="footer-col">
+        <h4>Site</h4>
+        <a href="/guides/">Guides</a>
+        <a href="/sitemap/">Sitemap</a>
+        <a href="/about/">About</a>
+        <a href="/contact/">Contact</a>
+        <a href="/privacy-policy/">Privacy Policy</a>
+        <a href="/terms-of-service/">Terms of Service</a>
+        <a href="/cookie-policy/">Cookie Policy</a>
+      </div>
+    </div>
+    <p class="copyright">© 2026 Toolbox</p>
+  </div>
+</footer>
+
+<div class="cookie-banner" id="cookieBanner" hidden>
+  <div class="cookie-inner">
+    <p>This site uses local browser storage to remember your preferences. No personal data is collected or uploaded.</p>
+    <div class="cookie-actions"><button class="btn btn-ghost" id="cookieReject" type="button">Reject</button><button class="btn btn-primary" id="cookieAccept" type="button">Accept</button></div>
+  </div>
+</div>
+
+<script src="/assets/app.js" defer></script>
+<script src="/assets/toolkit.js" defer></script>
+</body>
+</html>

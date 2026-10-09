@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Base64 Encoder and Decoder — Free Online Converter</title>
+<meta name="description" content="Encode text to Base64 or decode Base64 back to text instantly, free and in your browser. URL-safe output supported, and nothing you paste is uploaded.">
+<link rel="canonical" href="https://imgcompress2026.netlify.app/base64-encoder/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Base64 Encoder and Decoder — Free Online Converter">
+<meta property="og:description" content="Turn text into Base64 or read Base64 back as text. Everything happens in your browser.">
+<meta property="og:url" content="https://imgcompress2026.netlify.app/base64-encoder/">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20rx='22'%20fill='%232563eb'/%3E%3Ctext%20x='50'%20y='50'%20font-size='58'%20text-anchor='middle'%20dominant-baseline='central'%20fill='white'%20font-weight='bold'%3ETB%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Base64 Encoder and Decoder","url":"https://imgcompress2026.netlify.app/base64-encoder/","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","description":"Encode and decode Base64 text entirely in the browser, with URL-safe output.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}]}
+</script>
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9000494688678902" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Is Base64 encryption?","acceptedAnswer":{"@type":"Answer","text":"No. Base64 is an encoding, not encryption. There is no key and no secrecy: anyone can decode it in a second. Use it to carry data through text-only channels, never to protect a password or a secret."}},
+{"@type":"Question","name":"Does Base64 make my data bigger?","acceptedAnswer":{"@type":"Answer","text":"Yes, by about a third. Every three bytes of input become four characters of output, and the padding equals signs add a little more."}},
+{"@type":"Question","name":"What is URL-safe Base64?","acceptedAnswer":{"@type":"Answer","text":"Standard Base64 uses + and /, which have their own meaning inside a URL. The URL-safe variant swaps them for - and _ and drops the trailing padding so the string can be pasted straight into a link or a filename."}},
+{"@type":"Question","name":"Why does decoding fail?","acceptedAnswer":{"@type":"Answer","text":"Either the string contains characters that are not part of the Base64 alphabet, or the decoded bytes are not UTF-8 text. A Base64-encoded image, for example, decodes to binary data and cannot be shown as text."}}
+]}
+</script>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body data-tool="base64">
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#2563eb"/><circle cx="9" cy="9" r="1.8" fill="#fff"/><path d="M3.5 17.5l5-5 3 3 4-4 5 5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg><span>Toolbox</span></a>
+    <nav class="site-nav">
+      <a href="/">Home</a>
+      <a href="/image-tools/">Image Tools</a>
+      <a href="/text-tools/">Text Tools</a>
+      <a href="/developer-tools/">Developer Tools</a>
+      <a href="/guides/">Guides</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <h1>Base64 Encoder and Decoder</h1>
+    <p class="subtitle">Turn text into Base64, or read Base64 back as text — handled entirely inside your browser.</p>
+  </section>
+
+  <section class="card">
+    <label class="tool-label" for="toolInput">Text or Base64</label>
+    <textarea class="tool-textarea" id="toolInput" spellcheck="false" autocomplete="off" placeholder="Hello, world!"></textarea>
+    <div class="opt-row">
+      <label class="opt" for="b64UrlSafe"><input type="checkbox" id="b64UrlSafe"> URL-safe alphabet (- and _ instead of + and /)</label>
+    </div>
+    <div class="action-row">
+      <button class="btn btn-primary" data-act="encode" type="button">Encode to Base64</button>
+      <button class="btn btn-ghost" data-act="decode" type="button">Decode to text</button>
+      <button class="btn btn-ghost" data-act="copy" type="button">Copy</button>
+      <button class="btn btn-ghost" data-act="download" data-name="base64.txt" type="button">Download</button>
+      <button class="btn btn-ghost" data-act="clear" type="button">Clear</button>
+    </div>
+    <p class="error" id="toolError" hidden></p>
+    <p class="status" id="toolStatus" hidden></p>
+    <div class="tool-field">
+      <label class="tool-label" for="toolOutput">Result</label>
+      <textarea class="tool-textarea" id="toolOutput" readonly spellcheck="false"></textarea>
+    </div>
+  </section>
+
+  <section class="content-block">
+    <h2>How to encode or decode Base64</h2>
+    <ol>
+      <li>Paste your text — or a Base64 string — into the box.</li>
+      <li>Leave <strong>URL-safe</strong> unticked for the standard alphabet, or tick it if the result has to travel inside a URL or a filename.</li>
+      <li>Press <strong>Encode to Base64</strong> or <strong>Decode to text</strong>.</li>
+      <li>Copy the result, or download it as a text file.</li>
+    </ol>
+    <p>The tool always tells you what it did: encoding reports how many characters went in, and decoding reports when the input is not valid Base64 or does not decode to readable text.</p>
+  </section>
+
+  <section class="content-block">
+    <h2>What Base64 is, and when to use it</h2>
+    <p>Base64 is a way of writing arbitrary bytes using only 64 safe characters — the letters A–Z and a–z, the digits 0–9, plus <code>+</code> and <code>/</code>. Every three bytes of input become four characters of output, so the result is about a third larger than the original. That overhead is the entire price of the format, and it buys one thing: the ability to move binary or awkward data through a channel that only accepts text.</p>
+    <p>That is why email attachments are Base64, why JSON Web Tokens embed Base64-encoded headers and payloads, and why a data URI on a web page looks like <code>data:image/png;base64,iVBORw0…</code>. In every one of those cases the underlying channel cannot carry raw bytes, so the data is encoded into a shape the channel accepts.</p>
+    <p>The most common misunderstanding is that Base64 hides anything. It does not. There is no key, no password and no transformation that depends on a secret — the output can be decoded by anyone, including this page. If you need to keep something private, encode it <em>and then</em> encrypt it, or send it over a channel that is already protected. Base64 is for compatibility, not for confidentiality.</p>
+    <p>The URL-safe variant exists because <code>+</code>, <code>/</code> and <code>=</code> all have their own meaning in URLs and filenames, where they can be mangled by a proxy or a query parser. Swapping <code>+</code> for <code>-</code>, <code>/</code> for <code>_</code> and dropping the padding produces a string that survives a round trip through a link untouched.</p>
+  </section>
+
+  <section class="content-block">
+    <h2>Base64 FAQ</h2>
+    <div class="faq-item"><h4>Is Base64 encryption?</h4><p>No. Base64 is an encoding, not encryption. There is no key and no secrecy — anyone can decode it in a second. Use it to carry data through text-only channels, never to protect a password or a secret.</p></div>
+    <div class="faq-item"><h4>Does Base64 make my data bigger?</h4><p>Yes, by about a third. Every three bytes of input become four characters of output, and the padding equals signs add a little more.</p></div>
+    <div class="faq-item"><h4>What is URL-safe Base64?</h4><p>Standard Base64 uses <code>+</code> and <code>/</code>, which have their own meaning inside a URL. The URL-safe variant swaps them for <code>-</code> and <code>_</code> and drops the trailing padding, so the string can be pasted straight into a link or a filename.</p></div>
+    <div class="faq-item"><h4>Why does decoding fail?</h4><p>Either the string contains characters that are not part of the Base64 alphabet, or the decoded bytes are not UTF-8 text. A Base64-encoded image, for example, decodes to binary data and cannot be shown as text.</p></div>
+  </section>
+
+  <section class="content-block">
+    <h2>Related tools</h2>
+    <ul>
+      <li><a href="/json-formatter/">JSON Formatter and Validator</a> — format the payload you just encoded.</li>
+      <li><a href="/url-encoder/">URL Encoder and Decoder</a> — for values that travel inside a query string.</li>
+      <li><a href="/hash-generator/">SHA Hash Generator</a> — checksums for text and payloads.</li>
+      <li><a href="/developer-tools/">All developer tools</a> — eight browser-based utilities.</li>
+    </ul>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h4>Image tools</h4>
+        <a href="/compress-image/">Compress Image</a>
+        <a href="/compress-jpg/">Compress JPG</a>
+        <a href="/compress-png/">Compress PNG</a>
+        <a href="/compress-webp/">Compress WebP</a>
+        <a href="/compress-multiple-images/">Batch Compress</a>
+        <a href="/resize-image/">Resize Image</a>
+        <a href="/crop-image/">Crop Image</a>
+        <a href="/compress-to-size/">Compress to Size</a>
+      </div>
+      <div class="footer-col">
+        <h4>Convert and PDF</h4>
+        <a href="/convert/">Image Converter</a>
+        <a href="/png-to-jpg/">PNG to JPG</a>
+        <a href="/jpg-to-png/">JPG to PNG</a>
+        <a href="/webp-to-jpg/">WebP to JPG</a>
+        <a href="/image-to-pdf/">Image to PDF</a>
+        <a href="/image-tools/">All image tools</a>
+      </div>
+      <div class="footer-col">
+        <h4>Text tools</h4>
+        <a href="/word-counter/">Word Counter</a>
+        <a href="/case-converter/">Case Converter</a>
+        <a href="/line-sorter/">Line Sorter</a>
+        <a href="/lorem-ipsum-generator/">Lorem Ipsum</a>
+        <a href="/text-tools/">All text tools</a>
+      </div>
+      <div class="footer-col">
+        <h4>Developer tools</h4>
+        <a href="/json-formatter/">JSON Formatter</a>
+        <a href="/base64-encoder/">Base64 Encoder</a>
+        <a href="/url-encoder/">URL Encoder</a>
+        <a href="/hash-generator/">Hash Generator</a>
+        <a href="/uuid-generator/">UUID Generator</a>
+        <a href="/password-generator/">Password Generator</a>
+        <a href="/timestamp-converter/">Timestamp Converter</a>
+        <a href="/color-converter/">Color Converter</a>
+        <a href="/developer-tools/">All developer tools</a>
+      </div>
+      <div class="footer-col">
+        <h4>Site</h4>
+        <a href="/guides/">Guides</a>
+        <a href="/sitemap/">Sitemap</a>
+        <a href="/about/">About</a>
+        <a href="/contact/">Contact</a>
+        <a href="/privacy-policy/">Privacy Policy</a>
+        <a href="/terms-of-service/">Terms of Service</a>
+        <a href="/cookie-policy/">Cookie Policy</a>
+      </div>
+    </div>
+    <p class="copyright">© 2026 Toolbox</p>
+  </div>
+</footer>
+
+<div class="cookie-banner" id="cookieBanner" hidden>
+  <div class="cookie-inner">
+    <p>This site uses local browser storage to remember your preferences. No personal data is collected or uploaded.</p>
+    <div class="cookie-actions"><button class="btn btn-ghost" id="cookieReject" type="button">Reject</button><button class="btn btn-primary" id="cookieAccept" type="button">Accept</button></div>
+  </div>
+</div>
+
+<script src="/assets/app.js" defer></script>
+<script src="/assets/toolkit.js" defer></script>
+</body>
+</html>

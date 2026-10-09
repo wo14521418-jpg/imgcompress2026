@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>URL Encoder and Decoder — Free Percent Encoding Tool</title>
+<meta name="description" content="Percent-encode or decode URLs, query strings and form values online for free. Choose whether to escape the whole URL or a single value — nothing is uploaded.">
+<link rel="canonical" href="https://imgcompress2026.netlify.app/url-encoder/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="URL Encoder and Decoder — Free Percent Encoding Tool">
+<meta property="og:description" content="Escape or unescape URLs and query strings in your browser.">
+<meta property="og:url" content="https://imgcompress2026.netlify.app/url-encoder/">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20rx='22'%20fill='%232563eb'/%3E%3Ctext%20x='50'%20y='50'%20font-size='58'%20text-anchor='middle'%20dominant-baseline='central'%20fill='white'%20font-weight='bold'%3ETB%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"URL Encoder and Decoder","url":"https://imgcompress2026.netlify.app/url-encoder/","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","description":"Percent-encode and decode URLs and query strings entirely in the browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}]}
+</script>
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9000494688678902" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What is the difference between a whole URL and a single value?","acceptedAnswer":{"@type":"Answer","text":"Single value mode escapes every character that is not allowed in a query value, including the colon and the slash, which is what you need for a search term or a redirect target. Whole URL mode leaves the punctuation that gives a URL its structure - the colon, slashes, question mark, ampersand and equals sign - intact, so only the unsafe characters are escaped."}},
+{"@type":"Question","name":"Why does a space sometimes become %20 and sometimes a plus sign?","acceptedAnswer":{"@type":"Answer","text":"Both are valid in different places. %20 is the percent-encoded form of a space and is always correct. The plus sign is a convention used in HTML form submissions and query strings, where a plus means a space."}},
+{"@type":"Question","name":"Is the text I paste uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. Encoding and decoding happen in your browser with JavaScript, and nothing is sent to a server."}},
+{"@type":"Question","name":"Why does decoding throw an error?","acceptedAnswer":{"@type":"Answer","text":"A percent sign that is not followed by two valid hexadecimal digits is not valid percent encoding. That usually means the string was already decoded once, or that a stray percent sign was typed by hand."}}
+]}
+</script>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body data-tool="url">
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#2563eb"/><circle cx="9" cy="9" r="1.8" fill="#fff"/><path d="M3.5 17.5l5-5 3 3 4-4 5 5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg><span>Toolbox</span></a>
+    <nav class="site-nav">
+      <a href="/">Home</a>
+      <a href="/image-tools/">Image Tools</a>
+      <a href="/text-tools/">Text Tools</a>
+      <a href="/developer-tools/">Developer Tools</a>
+      <a href="/guides/">Guides</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <h1>URL Encoder and Decoder</h1>
+    <p class="subtitle">Percent-encode a URL or a query value, or turn a percent-encoded string back into readable text.</p>
+  </section>
+
+  <section class="card">
+    <label class="tool-label" for="toolInput">URL or text</label>
+    <textarea class="tool-textarea" id="toolInput" spellcheck="false" autocomplete="off" placeholder="https://example.com/search?q=red shoes&amp;page=2"></textarea>
+    <div class="opt-row">
+      <label class="opt" for="urlWhole"><input type="checkbox" id="urlWhole"> Encode a whole URL (keep : / ? &amp; = intact)</label>
+    </div>
+    <div class="action-row">
+      <button class="btn btn-primary" data-act="encode" type="button">Encode</button>
+      <button class="btn btn-ghost" data-act="decode" type="button">Decode</button>
+      <button class="btn btn-ghost" data-act="copy" type="button">Copy</button>
+      <button class="btn btn-ghost" data-act="download" data-name="encoded-url.txt" type="button">Download</button>
+      <button class="btn btn-ghost" data-act="clear" type="button">Clear</button>
+    </div>
+    <p class="error" id="toolError" hidden></p>
+    <p class="status" id="toolStatus" hidden></p>
+    <div class="tool-field">
+      <label class="tool-label" for="toolOutput">Result</label>
+      <textarea class="tool-textarea" id="toolOutput" readonly spellcheck="false"></textarea>
+    </div>
+  </section>
+
+  <section class="content-block">
+    <h2>How to encode or decode a URL</h2>
+    <ol>
+      <li>Paste the URL, query string or value you want to convert.</li>
+      <li>Tick <strong>Encode a whole URL</strong> if the input is a complete address and you want its structure preserved. Leave it unticked for a single value such as a search term or a redirect target.</li>
+      <li>Press <strong>Encode</strong> to escape the unsafe characters, or <strong>Decode</strong> to turn a percent-encoded string back into text.</li>
+      <li>Copy the result or download it.</li>
+    </ol>
+  </section>
+
+  <section class="content-block">
+    <h2>Why URLs need encoding at all</h2>
+    <p>A URL is built from a small set of reserved characters — the colon, the slashes, the question mark, the ampersand and the equals sign — and each of them carries a structural meaning. A space is not allowed anywhere in a URL. Neither is a quote, a hash inside a value, or the Chinese, Arabic or accented letters that appear in half the world's page titles.</p>
+    <p>Percent encoding solves that by replacing an unsafe character with a percent sign followed by its byte value in hexadecimal. A space becomes <code>%20</code>, an ampersand inside a value becomes <code>%26</code>, and a non-ASCII character becomes a short run of percent escapes describing its UTF-8 bytes. The receiving server reverses the process and gets the original text back.</p>
+    <p>The subtlety is what counts as unsafe. In a full URL, encoding the colon or the slash would destroy the address, because the browser would no longer know where the scheme and the path begin. Inside a single query value, though, those same characters <em>are</em> unsafe — a redirect target containing its own <code>?page=2</code> has to be escaped, or the outer URL will absorb it. That is exactly the difference between the two modes on this page, and picking the wrong one is the most common cause of a broken link that looks perfectly valid.</p>
+  </section>
+
+  <section class="content-block">
+    <h2>URL encoding FAQ</h2>
+    <div class="faq-item"><h4>Whole URL or single value?</h4><p>Use <strong>whole URL</strong> when the input is a complete address and its punctuation must stay meaningful. Use <strong>single value</strong> for a search term, a filename or a redirect target, where the colon and slash have to be escaped too.</p></div>
+    <div class="faq-item"><h4>Why does a space become <code>%20</code> sometimes and a plus sign other times?</h4><p>Both are accepted in different places. <code>%20</code> is the true percent-encoded form of a space and is always correct; the plus sign is a form-and-query-string convention where a plus is read as a space.</p></div>
+    <div class="faq-item"><h4>Is the text I paste uploaded?</h4><p>No. Encoding and decoding happen in your browser with JavaScript, and nothing is sent to a server.</p></div>
+    <div class="faq-item"><h4>Why does decoding throw an error?</h4><p>A percent sign that is not followed by two valid hexadecimal digits is not valid percent encoding. That usually means the string was already decoded once, or a stray percent sign was typed by hand.</p></div>
+  </section>
+
+  <section class="content-block">
+    <h2>Related tools</h2>
+    <ul>
+      <li><a href="/base64-encoder/">Base64 Encoder and Decoder</a> — for values that cannot be expressed with percent escapes.</li>
+      <li><a href="/json-formatter/">JSON Formatter and Validator</a> — format the response you just fetched.</li>
+      <li><a href="/hash-generator/">SHA Hash Generator</a> — sign or checksum a payload.</li>
+      <li><a href="/developer-tools/">All developer tools</a> — eight browser-based utilities.</li>
+    </ul>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h4>Image tools</h4>
+        <a href="/compress-image/">Compress Image</a>
+        <a href="/compress-jpg/">Compress JPG</a>
+        <a href="/compress-png/">Compress PNG</a>
+        <a href="/compress-webp/">Compress WebP</a>
+        <a href="/compress-multiple-images/">Batch Compress</a>
+        <a href="/resize-image/">Resize Image</a>
+        <a href="/crop-image/">Crop Image</a>
+        <a href="/compress-to-size/">Compress to Size</a>
+      </div>
+      <div class="footer-col">
+        <h4>Convert and PDF</h4>
+        <a href="/convert/">Image Converter</a>
+        <a href="/png-to-jpg/">PNG to JPG</a>
+        <a href="/jpg-to-png/">JPG to PNG</a>
+        <a href="/webp-to-jpg/">WebP to JPG</a>
+        <a href="/image-to-pdf/">Image to PDF</a>
+        <a href="/image-tools/">All image tools</a>
+      </div>
+      <div class="footer-col">
+        <h4>Text tools</h4>
+        <a href="/word-counter/">Word Counter</a>
+        <a href="/case-converter/">Case Converter</a>
+        <a href="/line-sorter/">Line Sorter</a>
+        <a href="/lorem-ipsum-generator/">Lorem Ipsum</a>
+        <a href="/text-tools/">All text tools</a>
+      </div>
+      <div class="footer-col">
+        <h4>Developer tools</h4>
+        <a href="/json-formatter/">JSON Formatter</a>
+        <a href="/base64-encoder/">Base64 Encoder</a>
+        <a href="/url-encoder/">URL Encoder</a>
+        <a href="/hash-generator/">Hash Generator</a>
+        <a href="/uuid-generator/">UUID Generator</a>
+        <a href="/password-generator/">Password Generator</a>
+        <a href="/timestamp-converter/">Timestamp Converter</a>
+        <a href="/color-converter/">Color Converter</a>
+        <a href="/developer-tools/">All developer tools</a>
+      </div>
+      <div class="footer-col">
+        <h4>Site</h4>
+        <a href="/guides/">Guides</a>
+        <a href="/sitemap/">Sitemap</a>
+        <a href="/about/">About</a>
+        <a href="/contact/">Contact</a>
+        <a href="/privacy-policy/">Privacy Policy</a>
+        <a href="/terms-of-service/">Terms of Service</a>
+        <a href="/cookie-policy/">Cookie Policy</a>
+      </div>
+    </div>
+    <p class="copyright">© 2026 Toolbox</p>
+  </div>
+</footer>
+
+<div class="cookie-banner" id="cookieBanner" hidden>
+  <div class="cookie-inner">
+    <p>This site uses local browser storage to remember your preferences. No personal data is collected or uploaded.</p>
+    <div class="cookie-actions"><button class="btn btn-ghost" id="cookieReject" type="button">Reject</button><button class="btn btn-primary" id="cookieAccept" type="button">Accept</button></div>
+  </div>
+</div>
+
+<script src="/assets/app.js" defer></script>
+<script src="/assets/toolkit.js" defer></script>
+</body>
+</html>

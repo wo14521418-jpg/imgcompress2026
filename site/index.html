@@ -3,27 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Free Online Image Compressor — Compress JPG, PNG and WebP</title>
-<meta name="description" content="Compress JPG, PNG and WebP images online for free. 100% in your browser — no uploads, no sign-up. Batch compress and download as ZIP.">
+<title>Free Online Tools — Image Compressor, JSON Formatter, Base64, Hash and More</title>
+<meta name="description" content="A free online toolbox that runs entirely in your browser: compress, resize and convert images, format JSON, encode Base64 and URLs, generate UUIDs and passwords, convert colours and count words. No uploads, no account.">
 <link rel="canonical" href="https://imgcompress2026.netlify.app/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Free Online Image Compressor — Compress JPG, PNG and WebP">
-<meta property="og:description" content="Compress JPG, PNG and WebP images online for free. 100% in your browser — no uploads, no sign-up.">
+<meta property="og:title" content="Free Online Tools — Image, Text and Developer Utilities">
+<meta property="og:description" content="A free browser-based toolbox: image compression and conversion, JSON formatting, Base64 and URL encoding, hashing, UUIDs, passwords, colour conversion and word counting.">
 <meta property="og:url" content="https://imgcompress2026.netlify.app/">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20rx='22'%20fill='%232563eb'/%3E%3Ctext%20x='50'%20y='50'%20font-size='58'%20text-anchor='middle'%20dominant-baseline='central'%20fill='white'%20font-weight='bold'%3EIC%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20rx='22'%20fill='%232563eb'/%3E%3Ctext%20x='50'%20y='50'%20font-size='58'%20text-anchor='middle'%20dominant-baseline='central'%20fill='white'%20font-weight='bold'%3ETB%3C/text%3E%3C/svg%3E">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"Image Compressor","url":"https://imgcompress2026.netlify.app/"},{"@type":"WebApplication","name":"Image Compressor","url":"https://imgcompress2026.netlify.app/","applicationCategory":"MultimediaApplication","operatingSystem":"Any","description":"Compress JPG, PNG and WebP images online for free, entirely in your browser."}]}
+{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"Toolbox","alternateName":"Free Online Toolbox","url":"https://imgcompress2026.netlify.app/"},{"@type":"WebApplication","name":"Free Online Toolbox","url":"https://imgcompress2026.netlify.app/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","description":"A free online toolbox for images, text and developer tasks that runs entirely in the browser: image compression and conversion, JSON formatting, Base64 and URL encoding, hashing, UUID and password generation, colour conversion and word counting."}]}
 </script>
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9000494688678902" crossorigin="anonymous"></script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"Will this tool save my images?","acceptedAnswer":{"@type":"Answer","text":"No. All image processing happens locally in your browser. We never upload, save or collect any of your image data."}},
+{"@type":"Question","name":"Will these tools save or upload my files?","acceptedAnswer":{"@type":"Answer","text":"No. Every tool on this site, whether it works on images, text or code, runs as JavaScript inside your browser. Your images, JSON, text, URLs, passwords and hashes are never sent to a server."}},
+{"@type":"Question","name":"What tools are on this site?","acceptedAnswer":{"@type":"Answer","text":"Twenty-five tools in three groups. Image tools compress, resize, crop and convert JPG, PNG and WebP files and build PDFs. Text tools count words, change letter case and generate placeholder text. Developer tools format JSON, encode Base64 and URLs, generate SHA hashes, UUIDs and passwords, convert Unix timestamps and convert colour codes."}},
+{"@type":"Question","name":"Do I need an account to use the tools?","acceptedAnswer":{"@type":"Answer","text":"No. There is no sign-up, no login and no email address required. Open a page and use the tool straight away."}},
 {"@type":"Question","name":"Which formats are supported?","acceptedAnswer":{"@type":"Answer","text":"JPG, PNG and WebP are supported. Output defaults to WebP (smaller files) and can be switched to JPG or PNG."}},
 {"@type":"Question","name":"Does this tool resize images too?","acceptedAnswer":{"@type":"Answer","text":"Yes. Use the Resize control to fit the image within 1920, 1280 or 800 pixels, or scale it to 50% or 25% of the original. The output dimensions are shown next to the file size."}},
 {"@type":"Question","name":"Can I compress an image to an exact file size?","acceptedAnswer":{"@type":"Answer","text":"Yes. The Compress to Size tool searches for the highest quality that still fits a limit you set, such as 100 KB or 200 KB, and shows the dimensions and quality it used."}},
 {"@type":"Question","name":"Is there a file size limit?","acceptedAnswer":{"@type":"Answer","text":"In theory, no. Very large images (over 50 MB) may process slowly depending on your device; we recommend processing them in batches."}},
-{"@type":"Question","name":"Is this tool free?","acceptedAnswer":{"@type":"Answer","text":"Yes, the current version is completely free to use."}}
+{"@type":"Question","name":"Are the tools free?","acceptedAnswer":{"@type":"Answer","text":"Yes. Every tool on the site is free to use, with no usage limit and no paid tier."}}
 ]}
 </script>
 <link rel="stylesheet" href="/assets/style.css">
@@ -32,22 +34,12 @@
 
 <header class="site-header">
   <div class="container header-inner">
-    <a class="brand" href="/">
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <rect width="24" height="24" rx="6" fill="#2563eb"/>
-        <circle cx="9" cy="9" r="1.8" fill="#fff"/>
-        <path d="M3.5 17.5l5-5 3 3 4-4 5 5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-      </svg>
-      <span>Image Compressor</span>
-    </a>
+    <a class="brand" href="/"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#2563eb"/><circle cx="9" cy="9" r="1.8" fill="#fff"/><path d="M3.5 17.5l5-5 3 3 4-4 5 5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg><span>Toolbox</span></a>
     <nav class="site-nav">
       <a href="/">Home</a>
-      <a href="/compress-image/">Compress Image</a>
-      <a href="/resize-image/">Resize Image</a>
-      <a href="/crop-image/">Crop Image</a>
-      <a href="/convert/">Convert</a>
-      <a href="/compress-to-size/">Compress to Size</a>
-      <a href="/compress-multiple-images/">Batch</a>
+      <a href="/image-tools/">Image Tools</a>
+      <a href="/text-tools/">Text Tools</a>
+      <a href="/developer-tools/">Developer Tools</a>
       <a href="/guides/">Guides</a>
     </nav>
   </div>
@@ -55,11 +47,12 @@
 
 <main class="container">
   <section class="hero">
-    <h1>Free Online Image Tools</h1>
-    <p class="subtitle">Compress, resize, crop, convert and combine images online for free — processed entirely in your browser.</p>
+    <h1>Free Online Tools</h1>
+    <p class="subtitle">Images, text and developer utilities in one place. Every tool runs completely inside your browser, so nothing you open is ever uploaded.</p>
   </section>
 
   <section class="card">
+    <p class="tool-label">Compress an image right here</p>
     <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload images">
       <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" multiple hidden>
       <svg width="40" height="40" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -162,22 +155,44 @@
   </section>
 
   <section class="content-block">
-    <h2>All image tools</h2>
-    <ul>
-      <li><a href="/compress-image/">Compress Image</a> — shrink any JPG, PNG or WebP file</li>
-      <li><a href="/compress-jpg/">Compress JPG</a> — reduce JPG/JPEG file size</li>
-      <li><a href="/compress-png/">Compress PNG</a> — optimize PNG images</li>
-      <li><a href="/compress-webp/">Compress WebP</a> — compress WebP images</li>
-      <li><a href="/compress-multiple-images/">Compress Multiple Images</a> — batch compress and download as ZIP</li>
-      <li><a href="/resize-image/">Resize Image</a> — set a maximum width or height</li>
-      <li><a href="/crop-image/">Crop Image</a> — cut to a free selection or a fixed ratio such as 1:1 or 16:9</li>
-      <li><a href="/compress-to-size/">Compress to Size</a> — hit an exact limit such as 100 KB or 200 KB</li>
-      <li><a href="/convert/">Image Converter</a> — convert between JPG, PNG and WebP</li>
-      <li><a href="/png-to-jpg/">PNG to JPG</a> — flatten transparency, cut the file size</li>
-      <li><a href="/jpg-to-png/">JPG to PNG</a> — lossless output for editing</li>
-      <li><a href="/webp-to-jpg/">WebP to JPG</a> — convert a whole batch of WebP files</li>
-      <li><a href="/image-to-pdf/">Image to PDF</a> — combine images into one PDF document</li>
-    </ul>
+    <h2>All tools</h2>
+    <p>Twenty-five tools, free, no account required, and every one of them runs on your own device. Start with the image compressor above, or pick a tool from the list.</p>
+
+    <h3>Image tools</h3>
+    <div class="tool-grid">
+      <a class="tool-card" href="/compress-image/"><b>Compress Image</b><span>Shrink any JPG, PNG or WebP file with a live before-and-after preview.</span></a>
+      <a class="tool-card" href="/compress-jpg/"><b>Compress JPG</b><span>Reduce the file size of JPEG photos without visible quality loss.</span></a>
+      <a class="tool-card" href="/compress-png/"><b>Compress PNG</b><span>Optimise PNG screenshots and graphics, with or without resizing.</span></a>
+      <a class="tool-card" href="/compress-webp/"><b>Compress WebP</b><span>Shrink WebP files further before you publish them.</span></a>
+      <a class="tool-card" href="/compress-multiple-images/"><b>Batch Compress</b><span>Compress a whole folder of images and download one ZIP.</span></a>
+      <a class="tool-card" href="/resize-image/"><b>Resize Image</b><span>Set a maximum width or height and keep the proportions intact.</span></a>
+      <a class="tool-card" href="/crop-image/"><b>Crop Image</b><span>Cut to a free selection or a fixed ratio such as 1:1 or 16:9.</span></a>
+      <a class="tool-card" href="/compress-to-size/"><b>Compress to Size</b><span>Hit an exact limit such as 100 KB or 200 KB and see what it cost.</span></a>
+      <a class="tool-card" href="/convert/"><b>Image Converter</b><span>Switch between JPG, PNG and WebP and choose the colour behind transparency.</span></a>
+      <a class="tool-card" href="/png-to-jpg/"><b>PNG to JPG</b><span>Flatten transparency onto a colour you pick and cut the file size.</span></a>
+      <a class="tool-card" href="/jpg-to-png/"><b>JPG to PNG</b><span>Lossless output for editing and screenshot workflows.</span></a>
+      <a class="tool-card" href="/webp-to-jpg/"><b>WebP to JPG</b><span>Convert one WebP file or a whole batch at once.</span></a>
+      <a class="tool-card" href="/image-to-pdf/"><b>Image to PDF</b><span>Combine several images into a single PDF with A4, Letter or custom pages.</span></a>
+    </div>
+
+    <h3>Text tools</h3>
+    <div class="tool-grid">
+      <a class="tool-card" href="/word-counter/"><b>Word Counter</b><span>Count words, characters, sentences and paragraphs, with reading and speaking time.</span></a>
+      <a class="tool-card" href="/case-converter/"><b>Case Converter</b><span>Switch between UPPER CASE, lower case, Title Case, camelCase, snake_case and more.</span></a>
+      <a class="tool-card" href="/lorem-ipsum-generator/"><b>Lorem Ipsum Generator</b><span>Generate placeholder paragraphs, sentences or words for mockups.</span></a>
+    </div>
+
+    <h3>Developer tools</h3>
+    <div class="tool-grid">
+      <a class="tool-card" href="/json-formatter/"><b>JSON Formatter</b><span>Format, validate and minify JSON, and see the exact line and column of any error.</span></a>
+      <a class="tool-card" href="/base64-encoder/"><b>Base64 Encoder</b><span>Encode text to Base64 or decode it back, with URL-safe output.</span></a>
+      <a class="tool-card" href="/url-encoder/"><b>URL Encoder</b><span>Percent-encode or decode URLs, query strings and form values.</span></a>
+      <a class="tool-card" href="/hash-generator/"><b>Hash Generator</b><span>Generate SHA-1, SHA-256, SHA-384 and SHA-512 hashes at once.</span></a>
+      <a class="tool-card" href="/uuid-generator/"><b>UUID Generator</b><span>Create version 4 UUIDs in bulk, with upper-case, brace and plain options.</span></a>
+      <a class="tool-card" href="/password-generator/"><b>Password Generator</b><span>Build strong random passwords with a live entropy estimate.</span></a>
+      <a class="tool-card" href="/timestamp-converter/"><b>Timestamp Converter</b><span>Turn Unix timestamps into readable dates, and dates back into timestamps.</span></a>
+      <a class="tool-card" href="/color-converter/"><b>Color Converter</b><span>Convert between HEX, RGB and HSL, with shades, tints and the complementary colour.</span></a>
+    </div>
   </section>
 
   <section class="content-block">
@@ -204,49 +219,82 @@
   </section>
 
   <section class="content-block">
-    <h2>Why image compression matters</h2>
+    <h2>Why the image tools matter</h2>
     <p>Images make up a large share of the weight of most web pages. Oversized images slow down load times, consume mobile data, hurt your Core Web Vitals, and push your site down in search rankings. Compressing an image before you upload it is one of the fastest, cheapest ways to make a website faster — and it costs you nothing.</p>
     <p><strong>How it works.</strong> Choose a compression level — Normal, Strong, or Extreme. If the image is bigger than it needs to be, set a target size under <strong>Resize</strong> as well: fit within 1920, 1280 or 800 pixels, or scale it to 50% or 25%. Pick an output format (WebP is recommended for the smallest files). Then drag in one image for a live before-and-after preview, or drop in several at once to batch-compress and download everything as a single ZIP archive. Everything runs locally in your browser, so your images never leave your device.</p>
     <p>Two more tools cover the cases the main box cannot. If a form or portal enforces an exact limit, <a href="/compress-to-size/">Compress to Size</a> searches for the best quality that still fits it, and reports the dimensions and quality it used. If the framing is wrong rather than the size, <a href="/crop-image/">Crop Image</a> cuts the picture to a free selection or a fixed ratio such as 1:1 or 16:9 before you compress.</p>
     <p>Format changes live under the <a href="/convert/">Image Converter</a>, which switches a file between JPG, PNG and WebP and lets you choose the colour that replaces transparency. There are dedicated pages for the conversions people need most — <a href="/png-to-jpg/">PNG to JPG</a>, <a href="/jpg-to-png/">JPG to PNG</a> and <a href="/webp-to-jpg/">WebP to JPG</a>, the last of which converts a whole batch at once. If you need several images inside a single document, <a href="/image-to-pdf/">Image to PDF</a> builds one with A4, Letter or fit-to-image pages.</p>
+    <p>The rest of the toolbox exists for the same reason: small jobs that should not require a sign-up, an upload, or a download of someone else's software. Formatting a block of JSON, turning a timestamp into a date, checking what a hex colour looks like next to its complement, or counting the words in a draft takes seconds with the right tool and minutes with the wrong one. Nothing here is a demo — each page does one job, does it properly, and tells you what it did.</p>
   </section>
 
   <section class="content-block">
     <h2>Frequently asked questions</h2>
-    <div class="faq-item"><h4>Will this tool save my images?</h4><p>No. All image processing happens locally in your browser. We never upload, save or collect any of your image data.</p></div>
+    <div class="faq-item"><h4>Will these tools save or upload my files?</h4><p>No. Every tool on this site — image, text or developer — runs as JavaScript inside your browser. Your images, JSON, text, URLs, passwords and hashes are never sent to a server.</p></div>
+    <div class="faq-item"><h4>What tools are on this site?</h4><p>Twenty-five tools in three groups. <strong>Image tools</strong> compress, resize, crop and convert JPG, PNG and WebP files and build PDFs. <strong>Text tools</strong> count words, change letter case and generate placeholder text. <strong>Developer tools</strong> format JSON, encode Base64 and URLs, generate SHA hashes, UUIDs and passwords, convert Unix timestamps and convert colour codes. Browse the <a href="/image-tools/">image tools</a>, <a href="/text-tools/">text tools</a> and <a href="/developer-tools/">developer tools</a>.</p></div>
+    <div class="faq-item"><h4>Do I need an account to use the tools?</h4><p>No. There is no sign-up, no login and no email address required. Open a page and use the tool straight away.</p></div>
     <div class="faq-item"><h4>Which formats are supported?</h4><p>JPG, PNG and WebP are supported. Output defaults to WebP (smaller files) and can be switched to JPG or PNG.</p></div>
     <div class="faq-item"><h4>Does this tool resize images too?</h4><p>Yes. After uploading, use the Resize control to fit the image within 1920, 1280 or 800 pixels, or scale it to 50% or 25% of the original. The output dimensions are shown next to the file size, and there is a dedicated <a href="/resize-image/">image resizer</a> if that is all you need.</p></div>
     <div class="faq-item"><h4>Can I compress an image to an exact file size?</h4><p>Yes. The <a href="/compress-to-size/">Compress to Size</a> tool searches for the highest quality that still fits a limit you set — 100 KB, 200 KB, 500 KB or any other number — and shows the dimensions and quality it used. Use it whenever a form or portal enforces a maximum upload size.</p></div>
     <div class="faq-item"><h4>Is there a file size limit?</h4><p>In theory, no. However, very large images (over 50 MB) may process slowly depending on your device; we recommend processing them in batches.</p></div>
-    <div class="faq-item"><h4>Is this tool free?</h4><p>Yes, the current version is completely free to use.</p></div>
+    <div class="faq-item"><h4>Are the tools free?</h4><p>Yes. Every tool on the site is free to use, with no usage limit and no paid tier.</p></div>
   </section>
 </main>
 
 <footer class="site-footer">
   <div class="container footer-inner">
-    <nav class="footer-nav" aria-label="Footer">
-      <a href="/compress-image/">Compress Image</a>
-      <a href="/compress-jpg/">Compress JPG</a>
-      <a href="/compress-png/">Compress PNG</a>
-      <a href="/compress-webp/">Compress WebP</a>
-      <a href="/resize-image/">Resize Image</a>
-      <a href="/crop-image/">Crop Image</a>
-      <a href="/compress-to-size/">Compress to Size</a>
-      <a href="/compress-multiple-images/">Batch Compress</a>
-      <a href="/convert/">Convert Image</a>
-      <a href="/png-to-jpg/">PNG to JPG</a>
-      <a href="/jpg-to-png/">JPG to PNG</a>
-      <a href="/webp-to-jpg/">WebP to JPG</a>
-      <a href="/image-to-pdf/">Image to PDF</a>
-      <a href="/guides/">Guides</a>
-      <a href="/sitemap/">Sitemap</a>
-      <a href="/about/">About</a>
-      <a href="/contact/">Contact</a>
-      <a href="/privacy-policy/">Privacy Policy</a>
-      <a href="/terms-of-service/">Terms of Service</a>
-      <a href="/cookie-policy/">Cookie Policy</a>
-    </nav>
-    <p class="copyright">© 2026 Image Compressor</p>
+        <div class="footer-cols">
+      <div class="footer-col">
+        <h4>Image tools</h4>
+        <a href="/compress-image/">Compress Image</a>
+        <a href="/compress-jpg/">Compress JPG</a>
+        <a href="/compress-png/">Compress PNG</a>
+        <a href="/compress-webp/">Compress WebP</a>
+        <a href="/compress-multiple-images/">Batch Compress</a>
+        <a href="/resize-image/">Resize Image</a>
+        <a href="/crop-image/">Crop Image</a>
+        <a href="/compress-to-size/">Compress to Size</a>
+      </div>
+      <div class="footer-col">
+        <h4>Convert and PDF</h4>
+        <a href="/convert/">Image Converter</a>
+        <a href="/png-to-jpg/">PNG to JPG</a>
+        <a href="/jpg-to-png/">JPG to PNG</a>
+        <a href="/webp-to-jpg/">WebP to JPG</a>
+        <a href="/image-to-pdf/">Image to PDF</a>
+        <a href="/image-tools/">All image tools</a>
+      </div>
+      <div class="footer-col">
+        <h4>Text tools</h4>
+        <a href="/word-counter/">Word Counter</a>
+        <a href="/case-converter/">Case Converter</a>
+        <a href="/line-sorter/">Line Sorter</a>
+        <a href="/lorem-ipsum-generator/">Lorem Ipsum</a>
+        <a href="/text-tools/">All text tools</a>
+      </div>
+      <div class="footer-col">
+        <h4>Developer tools</h4>
+        <a href="/json-formatter/">JSON Formatter</a>
+        <a href="/base64-encoder/">Base64 Encoder</a>
+        <a href="/url-encoder/">URL Encoder</a>
+        <a href="/hash-generator/">Hash Generator</a>
+        <a href="/uuid-generator/">UUID Generator</a>
+        <a href="/password-generator/">Password Generator</a>
+        <a href="/timestamp-converter/">Timestamp Converter</a>
+        <a href="/color-converter/">Color Converter</a>
+        <a href="/developer-tools/">All developer tools</a>
+      </div>
+      <div class="footer-col">
+        <h4>Site</h4>
+        <a href="/guides/">Guides</a>
+        <a href="/sitemap/">Sitemap</a>
+        <a href="/about/">About</a>
+        <a href="/contact/">Contact</a>
+        <a href="/privacy-policy/">Privacy Policy</a>
+        <a href="/terms-of-service/">Terms of Service</a>
+        <a href="/cookie-policy/">Cookie Policy</a>
+      </div>
+    </div>
+    <p class="copyright">© 2026 Toolbox</p>
   </div>
 </footer>
 

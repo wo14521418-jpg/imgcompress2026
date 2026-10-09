@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Random Password Generator — Strong Passwords Online</title>
+<meta name="description" content="Generate strong random passwords in your browser, free and private. Choose the length and character sets and see the entropy of every password you create.">
+<link rel="canonical" href="https://imgcompress2026.netlify.app/password-generator/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Random Password Generator — Strong Passwords Online">
+<meta property="og:description" content="Build strong random passwords with a live entropy estimate, generated in your browser.">
+<meta property="og:url" content="https://imgcompress2026.netlify.app/password-generator/">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20rx='22'%20fill='%232563eb'/%3E%3Ctext%20x='50'%20y='50'%20font-size='58'%20text-anchor='middle'%20dominant-baseline='central'%20fill='white'%20font-weight='bold'%3ETB%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Random Password Generator","url":"https://imgcompress2026.netlify.app/password-generator/","applicationCategory":"SecurityApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","description":"Generate strong random passwords entirely in the browser using the platform's cryptographic random number generator.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}]}
+</script>
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9000494688678902" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Are the passwords sent anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. The generator runs entirely in your browser using crypto.getRandomValues, the platform's secure random source. Nothing is transmitted or stored, and closing the tab erases the result."}},
+{"@type":"Question","name":"How long should a password be?","acceptedAnswer":{"@type":"Answer","text":"Sixteen random characters drawn from letters, digits and symbols is roughly 100 bits of entropy, which is comfortably beyond what anyone can brute-force. Twelve characters is still around 70 bits and fine for most accounts. Length buys more security than complexity, so prefer a longer password over a busier one."}},
+{"@type":"Question","name":"What does the entropy figure mean?","acceptedAnswer":{"@type":"Answer","text":"Entropy measures how many guesses an attacker would need. Each additional bit doubles the work. Sixty bits is strong against an offline attack, eighty bits is out of reach for the foreseeable future, and anything above a hundred bits is simply not worth attacking."}},
+{"@type":"Question","name":"Should I let the browser remember the password?","acceptedAnswer":{"@type":"Answer","text":"Yes, that is generally the right call. A password manager or the browser's built-in store lets you use a different long random password on every site, which is far safer than reusing one memorable password everywhere."}}
+]}
+</script>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body data-tool="password">
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#2563eb"/><circle cx="9" cy="9" r="1.8" fill="#fff"/><path d="M3.5 17.5l5-5 3 3 4-4 5 5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg><span>Toolbox</span></a>
+    <nav class="site-nav">
+      <a href="/">Home</a>
+      <a href="/image-tools/">Image Tools</a>
+      <a href="/text-tools/">Text Tools</a>
+      <a href="/developer-tools/">Developer Tools</a>
+      <a href="/guides/">Guides</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <h1>Random Password Generator</h1>
+    <p class="subtitle">Long, random, impossible-to-guess passwords — created and kept inside your browser.</p>
+  </section>
+
+  <section class="card">
+    <div class="field-row">
+      <label for="pwLength">Length</label>
+      <input type="range" id="pwLength" min="6" max="64" value="16">
+      <label for="pwCount">How many</label>
+      <input type="number" id="pwCount" value="5" min="1" max="20" step="1">
+    </div>
+    <div class="opt-row">
+      <label class="opt" for="pwLower"><input type="checkbox" id="pwLower" checked> a-z</label>
+      <label class="opt" for="pwUpper"><input type="checkbox" id="pwUpper" checked> A-Z</label>
+      <label class="opt" for="pwDigits"><input type="checkbox" id="pwDigits" checked> 0-9</label>
+      <label class="opt" for="pwSymbols"><input type="checkbox" id="pwSymbols" checked> ! @ # $ % …</label>
+      <label class="opt" for="pwNoAmbiguous"><input type="checkbox" id="pwNoAmbiguous"> Skip look-alike characters (l, 1, O, 0)</label>
+    </div>
+    <div class="action-row">
+      <button class="btn btn-primary" data-act="generate" type="button">Generate passwords</button>
+      <button class="btn btn-ghost" data-act="copy" type="button">Copy</button>
+      <button class="btn btn-ghost" data-act="download" data-name="passwords.txt" type="button">Download</button>
+      <button class="btn btn-ghost" data-act="clear" type="button">Clear</button>
+    </div>
+    <p class="error" id="toolError" hidden></p>
+    <p class="status" id="toolStatus" hidden></p>
+    <div class="tool-field">
+      <label class="tool-label" for="toolOutput">Passwords</label>
+      <textarea class="tool-textarea" id="toolOutput" readonly spellcheck="false"></textarea>
+    </div>
+  </section>
+
+  <section class="content-block">
+    <h2>How to generate a strong password</h2>
+    <ol>
+      <li>Drag the <strong>length</strong> slider. Sixteen characters is a good default; twenty or more for anything important.</li>
+      <li>Leave the four character sets ticked for the widest pool. Untick symbols only if the site rejects them — every password is guaranteed to contain at least one character from each set you leave ticked.</li>
+      <li>Press <strong>Generate passwords</strong>. Five are produced at a time so you can pick one you can type.</li>
+      <li>Copy the one you want straight into your password manager, and do not paste it anywhere else.</li>
+    </ol>
+  </section>
+
+  <section class="content-block">
+    <h2>Why random beats memorable</h2>
+    <p>People are drawn to passwords built from words, dates and substitutions — <code>Summer2024!</code> and its relatives. The problem is that those patterns are exactly what a cracking tool tries first. A modern machine working against a fast hash can test billions of candidates a second, and because so many people reach for the same kinds of substitutions, a dictionary with a handful of rules covers an enormous share of real passwords.</p>
+    <p>Randomness removes the pattern. Each character here is drawn independently from the pool you selected, so knowing every other character tells an attacker nothing about the next one. The trade is that the result is not memorable, which is why the answer is not to memorise it: let a password manager store it, and remember one strong passphrase for the manager instead.</p>
+    <p>Length matters more than complexity. Adding a character multiplies the search space by the size of the pool, while adding a symbol only enlarges the pool slightly. That is why the entropy figure shown after each generation is the number to watch: a sixteen-character password drawn from 94 possible characters carries roughly 100 bits, and every extra bit doubles the work an attacker has to do. Once you are past about eighty bits, the password is no longer the weak point — the site you gave it to is.</p>
+  </section>
+
+  <section class="content-block">
+    <h2>Password generator FAQ</h2>
+    <div class="faq-item"><h4>Are the passwords sent anywhere?</h4><p>No. The generator runs entirely in your browser using <code>crypto.getRandomValues</code>. Nothing is transmitted or stored, and closing the tab erases the result.</p></div>
+    <div class="faq-item"><h4>How long should a password be?</h4><p>Sixteen random characters from letters, digits and symbols is roughly 100 bits of entropy — comfortably beyond brute force. Twelve characters, around 70 bits, is still fine for most accounts. Length buys more security than complexity.</p></div>
+    <div class="faq-item"><h4>What does the entropy figure mean?</h4><p>It measures how many guesses an attacker would need. Each extra bit doubles the work. Sixty bits is strong against an offline attack, eighty bits is out of reach, and past a hundred bits the password is simply not the weak link any more.</p></div>
+    <div class="faq-item"><h4>Should I let the browser remember the password?</h4><p>Generally yes. A password manager or the browser's built-in store lets you use a different long random password on every site, which is far safer than reusing one memorable password everywhere.</p></div>
+  </section>
+
+  <section class="content-block">
+    <h2>Related tools</h2>
+    <ul>
+      <li><a href="/uuid-generator/">UUID Generator</a> — random identifiers for records rather than logins.</li>
+      <li><a href="/hash-generator/">SHA Hash Generator</a> — fingerprints for text and files.</li>
+      <li><a href="/base64-encoder/">Base64 Encoder and Decoder</a> — encode a secret for transport, then encrypt it.</li>
+      <li><a href="/developer-tools/">All developer tools</a> — eight browser-based utilities.</li>
+    </ul>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h4>Image tools</h4>
+        <a href="/compress-image/">Compress Image</a>
+        <a href="/compress-jpg/">Compress JPG</a>
+        <a href="/compress-png/">Compress PNG</a>
+        <a href="/compress-webp/">Compress WebP</a>
+        <a href="/compress-multiple-images/">Batch Compress</a>
+        <a href="/resize-image/">Resize Image</a>
+        <a href="/crop-image/">Crop Image</a>
+        <a href="/compress-to-size/">Compress to Size</a>
+      </div>
+      <div class="footer-col">
+        <h4>Convert and PDF</h4>
+        <a href="/convert/">Image Converter</a>
+        <a href="/png-to-jpg/">PNG to JPG</a>
+        <a href="/jpg-to-png/">JPG to PNG</a>
+        <a href="/webp-to-jpg/">WebP to JPG</a>
+        <a href="/image-to-pdf/">Image to PDF</a>
+        <a href="/image-tools/">All image tools</a>
+      </div>
+      <div class="footer-col">
+        <h4>Text tools</h4>
+        <a href="/word-counter/">Word Counter</a>
+        <a href="/case-converter/">Case Converter</a>
+        <a href="/line-sorter/">Line Sorter</a>
+        <a href="/lorem-ipsum-generator/">Lorem Ipsum</a>
+        <a href="/text-tools/">All text tools</a>
+      </div>
+      <div class="footer-col">
+        <h4>Developer tools</h4>
+        <a href="/json-formatter/">JSON Formatter</a>
+        <a href="/base64-encoder/">Base64 Encoder</a>
+        <a href="/url-encoder/">URL Encoder</a>
+        <a href="/hash-generator/">Hash Generator</a>
+        <a href="/uuid-generator/">UUID Generator</a>
+        <a href="/password-generator/">Password Generator</a>
+        <a href="/timestamp-converter/">Timestamp Converter</a>
+        <a href="/color-converter/">Color Converter</a>
+        <a href="/developer-tools/">All developer tools</a>
+      </div>
+      <div class="footer-col">
+        <h4>Site</h4>
+        <a href="/guides/">Guides</a>
+        <a href="/sitemap/">Sitemap</a>
+        <a href="/about/">About</a>
+        <a href="/contact/">Contact</a>
+        <a href="/privacy-policy/">Privacy Policy</a>
+        <a href="/terms-of-service/">Terms of Service</a>
+        <a href="/cookie-policy/">Cookie Policy</a>
+      </div>
+    </div>
+    <p class="copyright">© 2026 Toolbox</p>
+  </div>
+</footer>
+
+<div class="cookie-banner" id="cookieBanner" hidden>
+  <div class="cookie-inner">
+    <p>This site uses local browser storage to remember your preferences. No personal data is collected or uploaded.</p>
+    <div class="cookie-actions"><button class="btn btn-ghost" id="cookieReject" type="button">Reject</button><button class="btn btn-primary" id="cookieAccept" type="button">Accept</button></div>
+  </div>
+</div>
+
+<script src="/assets/app.js" defer></script>
+<script src="/assets/toolkit.js" defer></script>
+</body>
+</html>

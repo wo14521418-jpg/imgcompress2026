@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Line Sorter and Duplicate Remover — Sort Text Lines Online</title>
+<meta name="description" content="Sort lines A to Z or Z to A, remove duplicate lines, delete blank lines, trim whitespace, number and shuffle a list. Free, instant, entirely in your browser.">
+<link rel="canonical" href="https://imgcompress2026.netlify.app/line-sorter/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Line Sorter and Duplicate Remover — Sort Text Lines Online">
+<meta property="og:description" content="Sort, de-duplicate, trim, number and shuffle lines of text in your browser.">
+<meta property="og:url" content="https://imgcompress2026.netlify.app/line-sorter/">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20rx='22'%20fill='%232563eb'/%3E%3Ctext%20x='50'%20y='50'%20font-size='58'%20text-anchor='middle'%20dominant-baseline='central'%20fill='white'%20font-weight='bold'%3ETB%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Line Sorter and Duplicate Remover","url":"https://imgcompress2026.netlify.app/line-sorter/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","description":"Sort text lines alphabetically or numerically, remove duplicates and blank lines, trim whitespace, number lines and shuffle a list, entirely in the browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}]}
+</script>
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9000494688678902" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Does sorting ignore capital letters?","acceptedAnswer":{"@type":"Answer","text":"Yes. The sort is case-insensitive and treats digits as numbers, so item2 comes before item10 rather than after it. That is almost always what you want for a list of names, tags or file names."}},
+{"@type":"Question","name":"What exactly counts as a duplicate?","acceptedAnswer":{"@type":"Answer","text":"Two lines that are identical character for character. Apple and apple are therefore kept as separate entries, as are example.com and example.com with a trailing space - unless you trim the whitespace first."}},
+{"@type":"Question","name":"Will the tool change my original text?","acceptedAnswer":{"@type":"Answer","text":"No. The box you type in is never modified. Each operation writes its result to the second box, so you can keep going from the original until you copy what you want."}},
+{"@type":"Question","name":"Is my list uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. Everything runs in your browser. A list of email addresses or customer names never leaves your machine."}}
+]}
+</script>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body data-tool="lines">
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#2563eb"/><circle cx="9" cy="9" r="1.8" fill="#fff"/><path d="M3.5 17.5l5-5 3 3 4-4 5 5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg><span>Toolbox</span></a>
+    <nav class="site-nav">
+      <a href="/">Home</a>
+      <a href="/image-tools/">Image Tools</a>
+      <a href="/text-tools/">Text Tools</a>
+      <a href="/developer-tools/">Developer Tools</a>
+      <a href="/guides/">Guides</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <h1>Line Sorter and Duplicate Remover</h1>
+    <p class="subtitle">Sort a list, strip out duplicates and blank lines, trim stray whitespace, number the rows or shuffle them — all in your browser.</p>
+  </section>
+
+  <section class="card">
+    <label class="tool-label" for="toolInput">One item per line</label>
+    <textarea class="tool-textarea" id="toolInput" spellcheck="false" autocomplete="off" placeholder="zebra&#10;apple&#10;Banana&#10;apple&#10;&#10;item10&#10;item2"></textarea>
+    <div class="action-row">
+      <button class="btn btn-primary" data-act="sort-asc" type="button">Sort A to Z</button>
+      <button class="btn btn-ghost" data-act="sort-desc" type="button">Sort Z to A</button>
+      <button class="btn btn-ghost" data-act="dedupe" type="button">Remove duplicates</button>
+      <button class="btn btn-ghost" data-act="remove-empty" type="button">Remove empty lines</button>
+      <button class="btn btn-ghost" data-act="trim" type="button">Trim whitespace</button>
+      <button class="btn btn-ghost" data-act="number" type="button">Number the lines</button>
+      <button class="btn btn-ghost" data-act="reverse" type="button">Reverse the order</button>
+      <button class="btn btn-ghost" data-act="shuffle" type="button">Shuffle</button>
+      <button class="btn btn-ghost" data-act="lower" type="button">lower case</button>
+      <button class="btn btn-ghost" data-act="upper" type="button">UPPER CASE</button>
+    </div>
+    <p class="error" id="toolError" hidden></p>
+    <p class="status" id="toolStatus" hidden></p>
+    <div class="tool-field">
+      <label class="tool-label" for="toolOutput">Result</label>
+      <textarea class="tool-textarea" id="toolOutput" readonly spellcheck="false"></textarea>
+    </div>
+    <div class="action-row">
+      <button class="btn btn-ghost" data-act="copy" type="button">Copy</button>
+      <button class="btn btn-ghost" data-act="download" data-name="sorted-lines.txt" type="button">Download</button>
+      <button class="btn btn-ghost" data-act="clear" type="button">Clear</button>
+    </div>
+  </section>
+
+  <section class="content-block">
+    <h2>How to sort and clean up a list</h2>
+    <ol>
+      <li>Paste your list, one item per line. It can be anything — names, tags, URLs, order numbers, file names.</li>
+      <li>Press the operation you want: sort, remove duplicates, remove empty lines, trim whitespace, number, reverse or shuffle.</li>
+      <li>Chain the steps. Each one reads the original box and writes to the result box, so you can trim the whitespace, then remove the blanks, then sort, checking the count each time.</li>
+      <li>Copy the result or download it as a text file.</li>
+    </ol>
+    <p>Every step reports how many lines it changed, which is the quickest way to confirm that a de-duplication did what you expected before you paste the list somewhere it matters.</p>
+  </section>
+
+  <section class="content-block">
+    <h2>Why this is more fiddly than it looks</h2>
+    <p>Sorting a list by hand is easy for twenty items and impossible for two thousand. The difficulty is not the ordering itself, it is everything around it: the same address entered twice with different capitalisation, a blank line left at the end of the file, an invisible trailing space that makes two identical-looking entries differ by one byte. Those are the reasons a de-duplication that "should" have worked leaves the list the same length.</p>
+    <p>The order the operations are applied in matters, which is why each is a separate button rather than an all-in-one action. Trimming whitespace first lets the de-duplicator recognise two lines that only differed by a stray space. Removing the empty lines first gives you an accurate count. Sorting case-insensitively, with numbers compared as numbers, puts <code>item2</code> before <code>item10</code> — the order a person would put them in, and not the order a plain text sort would produce.</p>
+    <p>Shuffling is the odd one out. It reassigns the lines using the browser's cryptographic random number generator, which makes it genuinely useful for picking a random winner from an ordered list, or for removing the positional bias from a list that someone pasted in a hurry.</p>
+  </section>
+
+  <section class="content-block">
+    <h2>Line tools FAQ</h2>
+    <div class="faq-item"><h4>Does sorting ignore capital letters?</h4><p>Yes. The sort is case-insensitive and compares digits as numbers, so <code>item2</code> comes before <code>item10</code>. That is almost always what you want for names, tags or file names.</p></div>
+    <div class="faq-item"><h4>What counts as a duplicate?</h4><p>Two lines that are identical character for character. <code>Apple</code> and <code>apple</code> are kept separately, as are two otherwise identical lines where one has a trailing space — unless you trim the whitespace first.</p></div>
+    <div class="faq-item"><h4>Will the tool change my original text?</h4><p>No. The top box is never modified. Each operation writes to the result box, so you can keep working from the original until you are happy with the output.</p></div>
+    <div class="faq-item"><h4>Is my list uploaded?</h4><p>No. Everything runs in your browser, so a list of email addresses or customer names never leaves your machine.</p></div>
+  </section>
+
+  <section class="content-block">
+    <h2>Related tools</h2>
+    <ul>
+      <li><a href="/word-counter/">Word Counter</a> — check the length of a list or a draft.</li>
+      <li><a href="/case-converter/">Case Converter</a> — normalise the capitalisation before sorting.</li>
+      <li><a href="/lorem-ipsum-generator/">Lorem Ipsum Generator</a> — filler text for mockups.</li>
+      <li><a href="/text-tools/">All text tools</a> — four browser-based utilities.</li>
+    </ul>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h4>Image tools</h4>
+        <a href="/compress-image/">Compress Image</a>
+        <a href="/compress-jpg/">Compress JPG</a>
+        <a href="/compress-png/">Compress PNG</a>
+        <a href="/compress-webp/">Compress WebP</a>
+        <a href="/compress-multiple-images/">Batch Compress</a>
+        <a href="/resize-image/">Resize Image</a>
+        <a href="/crop-image/">Crop Image</a>
+        <a href="/compress-to-size/">Compress to Size</a>
+      </div>
+      <div class="footer-col">
+        <h4>Convert and PDF</h4>
+        <a href="/convert/">Image Converter</a>
+        <a href="/png-to-jpg/">PNG to JPG</a>
+        <a href="/jpg-to-png/">JPG to PNG</a>
+        <a href="/webp-to-jpg/">WebP to JPG</a>
+        <a href="/image-to-pdf/">Image to PDF</a>
+        <a href="/image-tools/">All image tools</a>
+      </div>
+      <div class="footer-col">
+        <h4>Text tools</h4>
+        <a href="/word-counter/">Word Counter</a>
+        <a href="/case-converter/">Case Converter</a>
+        <a href="/line-sorter/">Line Sorter</a>
+        <a href="/lorem-ipsum-generator/">Lorem Ipsum</a>
+        <a href="/text-tools/">All text tools</a>
+      </div>
+      <div class="footer-col">
+        <h4>Developer tools</h4>
+        <a href="/json-formatter/">JSON Formatter</a>
+        <a href="/base64-encoder/">Base64 Encoder</a>
+        <a href="/url-encoder/">URL Encoder</a>
+        <a href="/hash-generator/">Hash Generator</a>
+        <a href="/uuid-generator/">UUID Generator</a>
+        <a href="/password-generator/">Password Generator</a>
+        <a href="/timestamp-converter/">Timestamp Converter</a>
+        <a href="/color-converter/">Color Converter</a>
+        <a href="/developer-tools/">All developer tools</a>
+      </div>
+      <div class="footer-col">
+        <h4>Site</h4>
+        <a href="/guides/">Guides</a>
+        <a href="/sitemap/">Sitemap</a>
+        <a href="/about/">About</a>
+        <a href="/contact/">Contact</a>
+        <a href="/privacy-policy/">Privacy Policy</a>
+        <a href="/terms-of-service/">Terms of Service</a>
+        <a href="/cookie-policy/">Cookie Policy</a>
+      </div>
+    </div>
+    <p class="copyright">© 2026 Toolbox</p>
+  </div>
+</footer>
+
+<div class="cookie-banner" id="cookieBanner" hidden>
+  <div class="cookie-inner">
+    <p>This site uses local browser storage to remember your preferences. No personal data is collected or uploaded.</p>
+    <div class="cookie-actions"><button class="btn btn-ghost" id="cookieReject" type="button">Reject</button><button class="btn btn-primary" id="cookieAccept" type="button">Accept</button></div>
+  </div>
+</div>
+
+<script src="/assets/app.js" defer></script>
+<script src="/assets/toolkit.js" defer></script>
+</body>
+</html>
