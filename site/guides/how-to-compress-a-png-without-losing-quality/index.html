@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Compress a PNG Without Losing Quality (Complete Guide)</title>
+<meta name="description" content="PNG is lossless, so shrinking one takes a different approach. Here is how to cut PNG file size without changing a single pixel — and what to do when lossless is not enough.">
+<link rel="canonical" href="https://imgcompress2026.netlify.app/guides/how-to-compress-a-png-without-losing-quality/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to Compress a PNG Without Losing Quality">
+<meta property="og:description" content="How to cut PNG file size without changing a single pixel, and what to do when lossless is not enough.">
+<meta property="og:url" content="https://imgcompress2026.netlify.app/guides/how-to-compress-a-png-without-losing-quality/">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20rx='22'%20fill='%232563eb'/%3E%3Ctext%20x='50'%20y='50'%20font-size='58'%20text-anchor='middle'%20dominant-baseline='central'%20fill='white'%20font-weight='bold'%3EIC%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"How to Compress a PNG Without Losing Quality","description":"How to shrink a PNG without changing a single pixel, and what to do when lossless compression is not enough.","url":"https://imgcompress2026.netlify.app/guides/how-to-compress-a-png-without-losing-quality/","inLanguage":"en"}
+</script>
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9000494688678902" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#2563eb"/><circle cx="9" cy="9" r="1.8" fill="#fff"/><path d="M3.5 17.5l5-5 3 3 4-4 5 5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg><span>Image Compressor</span></a>
+    <nav class="site-nav">
+      <a href="/">Home</a>
+      <a href="/compress-image/">Compress Image</a>
+      <a href="/compress-jpg/">Compress JPG</a>
+      <a href="/compress-png/">Compress PNG</a>
+      <a href="/compress-webp/">Compress WebP</a>
+      <a href="/compress-multiple-images/">Batch</a>
+      <a href="/guides/">Guides</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero"><h1>How to compress a PNG without losing quality</h1></section>
+
+  <article class="content-block page-content">
+    <p>PNG is a <strong>lossless</strong> format. That single fact explains why PNG files are so large, and why "compress this PNG" is a harder question than it looks. You cannot simply lower a quality slider the way you can with JPG — there is no quality slider, because no pixels are allowed to change.</p>
+    <p>So there are really two answers, and you need to know which one you want.</p>
+
+    <h2>Answer 1: lossless PNG compression (zero pixel change)</h2>
+    <p>This reduces the file without touching a single pixel. It works because a PNG is not stored as a grid of colours — it is stored as a compressed stream, and that stream is often bigger than it needs to be. Lossless tools shrink it by:</p>
+    <ul>
+      <li><strong>Re-compressing the stream more efficiently.</strong> Two tools can write the same pixels into PNG containers of very different sizes. Better compression settings alone can save 5–25%.</li>
+      <li><strong>Stripping metadata.</strong> Editing software often embeds colour profiles, EXIF, and sometimes a full editing history. None of it changes the pixels, and all of it is dead weight in a file you are going to publish.</li>
+      <li><strong>Reducing colour depth when the image allows it.</strong> A screenshot or a flat logo may use only 40 distinct colours. Storing it as a 256-colour palette image instead of 16.7 million colours is still lossless — as long as the palette covers every colour actually used.</li>
+    </ul>
+    <p>All three are genuinely lossless. If you open the result and the before/after images are identical, the compression did its job correctly.</p>
+
+    <h2>Answer 2: when lossless is not enough</h2>
+    <p>Here is the honest limitation: if you have a 4 MB PNG that is a photograph, lossless compression will not save you. A photograph uses far more distinct colours than a logo, so there is little redundancy to exploit. Expect 10–20% and then a wall.</p>
+    <p>Past that wall you have three real options, and only these three:</p>
+    <ul>
+      <li><strong>Shrink the dimensions.</strong> A 4000px-wide photo displayed at 1200px is carrying roughly nine times more pixels than it needs. This is usually the biggest single win and it costs nothing visible.</li>
+      <li><strong>Change the format.</strong> For photographs, WebP or JPG will be dramatically smaller. You give up losslessness, but for a photo on a web page nobody will see the difference at a sensible quality setting.</li>
+      <li><strong>Accept the size.</strong> If the PNG must stay a PNG (transparency, exact colour, print, a design handoff), keep it and find the savings elsewhere on the page.</li>
+    </ul>
+
+    <h2>Which files should stay PNG?</h2>
+    <p>PNG earns its place when you need one of these:</p>
+    <ul>
+      <li><strong>Transparency</strong> — logos, icons, product cut-outs on a transparent background.</li>
+      <li><strong>Exact colour</strong> — flat UI graphics, charts, anything where a shifted shade looks like a bug.</li>
+      <li><strong>Sharp edges and text</strong> — screenshots. JPG smears hard edges into fuzzy halos; PNG keeps them crisp.</li>
+    </ul>
+    <p>If your image is none of those — it is a photo, a gradient-heavy render, or a big banner — PNG is probably the wrong container and reformatting will beat any compression setting.</p>
+
+    <h2>Step by step</h2>
+    <ol>
+      <li>Start with the <a href="/compress-png/">Compress PNG</a> tool and upload the file. Everything runs in your browser, so the image is never uploaded to a server.</li>
+      <li>Compare the before-and-after preview. If they look identical and the file got smaller, you have a lossless win — take it.</li>
+      <li>If the saving is disappointing, decide which of the three real options applies: resize, reformat, or keep.</li>
+      <li>Reformatting is one extra step: keep the same image and choose WebP or JPG as the output format in the <a href="/compress-image/">Compress Image</a> tool.</li>
+      <li>Batch of icons or screenshots? Drop the whole set into <a href="/compress-multiple-images/">Compress Multiple Images</a> and download one ZIP.</li>
+    </ol>
+
+    <h2>Frequently asked questions</h2>
+    <div class="faq-item"><h4>Does compressing a PNG reduce quality?</h4><p>Not if the compression is lossless. Lossless PNG compression changes how the pixels are stored, not what they are. Quality only drops when you convert to a lossy format such as JPG or WebP.</p></div>
+    <div class="faq-item"><h4>Why is my PNG still large after compressing?</h4><p>Because it is probably a photograph. Lossless compression finds little redundancy in photographic detail. Resizing the dimensions or converting to WebP/JPG is the fix.</p></div>
+    <div class="faq-item"><h4>Is WebP lossless for PNG content?</h4><p>WebP has both a lossless and a lossy mode. Its lossless mode is generally smaller than PNG for the same pixels, but browser and tool support for lossless WebP is less universal than for PNG. For transparency on the web, PNG is still the safest default.</p></div>
+    <div class="faq-item"><h4>Can I compress a PNG on my phone?</h4><p>Yes. Open this page in your mobile browser and pick a file from your gallery or files app. The compression happens on the device.</p></div>
+
+    <div class="rel-links">
+      <p><strong>Related:</strong> <a href="/compress-png/">Compress PNG</a> · <a href="/guides/jpg-vs-png-which-format/">JPG vs PNG</a> · <a href="/guides/image-compression-vs-resizing/">Compression vs resizing</a></p>
+    </div>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+      <a href="/privacy-policy/">Privacy Policy</a>
+      <a href="/terms-of-service/">Terms of Service</a>
+      <a href="/cookie-policy/">Cookie Policy</a>
+      <a href="/guides/">Guides</a>
+    </nav>
+    <p class="copyright">© 2026 Image Compressor</p>
+  </div>
+</footer>
+
+<div class="cookie-banner" id="cookieBanner" hidden>
+  <div class="cookie-inner">
+    <p>This site uses local browser storage to remember your preferences. No personal data is collected or uploaded.</p>
+    <div class="cookie-actions"><button class="btn btn-ghost" id="cookieReject" type="button">Reject</button><button class="btn btn-primary" id="cookieAccept" type="button">Accept</button></div>
+  </div>
+</div>
+
+<script src="/assets/app.js" defer></script>
+</body>
+</html>

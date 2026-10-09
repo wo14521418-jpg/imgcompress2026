@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Compress Images for Email Attachments (Size Limits)</title>
+<meta name="description" content="Email providers cap attachments at around 20-25 MB, and encoding eats a third of that. Here is how to get photos under the limit without making them look bad.">
+<link rel="canonical" href="https://imgcompress2026.netlify.app/guides/how-to-compress-images-for-email-attachments/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to Compress Images for Email Attachments">
+<meta property="og:description" content="Get photos under the email attachment limit without making them look bad.">
+<meta property="og:url" content="https://imgcompress2026.netlify.app/guides/how-to-compress-images-for-email-attachments/">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20rx='22'%20fill='%232563eb'/%3E%3Ctext%20x='50'%20y='50'%20font-size='58'%20text-anchor='middle'%20dominant-baseline='central'%20fill='white'%20font-weight='bold'%3EIC%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"How to Compress Images for Email Attachments","description":"How to get photos under provider attachment limits without visible quality loss.","url":"https://imgcompress2026.netlify.app/guides/how-to-compress-images-for-email-attachments/","inLanguage":"en"}
+</script>
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9000494688678902" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#2563eb"/><circle cx="9" cy="9" r="1.8" fill="#fff"/><path d="M3.5 17.5l5-5 3 3 4-4 5 5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg><span>Image Compressor</span></a>
+    <nav class="site-nav">
+      <a href="/">Home</a>
+      <a href="/compress-image/">Compress Image</a>
+      <a href="/compress-jpg/">Compress JPG</a>
+      <a href="/compress-png/">Compress PNG</a>
+      <a href="/compress-webp/">Compress WebP</a>
+      <a href="/compress-multiple-images/">Batch</a>
+      <a href="/guides/">Guides</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero"><h1>How to compress images for email attachments</h1></section>
+
+  <article class="content-block page-content">
+    <p>"Your message is too large" is one of the most annoying errors in computing, because the fix is not obvious: you compress the photo, the size barely moves, and you still cannot send it.</p>
+    <p>There are two reasons for that, and both are fixable.</p>
+
+    <h2>Reason 1: the limit is smaller than you think</h2>
+    <p>Most consumer mail providers cap a message somewhere in the region of 20–25 MB. That is the whole message, attachments included, and email is not a binary-safe pipe: attachments are encoded as text before they travel, which inflates them by roughly a third.</p>
+    <p>So a "25 MB" ceiling usually leaves you closer to 18–20 MB of actual files, and that is before the signature, the quoted thread, and whatever the recipient's provider enforces on their side. Treat the real-world budget for attachments as <strong>under 15 MB</strong> and you will almost never be bounced.</p>
+
+    <h2>Reason 2: you compressed the wrong thing</h2>
+    <p>Modern phone photos are 3000–4000 pixels wide. A typical desktop email window shows them at maybe 800 pixels. The camera wrote roughly twenty times more pixels than anyone will see — and those extra pixels are your file size.</p>
+    <p>Lowering the JPG quality alone leaves all of those pixels in place, which is why the file size barely moves. Reducing the pixel dimensions is the change that actually matters.</p>
+
+    <h2>A procedure that works</h2>
+    <ol>
+      <li><strong>Count the budget.</strong> Add up every attachment. If the total is over 15 MB, something has to shrink.</li>
+      <li><strong>Resize first.</strong> For ordinary sharing, an image 1600 pixels on the long edge is generous — it still looks sharp on a laptop screen and at modest print sizes. If the recipient only needs to look at it on a phone, 1200 pixels is plenty.</li>
+      <li><strong>Then compress.</strong> With the dimensions down, a normal quality setting will produce a file in the low hundreds of kilobytes. Photos compress extremely well at this stage; you should not need the strongest setting.</li>
+      <li><strong>Check it visually.</strong> Open the compressed result and look at a face, some foliage, or an area of fine texture. Those are where lossy compression shows first. If it looks clean at 100%, it will look clean to your recipient.</li>
+      <li><strong>Batch it.</strong> If you are sending ten photos, run them all through at once and attach the ZIP — or attach the ten smaller files directly, whichever is easier for the recipient to open.</li>
+    </ol>
+
+    <h2>What format should an email attachment be?</h2>
+    <ul>
+      <li><strong>JPG</strong> is the safest choice for email. Every client, on every device, opens it, and it is small for photographs.</li>
+      <li><strong>WebP</strong> is smaller still, but older mail clients and older phone gallery apps sometimes refuse to preview it. Not worth the risk for a one-off delivery.</li>
+      <li><strong>PNG</strong> is the right answer only when you need transparency or an exact-colour graphic, such as a logo or a screenshot. For a photo it wastes space.</li>
+      <li><strong>Do not attach a PDF-wrapped image or a document</strong> if the recipient just wants to look at the picture. It adds size and friction.</li>
+    </ul>
+
+    <h2>When to stop attaching at all</h2>
+    <p>Some deliveries simply should not travel by attachment: 30 photos from an event, a video, a folder of raw scans. Upload them once and send a link instead. It is faster for you, it does not fill up the recipient's inbox quota, and it never triggers a size error. Attachments are for a handful of files; links are for a pile.</p>
+
+    <h2>Frequently asked questions</h2>
+    <div class="faq-item"><h4>What is the email attachment size limit?</h4><p>Commonly 20–25 MB per message, depending on the provider, and effectively lower once encoding overhead is counted. Keeping attachments under 15 MB avoids the problem entirely.</p></div>
+    <div class="faq-item"><h4>Why is my photo still 8 MB after compressing?</h4><p>Because compressing usually does not change the pixel dimensions. A 4000-pixel-wide photo at low JPG quality is still a big file. Resize it to the size it will actually be viewed at, then compress.</p></div>
+    <div class="faq-item"><h4>What resolution should I use for email?</h4><p>1600 pixels on the long edge is a good default. Drop to 1200 if the photo will only be viewed on a phone, and keep the original file separately if you might need it later.</p></div>
+    <div class="faq-item"><h4>Can I compress images for email on a phone?</h4><p>Yes. Open this site in your phone browser, choose the photos from your gallery, and they are compressed on the device — nothing is uploaded anywhere.</p></div>
+
+    <div class="rel-links">
+      <p><strong>Related:</strong> <a href="/compress-multiple-images/">Compress multiple images</a> · <a href="/guides/image-compression-vs-resizing/">Compression vs resizing</a> · <a href="/guides/how-to-reduce-image-file-size/">How to reduce image file size</a></p>
+    </div>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+      <a href="/privacy-policy/">Privacy Policy</a>
+      <a href="/terms-of-service/">Terms of Service</a>
+      <a href="/cookie-policy/">Cookie Policy</a>
+      <a href="/guides/">Guides</a>
+    </nav>
+    <p class="copyright">© 2026 Image Compressor</p>
+  </div>
+</footer>
+
+<div class="cookie-banner" id="cookieBanner" hidden>
+  <div class="cookie-inner">
+    <p>This site uses local browser storage to remember your preferences. No personal data is collected or uploaded.</p>
+    <div class="cookie-actions"><button class="btn btn-ghost" id="cookieReject" type="button">Reject</button><button class="btn btn-primary" id="cookieAccept" type="button">Accept</button></div>
+  </div>
+</div>
+
+<script src="/assets/app.js" defer></script>
+</body>
+</html>
