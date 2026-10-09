@@ -2,5 +2,6 @@
   # 这个仓库根目录还留着早期 AI 漫画项目的 package.json，Netlify 会据此误判成 Next.js，
   # 于是每次都在根目录跑 npm install + next build，从 2026-09-02 起每一次构建都失败。
   # 这里显式写死：不做构建，直接把 site/ 目录发布出去。
+  base = "site"
   command = "echo Static site - no build step required"
-  publish = "site"
+  publish = "."
