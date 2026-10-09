@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Compress Multiple Images Online — Batch Compressor</title>
-<meta name="description" content="Compress multiple images at once online for free. Batch compress JPG, PNG and WebP and download them all as a single ZIP — in your browser.">
-<link rel="canonical" href="https://imgcompress2026.netlify.app/compress-multiple-images/">
+<title>Resize Image Online - Free Image Resizer</title>
+<meta name="description" content="Resize images online for free. Set a maximum width or height and download the resized JPG, PNG or WebP - processed in your browser, nothing uploaded.">
+<link rel="canonical" href="https://imgcompress2026.netlify.app/resize-image/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Compress Multiple Images Online — Batch Compressor">
-<meta property="og:description" content="Compress multiple images at once online for free and download them as a ZIP.">
-<meta property="og:url" content="https://imgcompress2026.netlify.app/compress-multiple-images/">
+<meta property="og:title" content="Resize Image Online - Free Image Resizer">
+<meta property="og:description" content="Resize images online for free. Set a maximum width or height and download the resized file.">
+<meta property="og:url" content="https://imgcompress2026.netlify.app/resize-image/">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20rx='22'%20fill='%232563eb'/%3E%3Ctext%20x='50'%20y='50'%20font-size='58'%20text-anchor='middle'%20dominant-baseline='central'%20fill='white'%20font-weight='bold'%3EIC%3C/text%3E%3C/svg%3E">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"Compress Multiple Images Online","url":"https://imgcompress2026.netlify.app/compress-multiple-images/","applicationCategory":"MultimediaApplication","operatingSystem":"Any","description":"Batch compress JPG, PNG and WebP images online for free and download as ZIP."}
+{"@context":"https://schema.org","@type":"WebApplication","name":"Resize Image Online","url":"https://imgcompress2026.netlify.app/resize-image/","applicationCategory":"MultimediaApplication","operatingSystem":"Any","description":"Resize JPG, PNG and WebP images to a target width or height in the browser."}
 </script>
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9000494688678902" crossorigin="anonymous"></script>
@@ -38,16 +38,16 @@
 
 <main class="container">
   <section class="hero">
-    <h1>Compress Multiple Images Online</h1>
-    <p class="subtitle">Batch compress many images at once and download them all as a single ZIP — free.</p>
+    <h1>Resize Image Online</h1>
+    <p class="subtitle">Change the dimensions of JPG, PNG and WebP images for free — right in your browser.</p>
   </section>
 
   <section class="card">
     <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload images">
       <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" multiple hidden>
       <svg width="40" height="40" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 16V6m0 0l-4 4m4-4l4 4" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round"/></svg>
-      <p class="dz-title">Drag &amp; drop multiple images here, or click to select</p>
-      <p class="dz-hint">Select several images at once — processed locally, never uploaded</p>
+      <p class="dz-title">Drag &amp; drop an image here, or click to upload</p>
+      <p class="dz-hint">Supports JPG / PNG / WebP — processed locally, never uploaded</p>
     </div>
     <p class="error" id="errorMsg" hidden></p>
 
@@ -126,33 +126,38 @@
   </section>
 
   <section class="content-block">
-    <h2>How to compress multiple images at once</h2>
+    <h2>How to resize an image</h2>
     <ol>
-      <li>Select several images (use Ctrl/Cmd to multi-select, or drag them in).</li>
-      <li>Choose a compression level — it applies to every image.</li>
-      <li>Watch the progress as each image is compressed.</li>
-      <li>Download all compressed images as a single ZIP file.</li>
+      <li>Upload a JPG, PNG or WebP image. WebP is selected as the output format by default because a resized photo stays smallest as WebP; switch to JPG or PNG under <strong>Output format</strong> if you need a specific file type.</li>
+      <li>Pick a target size under <strong>Resize</strong> — fit within 1920, 1280 or 800 pixels, or scale to 50% or 25% of the original.</li>
+      <li>Check the before-and-after preview. The output dimensions are shown next to the compressed size.</li>
+      <li>Download the resized image.</li>
     </ol>
   </section>
 
   <section class="content-block">
-    <h2>Why batch compress images?</h2>
-    <p>If you have a folder of photos or a set of product images, compressing them one by one is slow. Batch compression lets you process them all at once with a single quality setting, then download everything as one ZIP archive. It all happens locally in your browser.</p>
+    <h2>Why resize instead of just compressing?</h2>
+    <p>File size scales with the number of pixels. A photo straight from a phone or camera is usually 3000–4000 pixels wide, while the page or email you are putting it in will display it at 800–1600 pixels. Resizing removes the pixels nobody will ever see, and that shrinks the file far more than any quality setting can.</p>
+    <p>Resizing is a one-way operation: detail that is thrown away cannot be recovered by scaling the image back up, so keep the original file if you might need it later. Everything here runs in your browser, so the images you open are never uploaded anywhere.</p>
   </section>
 
   <section class="content-block">
-    <h2>Batch compression FAQ</h2>
-    <div class="faq-item"><h4>How many images can I compress at once?</h4><p>There is no hard limit. A very large batch may take longer depending on your device's performance.</p></div>
-    <div class="faq-item"><h4>Do I need to download each image separately?</h4><p>No — all compressed images are bundled into a single ZIP file.</p></div>
-    <div class="faq-item"><h4>Are my images uploaded?</h4><p>No. Everything is processed locally in your browser.</p></div>
+    <h2>Which target size should you choose?</h2>
+    <ul>
+      <li><strong>Fit within 1920 px</strong> — full-width hero images and desktop banners.</li>
+      <li><strong>Fit within 1280 px</strong> — in-article images and blog headers.</li>
+      <li><strong>Fit within 800 px</strong> — thumbnails, cards, and anything only viewed on a phone.</li>
+      <li><strong>50% / 25%</strong> — keep the original proportions and just make a smaller copy.</li>
+    </ul>
   </section>
 
   <section class="content-block">
     <h2>Related tools and guides</h2>
     <ul>
-      <li><a href="/compress-image/">Compress a Single Image</a></li>
-      <li><a href="/compress-jpg/">Compress JPG</a></li>
-      <li><a href="/guides/how-to-compress-images-for-a-website/">How to Compress Images for a Website</a></li>
+      <li><a href="/compress-image/">Compress Image</a></li>
+      <li><a href="/compress-multiple-images/">Resize and compress a whole batch</a></li>
+      <li><a href="/guides/image-compression-vs-resizing/">Image compression vs resizing</a></li>
+      <li><a href="/guides/how-to-resize-an-image/">How to resize an image without ruining it</a></li>
     </ul>
   </section>
 </main>

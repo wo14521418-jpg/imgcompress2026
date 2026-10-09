@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Compress an Image to 200 KB (or 100 KB)</title>
+<meta name="description" content="Hitting a target file size is a two-lever job: dimensions and quality. Here is a recipe that reliably gets a photo under 200 KB, 100 KB or 50 KB.">
+<link rel="canonical" href="https://imgcompress2026.netlify.app/guides/compress-image-to-200kb/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to Compress an Image to 200 KB (or 100 KB)">
+<meta property="og:description" content="A repeatable recipe for getting an image under a target file size without making it look bad.">
+<meta property="og:url" content="https://imgcompress2026.netlify.app/guides/compress-image-to-200kb/">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20rx='22'%20fill='%232563eb'/%3E%3Ctext%20x='50'%20y='50'%20font-size='58'%20text-anchor='middle'%20dominant-baseline='central'%20fill='white'%20font-weight='bold'%3EIC%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"How to Compress an Image to 200 KB (or 100 KB)","description":"A repeatable recipe for hitting a target image file size.","url":"https://imgcompress2026.netlify.app/guides/compress-image-to-200kb/","inLanguage":"en"}
+</script>
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9000494688678902" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#2563eb"/><circle cx="9" cy="9" r="1.8" fill="#fff"/><path d="M3.5 17.5l5-5 3 3 4-4 5 5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg><span>Image Compressor</span></a>
+    <nav class="site-nav">
+      <a href="/">Home</a>
+      <a href="/compress-image/">Compress Image</a>
+      <a href="/resize-image/">Resize Image</a>
+      <a href="/compress-jpg/">Compress JPG</a>
+      <a href="/compress-png/">Compress PNG</a>
+      <a href="/compress-webp/">Compress WebP</a>
+      <a href="/compress-multiple-images/">Batch</a>
+      <a href="/guides/">Guides</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero"><h1>How to compress an image to 200 KB</h1></section>
+
+  <article class="content-block page-content">
+    <p>Target sizes exist everywhere: a form that rejects uploads over 200 KB, a CMS with a 100 KB thumbnail limit, a marketplace that wants every listing photo under 500 KB. Here is how to hit those numbers reliably instead of guessing.</p>
+
+    <h2>Why "exactly 200 KB" is not a button</h2>
+    <p>Compression is not a linear dial. The same quality setting produces wildly different file sizes depending on the image: a photo of a plain wall at quality 60 might be 40 KB, while a photo of leaves at quality 60 might be 400 KB. All the detail in the leaves costs bits.</p>
+    <p>So the reliable approach is to use the two levers in the right order, then check where you landed.</p>
+
+    <h2>Lever one: the pixel dimensions</h2>
+    <p>This is the big one, and it is the step almost everyone skips. A 4000-pixel-wide photo has about 12 million pixels; the same photo at 1200 pixels wide has about 1.1 million. Everything downstream — and every byte in the file — gets ten times cheaper.</p>
+    <p>Start by asking what size the image needs to be. If it will be displayed at 1200 pixels wide, resize it to fit within 1280 pixels before you touch the quality setting.</p>
+
+    <h2>Lever two: the quality setting</h2>
+    <p>Once the dimensions are right, the quality level decides how much detail the encoder is allowed to throw away. In practice, for a photograph resized to around 1200–1600 pixels:</p>
+    <ul>
+      <li><strong>Normal (quality 75)</strong> — looks clean, typically lands in the 100–300 KB range.</li>
+      <li><strong>Strong (quality 55)</strong> — slightly softer in fine texture, often 70–200 KB.</li>
+      <li><strong>Extreme (quality 30)</strong> — visible softening if you zoom in, but usually 30–100 KB and still fine at normal viewing size.</li>
+    </ul>
+    <p>Those ranges are guidance, not promises. Busy textures cost more; smooth skies and plain backgrounds cost far less.</p>
+
+    <h2>The recipe</h2>
+    <ol>
+      <li>Open the <a href="/compress-image/">image compressor</a> and upload the file.</li>
+      <li>Set <strong>Resize</strong> to the largest size the image will actually be displayed at — 1920 for a banner, 1280 for an article image, 800 for a thumbnail.</li>
+      <li>Pick a compression level and read the "Compressed size" figure.</li>
+      <li>Still above your target? Step the level down to Strong, then Extreme.</li>
+      <li>Still above the target? Go back to the Resize setting and drop one step — 1280 becomes 800, for example. Shrinking the dimensions is almost always more effective than destroying quality, and it looks better too.</li>
+      <li>Download when the number is under your limit.</li>
+    </ol>
+
+    <h2>When you are stuck above the target</h2>
+    <ul>
+      <li><strong>It is a PNG.</strong> PNG is lossless, so it barely shrinks. Converting to JPG or WebP is usually the only way to make a serious dent.</li>
+      <li><strong>Switch the output format to WebP.</strong> At the same visual quality, WebP files are typically 25–35% smaller than an equivalent JPG. This is the cheapest win available.</li>
+      <li><strong>The limits are only a recommendation.</strong> If a form says "max 200 KB" that is a hard limit, but if a page-speed tool says "should be under 200 KB" it is advice — a slightly larger, sharper image may be the better trade.</li>
+      <li><strong>It is a screenshot.</strong> Screenshots compress best after you crop them to just the region that matters, rather than by turning quality down.</li>
+    </ul>
+
+    <h2>Frequently asked questions</h2>
+    <div class="faq-item"><h4>Why is my image still too large after compressing?</h4><p>Because compressing does not change the pixel dimensions. A 4000-pixel-wide photo stays huge until you resize it. Use the Resize control first, then compress.</p></div>
+    <div class="faq-item"><h4>What quality setting makes a file 200 KB?</h4><p>There is no single answer — it depends entirely on the image content. Resize to the size it will be displayed at, then try Normal, Strong and Extreme and pick the first one that lands under your limit.</p></div>
+    <div class="faq-item"><h4>How do I compress an image to 100 KB?</h4><p>Same recipe, one step further: resize to 800–1280 pixels and use the Extreme level, or convert to WebP. A 1280-pixel WebP at quality 30 is usually well under 100 KB.</p></div>
+    <div class="faq-item"><h4>Does compressing to a smaller size reduce quality?</h4><p>Yes — lossy compression trades detail for size by definition. The trick is to resize to the size that will actually be displayed first, so the detail you give up is detail nobody was going to see.</p></div>
+
+    <div class="rel-links">
+      <p><strong>Related:</strong> <a href="/compress-image/">Compress Image</a> · <a href="/resize-image/">Resize Image</a> · <a href="/guides/how-to-reduce-image-file-size/">How to reduce image file size</a></p>
+    </div>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+      <a href="/privacy-policy/">Privacy Policy</a>
+      <a href="/terms-of-service/">Terms of Service</a>
+      <a href="/cookie-policy/">Cookie Policy</a>
+      <a href="/guides/">Guides</a>
+    </nav>
+    <p class="copyright">© 2026 Image Compressor</p>
+  </div>
+</footer>
+
+<div class="cookie-banner" id="cookieBanner" hidden>
+  <div class="cookie-inner">
+    <p>This site uses local browser storage to remember your preferences. No personal data is collected or uploaded.</p>
+    <div class="cookie-actions"><button class="btn btn-ghost" id="cookieReject" type="button">Reject</button><button class="btn btn-primary" id="cookieAccept" type="button">Accept</button></div>
+  </div>
+</div>
+
+<script src="/assets/app.js" defer></script>
+</body>
+</html>

@@ -45,6 +45,9 @@
   var batchProgressFill = $('batchProgressFill');
   var downloadZipBtn = $('downloadZipBtn');
   var formatSelect = $('formatSelect');
+  var resizeSelect = $('resizeSelect');
+  var batchResizeSelect = $('batchResizeSelect');
+  var outDims = $('outDims');
   var pngHint = $('pngHint');
   var singleLevelBtns = Array.prototype.slice.call(document.querySelectorAll('#results .level-btn'));
   var batchLevelBtns = Array.prototype.slice.call(document.querySelectorAll('#batchResults .level-btn'));
@@ -63,6 +66,8 @@
   var recompressToken = 0;
   var qualityLevel = 75;
   var batchQualityLevel = 75;
+  var resizeMode = 'orig';
+  var batchResizeMode = 'orig';
 
   var webpSupported = (function () {
     var c = document.createElement('canvas');
@@ -104,12 +109,36 @@
   function showError(msg) { errorMsg.textContent = msg; errorMsg.hidden = false; }
   function hideError() { errorMsg.hidden = true; }
 
-  function compressImage(img, q, type) {
-    var MAX_DIM = 8192;
-    var w = img.naturalWidth, h = img.naturalHeight;
-    var scale = Math.min(1, MAX_DIM / Math.max(w, h));
-    w = Math.max(1, Math.round(w * scale));
-    h = Math.max(1, Math.round(h * scale));
+  var MAX_DIM = 8192;
+
+  /* Resize setting values: 'orig' | 'pct50' | 'pct25' | 'fit1920' | 'fit1280' | 'fit800' */
+  function parseResize(val) {
+    if (!val || val === 'orig') return { mode: 'orig', value: 0 };
+    if (val.indexOf('pct') === 0) return { mode: 'pct', value: parseInt(val.slice(3), 10) || 100 };
+    if (val.indexOf('fit') === 0) return { mode: 'fit', value: parseInt(val.slice(3), 10) || 0 };
+    return { mode: 'orig', value: 0 };
+  }
+
+  function targetDims(w0, h0, spec) {
+    var w = w0, h = h0;
+    if (spec && spec.mode === 'pct') {
+      w = w0 * spec.value / 100;
+      h = h0 * spec.value / 100;
+    } else if (spec && spec.mode === 'fit' && spec.value > 0) {
+      var longest = Math.max(w0, h0);
+      if (longest > spec.value) {
+        var s = spec.value / longest;
+        w = w0 * s;
+        h = h0 * s;
+      }
+    }
+    var cap = Math.min(1, MAX_DIM / Math.max(w, h));
+    return { w: Math.max(1, Math.round(w * cap)), h: Math.max(1, Math.round(h * cap)) };
+  }
+
+  function compressImage(img, q, type, spec) {
+    var dims = targetDims(img.naturalWidth, img.naturalHeight, spec);
+    var w = dims.w, h = dims.h;
     var canvas = document.createElement('canvas');
     canvas.width = w; canvas.height = h;
     var ctx = canvas.getContext('2d');
@@ -122,13 +151,14 @@
     }
     ctx.drawImage(img, 0, 0, w, h);
     return new Promise(function (resolve) {
-      canvas.toBlob(function (blob) { resolve(blob); }, type, q / 100);
+      canvas.toBlob(function (blob) { resolve({ blob: blob, w: w, h: h }); }, type, q / 100);
     });
   }
 
-  function updateResult(blob) {
+  function updateResult(blob, w, h) {
     if (!blob) return;
     currentBlob = blob;
+    if (outDims) outDims.textContent = (w && h) ? (w + ' x ' + h + ' px') : '-';
     if (afterUrl) URL.revokeObjectURL(afterUrl);
     afterUrl = URL.createObjectURL(blob);
     afterImg.src = afterUrl;
@@ -162,9 +192,9 @@
     setStatus('Compressing…');
     try {
       var q = qualityLevel;
-      var blob = await compressImage(currentImg, q);
+      var out = await compressImage(currentImg, q, null, parseResize(resizeMode));
       if (token !== recompressToken) return;
-      updateResult(blob);
+      updateResult(out.blob, out.w, out.h);
       setStatus(null);
     } catch (err) {
       if (token !== recompressToken) return;
@@ -443,9 +473,9 @@
       try {
         var img = await loadImage(item.file);
         if (token !== batchRunToken) return;
-        var blob = await compressImage(img, q, 'image/webp');
+        var out = await compressImage(img, q, 'image/webp', parseResize(batchResizeMode));
         if (token !== batchRunToken) return;
-        item.blob = blob;
+        item.blob = out.blob;
         item.state = 'done';
       } catch (err) {
         if (token !== batchRunToken) return;
@@ -519,4 +549,16 @@
   applySingleLevelUI();
   applyFormatUI();
   applyBatchLevelUI();
+  if (resizeSelect) {
+    resizeSelect.addEventListener('change', function () {
+      resizeMode = resizeSelect.value;
+      recompress();
+    });
+  }
+  if (batchResizeSelect) {
+    batchResizeSelect.addEventListener('change', function () {
+      batchResizeMode = batchResizeSelect.value;
+      if (batchItems.length) runBatch();
+    });
+  }
 })();
