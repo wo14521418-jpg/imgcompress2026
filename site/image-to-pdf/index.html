@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image to PDF - Combine JPG, PNG and WebP into One PDF Free</title>
+<meta name="description" content="Turn photos and screenshots into a single PDF in your browser. Choose A4, Letter or fit-to-image pages, set the margins and order the pages. Free, nothing uploaded.">
+<link rel="canonical" href="https://imgcompress2026.netlify.app/image-to-pdf/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Image to PDF - Combine JPG, PNG and WebP into One PDF Free">
+<meta property="og:description" content="Combine images into one PDF in your browser, with page size, orientation, margins and page order under your control.">
+<meta property="og:url" content="https://imgcompress2026.netlify.app/image-to-pdf/">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20rx='22'%20fill='%232563eb'/%3E%3Ctext%20x='50'%20y='50'%20font-size='58'%20text-anchor='middle'%20dominant-baseline='central'%20fill='white'%20font-weight='bold'%3EIC%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Image to PDF","url":"https://imgcompress2026.netlify.app/image-to-pdf/","applicationCategory":"MultimediaApplication","operatingSystem":"Any","description":"Combine JPG, PNG and WebP images into a single PDF document in the browser."}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How do I turn photos into a PDF for free?","acceptedAnswer":{"@type":"Answer","text":"Drop the images in, drag them into the order you want, choose a page size and margins, then press Create PDF and download it. The whole job runs in your browser."}},
+{"@type":"Question","name":"What page size should I choose?","acceptedAnswer":{"@type":"Answer","text":"Choose A4 or Letter when the PDF is going to be printed or submitted somewhere with a paper-size requirement. Choose Fit to image when you want each page to be exactly the size of the photo, which is best for viewing on screen."}},
+{"@type":"Question","name":"Do the images get uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. The PDF is assembled in your browser, so the photos never leave your device. You can verify this by disconnecting from the internet after the page loads."}},
+{"@type":"Question","name":"Can I put several photos on one page?","acceptedAnswer":{"@type":"Answer","text":"This tool makes one image per page, which is what people usually need for scans, receipts, documents and photo portfolios. Arrange the order before you build the PDF."}},
+{"@type":"Question","name":"Will the PDF contain searchable text?","acceptedAnswer":{"@type":"Answer","text":"No. Each page is a picture, so text inside the images is not selectable or searchable. For that you would need OCR, which is a different kind of tool."}}
+]}
+</script>
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9000494688678902" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#2563eb"/><circle cx="9" cy="9" r="1.8" fill="#fff"/><path d="M3.5 17.5l5-5 3 3 4-4 5 5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg><span>Image Compressor</span></a>
+    <nav class="site-nav">
+      <a href="/">Home</a>
+      <a href="/compress-image/">Compress Image</a>
+      <a href="/resize-image/">Resize Image</a>
+      <a href="/crop-image/">Crop Image</a>
+      <a href="/convert/">Convert</a>
+      <a href="/compress-to-size/">Compress to Size</a>
+      <a href="/compress-multiple-images/">Batch</a>
+      <a href="/guides/">Guides</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <h1>Image to PDF</h1>
+    <p class="subtitle">Combine photos, scans and screenshots into a single PDF — one image per page, in the order you choose. Free, in your browser, nothing uploaded.</p>
+  </section>
+
+  <section class="card">
+    <div class="dropzone" id="pdfDropzone" tabindex="0" role="button" aria-label="Upload images">
+      <input type="file" id="pdfFileInput" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" multiple hidden>
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M12 16V6m0 0l-4 4m4-4l4 4" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+      <p class="dz-title">Drag &amp; drop images here, or click to upload</p>
+      <p class="dz-hint">JPG / PNG / WebP, several at a time — the PDF is built locally, never uploaded</p>
+    </div>
+    <p class="error" id="pdfError" hidden></p>
+
+    <div id="pdfEditor" hidden>
+      <div class="pdf-list" id="pdfList"></div>
+
+      <div class="format-row">
+        <span class="format-label">Page size</span>
+        <select id="pdfPageSize" aria-label="Page size">
+          <option value="a4">A4 (210 x 297 mm)</option>
+          <option value="letter">US Letter (8.5 x 11 in)</option>
+          <option value="fit">Fit to image</option>
+        </select>
+      </div>
+      <div class="format-row">
+        <span class="format-label">Orientation</span>
+        <select id="pdfOrientation" aria-label="Orientation">
+          <option value="auto">Automatic (match the image)</option>
+          <option value="portrait">Portrait</option>
+          <option value="landscape">Landscape</option>
+        </select>
+      </div>
+      <div class="format-row">
+        <span class="format-label">Margin</span>
+        <select id="pdfMargin" aria-label="Page margin">
+          <option value="0">None (full bleed)</option>
+          <option value="18" selected>Small (6 mm)</option>
+          <option value="36">Large (13 mm)</option>
+        </select>
+      </div>
+      <div class="level-row" id="pdfQuality">
+        <span class="level-label">Image quality inside the PDF</span>
+        <div class="level-options" role="radiogroup" aria-label="Image quality">
+          <button type="button" class="level-btn" data-level="95"><span class="level-name">High</span><span class="level-q">Quality 95</span></button>
+          <button type="button" class="level-btn active" data-level="90"><span class="level-name">Normal</span><span class="level-q">Quality 90</span></button>
+          <button type="button" class="level-btn" data-level="75"><span class="level-name">Smaller file</span><span class="level-q">Quality 75</span></button>
+        </div>
+      </div>
+
+      <p class="status" id="pdfStatus" hidden></p>
+      <div class="action-row">
+        <button class="btn btn-primary" id="pdfBuild" type="button" disabled>Create PDF</button>
+        <button class="btn btn-ghost" id="pdfClear" type="button">Clear all</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="card" id="pdfResult" hidden>
+    <div class="stats">
+      <div class="stat"><span class="stat-label">PDF</span><span class="stat-value" id="pdfResultMeta">-</span></div>
+    </div>
+    <div class="action-row">
+      <button class="btn btn-primary" id="pdfDownload" type="button" disabled>Download PDF</button>
+      <a class="btn btn-ghost" id="pdfOpen" href="#" target="_blank" rel="noopener">Open in a new tab</a>
+    </div>
+  </section>
+
+  <section class="content-block">
+    <h2>How to make a PDF from images</h2>
+    <ol>
+      <li>Drop in the images you want in the document. JPG, PNG and WebP are all accepted, and you can add them in several goes.</li>
+      <li>Put the pages in order with the arrow buttons. Page 1 is the first image in the list.</li>
+      <li>Choose a page size: A4 or Letter for anything that will be printed or submitted, or Fit to image to keep each page exactly the size of the photo.</li>
+      <li>Set a margin and a quality level, then press <strong>Create PDF</strong> and download it.</li>
+    </ol>
+
+    <h2>Which page size do you need?</h2>
+    <ul>
+      <li><strong>A4</strong> — the default almost everywhere outside North America, and what most online application portals expect.</li>
+      <li><strong>US Letter</strong> — the equivalent for the United States and Canada; 8.5 x 11 inches.</li>
+      <li><strong>Fit to image</strong> — the page becomes the size of the picture, so there is no white border and no scaling. Ideal for reading on a phone or tablet, and for archiving a set of screenshots.</li>
+    </ul>
+    <p>Automatic orientation gives each page the orientation that suits its image: portrait pages for tall scans and receipts, landscape pages for wide screenshots. If your document has to follow a rule — for example, every page portrait — set it explicitly instead.</p>
+
+    <h2>What this tool does to your images</h2>
+    <p>Each image is re-encoded as a JPEG and embedded in the PDF, which is how virtually all PDF readers store photographs. Two consequences are worth knowing about:</p>
+    <ul>
+      <li><strong>Transparency becomes white.</strong> A PNG logo with a transparent background will sit on a white page, because the PDF image stream has no alpha channel here.</li>
+      <li><strong>Very large photos are scaled down.</strong> Images wider than 2400 pixels are reduced before embedding, which keeps the PDF a sensible size — a 6000-pixel photo adds nothing to a document that will be displayed at screen or print resolution. Reduce the quality setting further if you need an even smaller file for an upload limit.</li>
+    </ul>
+
+    <h2>Typical uses</h2>
+    <ul>
+      <li>Photographing several pages of a signed document with a phone and submitting them as one PDF.</li>
+      <li>Collecting receipts or invoices into a single file for an expense claim.</li>
+      <li>Turning a set of screenshots into a shareable walkthrough.</li>
+      <li>Building a simple photo portfolio or a visual price list.</li>
+      <li>Attaching scanned ID or forms to an application that only accepts PDF.</li>
+    </ul>
+
+    <h2>Frequently asked questions</h2>
+    <div class="faq-item"><h4>Is there a limit on how many images I can combine?</h4><p>No fixed limit. Ten to fifty pages is comfortable in a browser; for a very large document, build it in two parts and join them with a PDF tool afterwards.</p></div>
+    <div class="faq-item"><h4>Can I put two or more images on a single page?</h4><p>Not in this tool — it creates one page per image, which covers the common cases of documents, receipts, scans and portfolios.</p></div>
+    <div class="faq-item"><h4>Is the PDF searchable?</h4><p>No. Every page is an image, so text inside it is not selectable. Nothing here performs OCR (optical character recognition).</p></div>
+    <div class="faq-item"><h4>Are my photos uploaded to a server?</h4><p>No. The PDF is written by your browser from the files you selected. Nothing is transmitted, and the file is never stored online.</p></div>
+    <div class="faq-item"><h4>The PDF is too big to upload somewhere. What should I do?</h4><p>Set the quality to 75, use A4 with small margins, and if that is still too large, <a href="/resize-image/">resize</a> the images to around 1600 pixels wide first — fewer pixels is the most effective way to shrink a PDF.</p></div>
+
+    <div class="rel-links">
+      <p><strong>Related:</strong> <a href="/convert/">Image Converter</a> · <a href="/resize-image/">Resize Image</a> · <a href="/compress-to-size/">Compress to a target size</a> · <a href="/guides/how-to-compress-images-for-email-attachments/">Compress images for email</a></p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="/compress-image/">Compress Image</a>
+      <a href="/compress-jpg/">Compress JPG</a>
+      <a href="/compress-png/">Compress PNG</a>
+      <a href="/compress-webp/">Compress WebP</a>
+      <a href="/resize-image/">Resize Image</a>
+      <a href="/crop-image/">Crop Image</a>
+      <a href="/compress-to-size/">Compress to Size</a>
+      <a href="/compress-multiple-images/">Batch Compress</a>
+      <a href="/convert/">Convert Image</a>
+      <a href="/png-to-jpg/">PNG to JPG</a>
+      <a href="/jpg-to-png/">JPG to PNG</a>
+      <a href="/webp-to-jpg/">WebP to JPG</a>
+      <a href="/image-to-pdf/">Image to PDF</a>
+      <a href="/guides/">Guides</a>
+      <a href="/sitemap/">Sitemap</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+      <a href="/privacy-policy/">Privacy Policy</a>
+      <a href="/terms-of-service/">Terms of Service</a>
+      <a href="/cookie-policy/">Cookie Policy</a>
+    </nav>
+    <p class="copyright">© 2026 Image Compressor</p>
+  </div>
+</footer>
+
+<div class="cookie-banner" id="cookieBanner" hidden>
+  <div class="cookie-inner">
+    <p>This site uses local browser storage to remember your preferences. No personal data is collected or uploaded.</p>
+    <div class="cookie-actions"><button class="btn btn-ghost" id="cookieReject" type="button">Reject</button><button class="btn btn-primary" id="cookieAccept" type="button">Accept</button></div>
+  </div>
+</div>
+
+<script src="/assets/app.js" defer></script>
+<script src="/assets/image-to-pdf.js" defer></script>
+</body>
+</html>

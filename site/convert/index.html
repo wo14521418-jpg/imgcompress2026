@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Converter - Convert JPG, PNG and WebP Free Online</title>
+<meta name="description" content="Convert an image between JPG, PNG and WebP in your browser. Choose the output format, quality and size, then download - free, no sign-up, nothing uploaded.">
+<link rel="canonical" href="https://imgcompress2026.netlify.app/convert/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Image Converter - Convert JPG, PNG and WebP Free Online">
+<meta property="og:description" content="Convert images between JPG, PNG and WebP in your browser. Free, private and instant.">
+<meta property="og:url" content="https://imgcompress2026.netlify.app/convert/">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20rx='22'%20fill='%232563eb'/%3E%3Ctext%20x='50'%20y='50'%20font-size='58'%20text-anchor='middle'%20dominant-baseline='central'%20fill='white'%20font-weight='bold'%3EIC%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Image Converter","url":"https://imgcompress2026.netlify.app/convert/","applicationCategory":"MultimediaApplication","operatingSystem":"Any","description":"Convert images between JPG, PNG and WebP in the browser, with control over quality and dimensions."}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How do I convert an image to another format for free?","acceptedAnswer":{"@type":"Answer","text":"Upload the image, pick JPG, PNG or WebP under Convert to, then download the result. The conversion runs in your browser, so there is no upload, no queue and no sign-up."}},
+{"@type":"Question","name":"Does converting an image to another format reduce quality?","acceptedAnswer":{"@type":"Answer","text":"Converting to JPG or WebP re-encodes the image, so a small amount of detail is discarded depending on the quality setting. Converting to PNG is lossless but produces a larger file."}},
+{"@type":"Question","name":"Why does my transparent logo get a white background?","acceptedAnswer":{"@type":"Answer","text":"JPEG cannot store transparency, so transparent pixels have to be replaced with a solid colour. Choose the colour in the background picker, or export to PNG or WebP to keep the transparency."}},
+{"@type":"Question","name":"Are my images uploaded to a server?","acceptedAnswer":{"@type":"Answer","text":"No. Conversion happens on a canvas inside your browser using the image you selected. Nothing is sent anywhere."}},
+{"@type":"Question","name":"Can I convert several images at once?","acceptedAnswer":{"@type":"Answer","text":"Yes. The WebP to JPG converter handles a batch of files, and the batch compressor can resize and compress a whole folder into a ZIP archive."}}
+]}
+</script>
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9000494688678902" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body data-default-format="webp">
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#2563eb"/><circle cx="9" cy="9" r="1.8" fill="#fff"/><path d="M3.5 17.5l5-5 3 3 4-4 5 5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg><span>Image Compressor</span></a>
+    <nav class="site-nav">
+      <a href="/">Home</a>
+      <a href="/compress-image/">Compress Image</a>
+      <a href="/resize-image/">Resize Image</a>
+      <a href="/crop-image/">Crop Image</a>
+      <a href="/convert/">Convert</a>
+      <a href="/compress-to-size/">Compress to Size</a>
+      <a href="/compress-multiple-images/">Batch</a>
+      <a href="/guides/">Guides</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <h1>Image converter</h1>
+    <p class="subtitle">Convert JPG, PNG and WebP in your browser. Pick the output format, set the quality if you need to, and download — free, no sign-up, nothing uploaded.</p>
+  </section>
+
+  <section class="card">
+    <div class="dropzone" id="convertDropzone" tabindex="0" role="button" aria-label="Upload an image">
+      <input type="file" id="convertFileInput" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" hidden>
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M12 16V6m0 0l-4 4m4-4l4 4" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+      <p class="dz-title">Drag &amp; drop an image here, or click to upload</p>
+      <p class="dz-hint">Supports JPG / PNG / WebP — converted locally, never uploaded</p>
+    </div>
+    <p class="error" id="convertError" hidden></p>
+
+    <div class="format-row">
+      <span class="format-label">Convert to</span>
+      <select id="convertFormat" aria-label="Output format">
+        <option value="webp">WebP</option>
+        <option value="jpeg">JPG</option>
+        <option value="png">PNG</option>
+      </select>
+    </div>
+    <div class="color-row">
+      <span class="format-label">Background fill</span>
+      <input type="color" id="convertBg" value="#ffffff" aria-label="Background colour">
+      <span class="dz-hint">Replaces transparency when the output is JPG</span>
+    </div>
+    <div class="level-row" id="convertQuality">
+      <span class="level-label">Quality (JPG and WebP)</span>
+      <div class="level-options" role="radiogroup" aria-label="Output quality">
+        <button type="button" class="level-btn active" data-level="90"><span class="level-name">High</span><span class="level-q">Quality 90</span></button>
+        <button type="button" class="level-btn" data-level="75"><span class="level-name">Normal</span><span class="level-q">Quality 75</span></button>
+        <button type="button" class="level-btn" data-level="55"><span class="level-name">Small</span><span class="level-q">Quality 55</span></button>
+      </div>
+    </div>
+    <div class="format-row">
+      <span class="format-label">Maximum width</span>
+      <select id="convertMaxWidth" aria-label="Maximum width">
+        <option value="0">Keep original size</option>
+        <option value="1920">Fit within 1920 px</option>
+        <option value="1280">Fit within 1280 px</option>
+        <option value="800">Fit within 800 px</option>
+      </select>
+    </div>
+  </section>
+
+  <section class="card" id="convertResults" hidden>
+    <div id="convertSingle">
+      <div class="compare">
+        <figure class="preview"><figcaption>Original</figcaption><div class="preview-box"><img id="convertBefore" alt="" width="400" height="400" hidden></div><span class="preview-meta" id="convertBeforeMeta"></span></figure>
+        <figure class="preview"><figcaption>Converted</figcaption><div class="preview-box"><img id="convertAfter" alt="" width="400" height="400" hidden></div><span class="preview-meta" id="convertAfterMeta"></span></figure>
+      </div>
+      <div class="stats">
+        <div class="stat"><span class="stat-label">Original size</span><span class="stat-value" id="convertOrigSize">-</span></div>
+        <div class="stat"><span class="stat-label">Converted size</span><span class="stat-value" id="convertOutSize">-</span></div>
+        <div class="stat"><span class="stat-label">Change</span><span class="stat-value badge is-none" id="convertSaved">-</span></div>
+        <div class="stat"><span class="stat-label">Output dimensions</span><span class="stat-value" id="convertDims">-</span></div>
+      </div>
+      <p class="status" id="convertStatus" hidden></p>
+      <div class="action-row">
+        <button class="btn btn-primary" id="convertDownload" type="button" disabled>Download converted image</button>
+        <button class="btn btn-ghost" id="convertReset" type="button">Convert another</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-block">
+    <h2>How to convert an image</h2>
+    <ol>
+      <li>Drop an image in the box above, or click to choose one.</li>
+      <li>Pick the format you need under <strong>Convert to</strong> — WebP, JPG or PNG.</li>
+      <li>Set the quality if you picked JPG or WebP, and optionally cap the width.</li>
+      <li>Download the converted file. The original on your device is untouched.</li>
+    </ol>
+
+    <h2>Which format should you convert to?</h2>
+    <ul>
+      <li><strong>WebP</strong> — the best default for anything going on a website. Usually 25–35% smaller than the equivalent JPG with no visible difference, and it keeps transparency.</li>
+      <li><strong>JPG</strong> — the format to choose when something other than a browser has to read the file: email clients, print services, older forms, some marketplace back ends. No transparency.</li>
+      <li><strong>PNG</strong> — lossless, so nothing changes on save, and it keeps transparency exactly. The right choice for logos, screenshots of text and flat-colour graphics. Expect a much larger file for a photograph.</li>
+    </ul>
+    <p>There is a dedicated page for each of the conversions people search for most: <a href="/png-to-jpg/">PNG to JPG</a>, <a href="/jpg-to-png/">JPG to PNG</a> and <a href="/webp-to-jpg/">WebP to JPG</a> (which also handles a whole batch at once).</p>
+
+    <h2>What conversion can and cannot do</h2>
+    <p>Converting changes the container, not the content. If the image is blurry, over-compressed or the wrong size, converting it will not repair any of that — and converting a lossy format to another lossy format costs a little quality each time, because the encoder has to guess at detail that was already discarded.</p>
+    <p>That leads to a simple rule: keep the best original you have, and convert once, at the end, straight to the format the destination needs. Do not convert JPG to PNG to edit and back to JPG for no reason; every round trip through a lossy format is a small step down.</p>
+
+    <h2>Frequently asked questions</h2>
+    <div class="faq-item"><h4>Is this image converter free?</h4><p>Yes, and there is no account, no watermark and no daily limit. It runs in the browser, which is also why it is instant — there is no file to upload.</p></div>
+    <div class="faq-item"><h4>Will converting change the image quality?</h4><p>To JPG or WebP: slightly, depending on the quality setting. Quality 90 is visually identical for most photos. To PNG: not at all, because PNG is lossless.</p></div>
+    <div class="faq-item"><h4>Why does a transparent PNG look white after converting to JPG?</h4><p>Because JPEG has no way to store transparency. Transparent areas have to become a solid colour — use the background picker to choose which. To keep transparency, export to PNG or WebP instead.</p></div>
+    <div class="faq-item"><h4>Can I convert an image on my phone?</h4><p>Yes. Open this page in your mobile browser, choose a photo from the gallery, pick the format and download. It works the same as on a desktop.</p></div>
+    <div class="faq-item"><h4>Can I convert a PDF or a HEIC file here?</h4><p>No. This converter handles JPG, PNG and WebP only. For PDFs of images, use the <a href="/image-to-pdf/">image to PDF tool</a>; HEIC files from an iPhone usually need to be shared as JPG from the Photos app first.</p></div>
+
+    <div class="rel-links">
+      <p><strong>Related:</strong> <a href="/png-to-jpg/">PNG to JPG</a> · <a href="/jpg-to-png/">JPG to PNG</a> · <a href="/webp-to-jpg/">WebP to JPG</a> · <a href="/image-to-pdf/">Image to PDF</a> · <a href="/guides/webp-vs-avif/">WebP vs AVIF</a></p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="/compress-image/">Compress Image</a>
+      <a href="/compress-jpg/">Compress JPG</a>
+      <a href="/compress-png/">Compress PNG</a>
+      <a href="/compress-webp/">Compress WebP</a>
+      <a href="/resize-image/">Resize Image</a>
+      <a href="/crop-image/">Crop Image</a>
+      <a href="/compress-to-size/">Compress to Size</a>
+      <a href="/compress-multiple-images/">Batch Compress</a>
+      <a href="/convert/">Convert Image</a>
+      <a href="/png-to-jpg/">PNG to JPG</a>
+      <a href="/jpg-to-png/">JPG to PNG</a>
+      <a href="/webp-to-jpg/">WebP to JPG</a>
+      <a href="/image-to-pdf/">Image to PDF</a>
+      <a href="/guides/">Guides</a>
+      <a href="/sitemap/">Sitemap</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+      <a href="/privacy-policy/">Privacy Policy</a>
+      <a href="/terms-of-service/">Terms of Service</a>
+      <a href="/cookie-policy/">Cookie Policy</a>
+    </nav>
+    <p class="copyright">© 2026 Image Compressor</p>
+  </div>
+</footer>
+
+<div class="cookie-banner" id="cookieBanner" hidden>
+  <div class="cookie-inner">
+    <p>This site uses local browser storage to remember your preferences. No personal data is collected or uploaded.</p>
+    <div class="cookie-actions"><button class="btn btn-ghost" id="cookieReject" type="button">Reject</button><button class="btn btn-primary" id="cookieAccept" type="button">Accept</button></div>
+  </div>
+</div>
+
+<script src="/assets/app.js" defer></script>
+<script src="/assets/convert.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WebP to JPG Converter - Convert WebP Images Free, in Bulk</title>
+<meta name="description" content="Convert WebP to JPG free in your browser, one file or a whole batch at once. No upload, no sign-up, no watermark. Get a .jpg that every program can open.">
+<link rel="canonical" href="https://imgcompress2026.netlify.app/webp-to-jpg/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="WebP to JPG Converter - Convert WebP Images Free, in Bulk">
+<meta property="og:description" content="Turn WebP files into JPGs that every program accepts, one file or an entire batch. Free and private.">
+<meta property="og:url" content="https://imgcompress2026.netlify.app/webp-to-jpg/">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20rx='22'%20fill='%232563eb'/%3E%3Ctext%20x='50'%20y='50'%20font-size='58'%20text-anchor='middle'%20dominant-baseline='central'%20fill='white'%20font-weight='bold'%3EIC%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"WebP to JPG Converter","url":"https://imgcompress2026.netlify.app/webp-to-jpg/","applicationCategory":"MultimediaApplication","operatingSystem":"Any","description":"Convert one or many WebP images to JPG in the browser."}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How do I convert a WebP file to JPG for free?","acceptedAnswer":{"@type":"Answer","text":"Drop the WebP files into the box, pick a JPG quality level and press Download on each converted file. Everything runs in your browser, so nothing is uploaded."}},
+{"@type":"Question","name":"Why do I keep ending up with WebP files?","acceptedAnswer":{"@type":"Answer","text":"Web browsers and image-heavy sites increasingly serve WebP because it is smaller than JPEG. When you right-click and save an image, or a service exports thumbnails, you often get WebP without asking for it."}},
+{"@type":"Question","name":"Which programs cannot open WebP?","acceptedAnswer":{"@type":"Answer","text":"Most current browsers and recent Windows and macOS versions can. The problem is older office and editing software, some email clients, print services, marketplace upload forms and older phones. JPEG works everywhere."}},
+{"@type":"Question","name":"Does converting WebP to JPG lose quality?","acceptedAnswer":{"@type":"Answer","text":"Slightly, because both formats are lossy and the image is re-encoded. At quality 90 the difference is not visible in practice. The file will usually be somewhat larger than the WebP."}},
+{"@type":"Question","name":"Can I convert many WebP files at the same time?","acceptedAnswer":{"@type":"Answer","text":"Yes. Select or drop as many files as you like and each one is converted separately, with its own download button and its own before-and-after size readout."}}
+]}
+</script>
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9000494688678902" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body data-default-format="jpeg" data-multi="1">
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#2563eb"/><circle cx="9" cy="9" r="1.8" fill="#fff"/><path d="M3.5 17.5l5-5 3 3 4-4 5 5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg><span>Image Compressor</span></a>
+    <nav class="site-nav">
+      <a href="/">Home</a>
+      <a href="/compress-image/">Compress Image</a>
+      <a href="/resize-image/">Resize Image</a>
+      <a href="/crop-image/">Crop Image</a>
+      <a href="/convert/">Convert</a>
+      <a href="/compress-to-size/">Compress to Size</a>
+      <a href="/compress-multiple-images/">Batch</a>
+      <a href="/guides/">Guides</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <h1>WebP to JPG converter</h1>
+    <p class="subtitle">Turn WebP files into JPGs that every program, printer and upload form accepts. One file or a whole batch — free, in your browser, nothing uploaded.</p>
+  </section>
+
+  <section class="card">
+    <div class="dropzone" id="convertDropzone" tabindex="0" role="button" aria-label="Upload WebP images">
+      <input type="file" id="convertFileInput" accept="image/webp,.webp" multiple hidden>
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M12 16V6m0 0l-4 4m4-4l4 4" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+      <p class="dz-title">Drag &amp; drop WebP files here, or click to upload</p>
+      <p class="dz-hint">Several files at once is fine — converted locally, never uploaded</p>
+    </div>
+    <p class="error" id="convertError" hidden></p>
+
+    <div class="level-row" id="convertQuality">
+      <span class="level-label">JPG quality</span>
+      <div class="level-options" role="radiogroup" aria-label="Output quality">
+        <button type="button" class="level-btn active" data-level="90"><span class="level-name">High</span><span class="level-q">Quality 90</span></button>
+        <button type="button" class="level-btn" data-level="75"><span class="level-name">Normal</span><span class="level-q">Quality 75</span></button>
+        <button type="button" class="level-btn" data-level="55"><span class="level-name">Small</span><span class="level-q">Quality 55</span></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="card" id="convertResults" hidden>
+    <div id="convertMulti">
+      <div class="convert-list" id="convertList"></div>
+      <p class="status" id="convertStatus" hidden></p>
+    </div>
+  </section>
+
+  <section class="content-block">
+    <h2>Why you suddenly have WebP files</h2>
+    <p>WebP is a modern format that stores the same picture in fewer bytes, so websites use it to load faster. The side effect is that when you right-click and save an image from a page, you often save a <code>.webp</code> file rather than a <code>.jpg</code> — even though the file you see on screen looks like any other photo.</p>
+    <p>Some services go further and export WebP thumbnails or downloads by default. That is where the incompatibility bites: the file is fine, the program you are trying to open it with is the problem.</p>
+
+    <h2>Where WebP still causes trouble</h2>
+    <ul>
+      <li><strong>Older editing software</strong> — older versions of Office, some photo tools and many PDF builders simply do not recognise the format.</li>
+      <li><strong>Email clients and older phones</strong> — previews may fail to render, or the attachment may show as a generic file.</li>
+      <li><strong>Upload forms</strong> — marketplace listings, job portals, government forms and print services frequently accept only JPG or PNG.</li>
+      <li><strong>Print workflows</strong> — a shop's software may reject the file or print it incorrectly.</li>
+      <li><strong>Social posting tools</strong> — some third-party schedulers still mishandle WebP uploads.</li>
+    </ul>
+    <p>In all of those cases JPEG is the safe answer: it has been universally supported for three decades, and at quality 90 the difference from the WebP is not visible in normal use.</p>
+
+    <h2>Converting a whole folder at once</h2>
+    <ol>
+      <li>Select all the WebP files you need (in your file browser, or drag them straight onto the box above).</li>
+      <li>Pick a JPG quality — 90 for photographs you care about, 75 if the destination has a size limit.</li>
+      <li>Each file appears in the list with its size before and after. Press Download on the ones you want.</li>
+    </ol>
+    <p>The conversion happens on your own machine, which is why there is no queue and no upload progress bar: there is nothing to upload. You can pull the network cable out after the page loads and it will still work.</p>
+
+    <h2>Frequently asked questions</h2>
+    <div class="faq-item"><h4>Is there a file size or count limit?</h4><p>No hard limit. A few dozen files is comfortable in any modern browser; if you are converting hundreds at once, do it in groups so the browser is not holding everything in memory at the same time.</p></div>
+    <div class="faq-item"><h4>Will the JPG be bigger than the WebP?</h4><p>Usually yes, by roughly 20–40% at similar quality. WebP is simply the more efficient format. You are trading a little file size for universal compatibility.</p></div>
+    <div class="faq-item"><h4>Can I keep transparency?</h4><p>Not in a JPG — it has no alpha channel. A transparent WebP converted to JPG gets a white background. If transparency matters, convert to PNG instead using the <a href="/convert/">image converter</a>.</p></div>
+    <div class="faq-item"><h4>Are animated WebP files supported?</h4><p>No. Only the first frame of an animation would be converted, so this tool is intended for still images.</p></div>
+    <div class="faq-item"><h4>Are my files uploaded to a server?</h4><p>No. Every conversion is done by your browser on your device. Nothing is transmitted, stored or logged.</p></div>
+
+    <div class="rel-links">
+      <p><strong>Related:</strong> <a href="/convert/">Image Converter</a> · <a href="/png-to-jpg/">PNG to JPG</a> · <a href="/jpg-to-png/">JPG to PNG</a> · <a href="/compress-webp/">Compress WebP</a> · <a href="/guides/jpg-vs-webp-which-is-better/">JPG vs WebP</a></p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="/compress-image/">Compress Image</a>
+      <a href="/compress-jpg/">Compress JPG</a>
+      <a href="/compress-png/">Compress PNG</a>
+      <a href="/compress-webp/">Compress WebP</a>
+      <a href="/resize-image/">Resize Image</a>
+      <a href="/crop-image/">Crop Image</a>
+      <a href="/compress-to-size/">Compress to Size</a>
+      <a href="/compress-multiple-images/">Batch Compress</a>
+      <a href="/convert/">Convert Image</a>
+      <a href="/png-to-jpg/">PNG to JPG</a>
+      <a href="/jpg-to-png/">JPG to PNG</a>
+      <a href="/webp-to-jpg/">WebP to JPG</a>
+      <a href="/image-to-pdf/">Image to PDF</a>
+      <a href="/guides/">Guides</a>
+      <a href="/sitemap/">Sitemap</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+      <a href="/privacy-policy/">Privacy Policy</a>
+      <a href="/terms-of-service/">Terms of Service</a>
+      <a href="/cookie-policy/">Cookie Policy</a>
+    </nav>
+    <p class="copyright">© 2026 Image Compressor</p>
+  </div>
+</footer>
+
+<div class="cookie-banner" id="cookieBanner" hidden>
+  <div class="cookie-inner">
+    <p>This site uses local browser storage to remember your preferences. No personal data is collected or uploaded.</p>
+    <div class="cookie-actions"><button class="btn btn-ghost" id="cookieReject" type="button">Reject</button><button class="btn btn-primary" id="cookieAccept" type="button">Accept</button></div>
+  </div>
+</div>
+
+<script src="/assets/app.js" defer></script>
+<script src="/assets/convert.js" defer></script>
+</body>
+</html>

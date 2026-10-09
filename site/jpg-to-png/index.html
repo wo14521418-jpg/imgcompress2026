@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JPG to PNG Converter - Convert JPEG to PNG Free Online</title>
+<meta name="description" content="Convert JPG to PNG free in your browser. Lossless output with no quality setting to guess, plus an optional width cap. Nothing is uploaded.">
+<link rel="canonical" href="https://imgcompress2026.netlify.app/jpg-to-png/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="JPG to PNG Converter - Convert JPEG to PNG Free Online">
+<meta property="og:description" content="Turn a JPG into a lossless PNG in your browser, with an optional width cap. Free and private.">
+<meta property="og:url" content="https://imgcompress2026.netlify.app/jpg-to-png/">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20rx='22'%20fill='%232563eb'/%3E%3Ctext%20x='50'%20y='50'%20font-size='58'%20text-anchor='middle'%20dominant-baseline='central'%20fill='white'%20font-weight='bold'%3EIC%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"JPG to PNG Converter","url":"https://imgcompress2026.netlify.app/jpg-to-png/","applicationCategory":"MultimediaApplication","operatingSystem":"Any","description":"Convert JPEG images to lossless PNG in the browser."}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How do I convert a JPG to PNG for free?","acceptedAnswer":{"@type":"Answer","text":"Upload the JPG and download the PNG. There is no quality setting because PNG is lossless, so the conversion runs automatically in your browser."}},
+{"@type":"Question","name":"Does JPG to PNG conversion improve quality?","acceptedAnswer":{"@type":"Answer","text":"No. Detail already discarded by the JPEG encoder cannot be recovered. The PNG is a pixel-exact copy of the JPEG that was decoded, so it stops any further loss from that point onwards."}},
+{"@type":"Question","name":"Why is the PNG file so much bigger than the JPG?","acceptedAnswer":{"@type":"Answer","text":"PNG records every pixel without loss, while JPEG stores a close approximation in far fewer bytes. The same photo is typically several times larger as a PNG."}},
+{"@type":"Question","name":"Is the uploaded file sent anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. The conversion uses a canvas inside your browser. Your image never leaves your device."}},
+{"@type":"Question","name":"When should I use PNG instead of JPG?","acceptedAnswer":{"@type":"Answer","text":"When you need transparency, when the image is a screenshot or graphic with sharp edges and flat colour, or when you are editing in several passes and want to stop the repeated quality loss that a lossy format causes."}}
+]}
+</script>
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9000494688678902" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body data-default-format="png">
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#2563eb"/><circle cx="9" cy="9" r="1.8" fill="#fff"/><path d="M3.5 17.5l5-5 3 3 4-4 5 5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg><span>Image Compressor</span></a>
+    <nav class="site-nav">
+      <a href="/">Home</a>
+      <a href="/compress-image/">Compress Image</a>
+      <a href="/resize-image/">Resize Image</a>
+      <a href="/crop-image/">Crop Image</a>
+      <a href="/convert/">Convert</a>
+      <a href="/compress-to-size/">Compress to Size</a>
+      <a href="/compress-multiple-images/">Batch</a>
+      <a href="/guides/">Guides</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <h1>JPG to PNG converter</h1>
+    <p class="subtitle">Convert a JPEG into a lossless PNG in your browser. No quality slider to guess at, because PNG does not have one — free, nothing uploaded.</p>
+  </section>
+
+  <section class="card">
+    <div class="dropzone" id="convertDropzone" tabindex="0" role="button" aria-label="Upload a JPG image">
+      <input type="file" id="convertFileInput" accept="image/jpeg,.jpg,.jpeg" hidden>
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M12 16V6m0 0l-4 4m4-4l4 4" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+      <p class="dz-title">Drag &amp; drop a JPG here, or click to upload</p>
+      <p class="dz-hint">JPG in, PNG out — converted locally, never uploaded</p>
+    </div>
+    <p class="error" id="convertError" hidden></p>
+
+    <div class="format-row">
+      <span class="format-label">Output</span>
+      <span class="dz-hint">PNG, lossless — no quality setting needed</span>
+    </div>
+    <div class="format-row">
+      <span class="format-label">Maximum width</span>
+      <select id="convertMaxWidth" aria-label="Maximum width">
+        <option value="0">Keep original size</option>
+        <option value="1920">Fit within 1920 px</option>
+        <option value="1280">Fit within 1280 px</option>
+        <option value="800">Fit within 800 px</option>
+      </select>
+    </div>
+  </section>
+
+  <section class="card" id="convertResults" hidden>
+    <div id="convertSingle">
+      <div class="compare">
+        <figure class="preview"><figcaption>JPG</figcaption><div class="preview-box"><img id="convertBefore" alt="" width="400" height="400" hidden></div><span class="preview-meta" id="convertBeforeMeta"></span></figure>
+        <figure class="preview"><figcaption>PNG</figcaption><div class="preview-box"><img id="convertAfter" alt="" width="400" height="400" hidden></div><span class="preview-meta" id="convertAfterMeta"></span></figure>
+      </div>
+      <div class="stats">
+        <div class="stat"><span class="stat-label">JPG size</span><span class="stat-value" id="convertOrigSize">-</span></div>
+        <div class="stat"><span class="stat-label">PNG size</span><span class="stat-value" id="convertOutSize">-</span></div>
+        <div class="stat"><span class="stat-label">Change</span><span class="stat-value badge is-none" id="convertSaved">-</span></div>
+        <div class="stat"><span class="stat-label">Output dimensions</span><span class="stat-value" id="convertDims">-</span></div>
+      </div>
+      <p class="status" id="convertStatus" hidden></p>
+      <div class="action-row">
+        <button class="btn btn-primary" id="convertDownload" type="button" disabled>Download PNG</button>
+        <button class="btn btn-ghost" id="convertReset" type="button">Convert another</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-block">
+    <h2>What converting JPG to PNG actually does</h2>
+    <p>A JPEG file does not contain the image your camera recorded. It contains a mathematical approximation of it, and that approximation is decoded back into pixels whenever the file is opened. Converting to PNG takes that decoded result and stores every one of those pixels exactly, with no further approximation.</p>
+    <p>So the honest description is: PNG conversion freezes the JPEG exactly as it looks right now. It cannot recover detail the JPEG discarded, and the file will be larger. What it does is stop further loss.</p>
+
+    <h2>Why that matters when you are editing</h2>
+    <p>Lossy formats degrade on every save. A workflow that opens a JPG, adjusts it, saves as JPG, edits again and saves again compounds the damage: each save re-encodes the already-degraded image and adds fresh artefacts, especially around edges and in gradients where banding appears.</p>
+    <p>Converting to PNG once at the start of an editing session breaks that cycle. You edit and save as many times as you like with no additional loss, then export a final JPG or WebP at the end for delivery. This is the standard intermediate-file approach: lossless while working, lossy only for the last step.</p>
+
+    <h2>Transparency: the limit of what this conversion can do</h2>
+    <p>PNG supports transparency and JPEG does not, but a JPG does not secretly contain transparent data waiting to be revealed. Any area that looks white in your JPG is white — it is a solid colour, not a transparency. Converting will keep it white.</p>
+    <p>If you need a background removed, that is an editing job, not a conversion. For cutting a subject out and exporting with a transparent background, use the <a href="/crop-image/">cropper</a> to frame it and then export as PNG or WebP from the <a href="/convert/">converter</a>.</p>
+
+    <h2>When PNG is the wrong choice</h2>
+    <ul>
+      <li><strong>Publishing photographs on a website</strong> — a PNG of a photo can easily be five times the size of the JPEG, and WebP or JPG both look identical while loading faster.</li>
+      <li><strong>Email attachments</strong> — many mail servers cap total message size; converting photos to PNG makes hitting that cap more likely.</li>
+      <li><strong>Anywhere a JPG or WebP is accepted</strong> — the larger file buys you nothing if nobody is going to re-edit it.</li>
+    </ul>
+
+    <h2>Frequently asked questions</h2>
+    <div class="faq-item"><h4>Does this conversion lose any quality?</h4><p>No. PNG is lossless, so the pixels that come out are exactly the pixels the JPEG decoder produced. The only quality difference is the one your JPEG already had.</p></div>
+    <div class="faq-item"><h4>Why did my file get so much bigger?</h4><p>Because PNG stores every pixel exactly instead of approximating. That is normal, and it is the price of a lossless working file. Keep the PNG for editing and export a compressed format when you publish.</p></div>
+    <div class="faq-item"><h4>Will the transparency come back?</h4><p>No. A JPEG has no transparency to restore. Areas that appear white are solid white pixels.</p></div>
+    <div class="faq-item"><h4>Can I convert a JPG to PNG on my phone?</h4><p>Yes — the tool works in mobile Safari and Chrome. Pick the photo from your gallery, and use the maximum width option if the result needs to be a manageable size.</p></div>
+    <div class="faq-item"><h4>Should I convert to PNG or WebP instead?</h4><p>WebP gives you lossless quality at a much smaller size, and current browsers all support it. Choose PNG when a specific application or printer requires the PNG format; otherwise WebP is usually the better lossless container today.</p></div>
+
+    <div class="rel-links">
+      <p><strong>Related:</strong> <a href="/png-to-jpg/">PNG to JPG</a> · <a href="/webp-to-jpg/">WebP to JPG</a> · <a href="/convert/">Image Converter</a> · <a href="/guides/jpg-vs-png-which-format/">JPG vs PNG</a> · <a href="/guides/how-to-compress-a-png-without-losing-quality/">Compress a PNG without losing quality</a></p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="/compress-image/">Compress Image</a>
+      <a href="/compress-jpg/">Compress JPG</a>
+      <a href="/compress-png/">Compress PNG</a>
+      <a href="/compress-webp/">Compress WebP</a>
+      <a href="/resize-image/">Resize Image</a>
+      <a href="/crop-image/">Crop Image</a>
+      <a href="/compress-to-size/">Compress to Size</a>
+      <a href="/compress-multiple-images/">Batch Compress</a>
+      <a href="/convert/">Convert Image</a>
+      <a href="/png-to-jpg/">PNG to JPG</a>
+      <a href="/jpg-to-png/">JPG to PNG</a>
+      <a href="/webp-to-jpg/">WebP to JPG</a>
+      <a href="/image-to-pdf/">Image to PDF</a>
+      <a href="/guides/">Guides</a>
+      <a href="/sitemap/">Sitemap</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+      <a href="/privacy-policy/">Privacy Policy</a>
+      <a href="/terms-of-service/">Terms of Service</a>
+      <a href="/cookie-policy/">Cookie Policy</a>
+    </nav>
+    <p class="copyright">© 2026 Image Compressor</p>
+  </div>
+</footer>
+
+<div class="cookie-banner" id="cookieBanner" hidden>
+  <div class="cookie-inner">
+    <p>This site uses local browser storage to remember your preferences. No personal data is collected or uploaded.</p>
+    <div class="cookie-actions"><button class="btn btn-ghost" id="cookieReject" type="button">Reject</button><button class="btn btn-primary" id="cookieAccept" type="button">Accept</button></div>
+  </div>
+</div>
+
+<script src="/assets/app.js" defer></script>
+<script src="/assets/convert.js" defer></script>
+</body>
+</html>

@@ -339,3 +339,29 @@
   .aspect-btn:hover { border-color: var(--blue-600); color: var(--blue-600); }
   .aspect-btn.active { background: var(--blue-600); border-color: var(--blue-600); color: var(--white); }
   .crop-info { margin-top: 12px; text-align: center; color: var(--ink-600); font-size: .9rem; }
+
+  /* ---------- Conversion and PDF tools ---------- */
+  .convert-row, .pdf-row {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px;
+    background: var(--white); margin-top: 8px;
+  }
+  .convert-row.is-error, .pdf-row.is-error { border-color: var(--red-600); }
+  .convert-name, .pdf-name { flex: 1 1 180px; font-weight: 600; font-size: .9rem; overflow-wrap: anywhere; }
+  .convert-meta, .pdf-meta { color: var(--ink-600); font-size: .82rem; }
+  .convert-dl { padding: 6px 14px; font-size: .85rem; }
+  .convert-list { margin-top: 10px; }
+  .pdf-index { color: var(--ink-400); font-weight: 700; font-size: .85rem; min-width: 22px; }
+  .pdf-actions { display: flex; gap: 6px; }
+  .icon-btn {
+    font: inherit; font-size: .85rem; line-height: 1; cursor: pointer;
+    background: var(--white); color: var(--ink-600);
+    border: 1px solid var(--line); border-radius: 8px; padding: 6px 9px;
+  }
+  .icon-btn:hover { border-color: var(--blue-600); color: var(--blue-600); }
+  .color-row { display: flex; align-items: center; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+  .color-row input[type="color"] {
+    width: 46px; height: 34px; padding: 2px; border: 1px solid var(--line);
+    border-radius: 8px; background: var(--white); cursor: pointer;
+  }
+  .action-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
