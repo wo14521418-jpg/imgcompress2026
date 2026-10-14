@@ -676,8 +676,8 @@
       var thumb = document.createElement('img');
       thumb.className = 'bi-thumb';
       thumb.alt = '';
-      thumb.width = 48;
-      thumb.height = 48;
+      thumb.width = 44;
+      thumb.height = 44;
       if (!item.thumbUrl) item.thumbUrl = URL.createObjectURL(item.file);
       thumb.src = item.thumbUrl;
       li.insertBefore(thumb, li.firstChild);

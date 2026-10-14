@@ -158,10 +158,10 @@
   .progress-bar { flex: 1; height: 6px; background: var(--track); border-radius: 999px; overflow: hidden; }
   .progress-fill { height: 100%; width: 0%; background: var(--blue-600); border-radius: 999px; transition: width .2s ease; }
   .progress-text { font-size: .875rem; font-weight: 600; color: var(--ink-600); white-space: nowrap; }
-  .batch-list { list-style: none; margin: 16px 0 0; display: grid; gap: 8px; max-height: 340px; overflow: auto; }
-  .batch-item { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 10px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); }
+  .batch-list { list-style: none; margin: 16px 0 0; display: grid; gap: 8px; }
+  .batch-item { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 8px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); }
   .bi-thumb {
-    width: 48px; height: 48px; flex-shrink: 0; display: block;
+    width: 44px; height: 44px; flex-shrink: 0; display: block;
     object-fit: cover; border-radius: 8px;
     border: 1px solid var(--line); background: var(--white);
   }
