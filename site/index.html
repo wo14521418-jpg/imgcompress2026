@@ -20,7 +20,7 @@
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
 {"@type":"Question","name":"Will this tool save my images?","acceptedAnswer":{"@type":"Answer","text":"No. All image processing happens locally in your browser. We never upload, save or collect any of your image data."}},
 {"@type":"Question","name":"Which formats are supported?","acceptedAnswer":{"@type":"Answer","text":"JPG, PNG and WebP are supported. Output defaults to WebP (smaller files) and can be switched to JPG or PNG."}},
-{"@type":"Question","name":"Does this tool resize images too?","acceptedAnswer":{"@type":"Answer","text":"Yes. Use the Resize control to fit the image within 1920, 1280 or 800 pixels, scale it to 50% or 25% of the original, or choose Custom size in pixels and type an exact width and height such as 1340 x 1785. The output dimensions are shown next to the file size."}},
+{"@type":"Question","name":"Does this tool resize images too?","acceptedAnswer":{"@type":"Answer","text":"Yes. Use the Resize menu to fit the image within 1920, 1280 or 800 pixels, or scale it to 50% or 25% of the original. For an exact size, type the width and height into the Exact size boxes - 1340 x 1785, for example - or press one of the one-click buttons for common sizes. The output dimensions are shown next to the file size."}},
 {"@type":"Question","name":"Can I compress an image to an exact file size?","acceptedAnswer":{"@type":"Answer","text":"Yes. The Compress to Size tool searches for the highest quality that still fits a limit you set, such as 100 KB or 200 KB, and shows the dimensions and quality it used."}},
 {"@type":"Question","name":"Is there a file size limit?","acceptedAnswer":{"@type":"Answer","text":"In theory, no. Very large images (over 50 MB) may process slowly depending on your device; we recommend processing them in batches."}},
 {"@type":"Question","name":"Is this tool free?","acceptedAnswer":{"@type":"Answer","text":"Yes, the current version is completely free to use."}}
@@ -107,15 +107,25 @@
           <option value="custom">Custom size in pixels</option>
         </select>
       </div>
-      <div class="size-row" id="customSizeRow" hidden>
+            <div class="size-row" id="customSizeRow">
         <span class="format-label">Exact size</span>
         <div class="size-inputs">
           <input type="number" id="resizeWidth" min="1" max="8192" step="1" inputmode="numeric" placeholder="width" aria-label="Output width in pixels">
           <span class="size-x">&times;</span>
           <input type="number" id="resizeHeight" min="1" max="8192" step="1" inputmode="numeric" placeholder="height" aria-label="Output height in pixels">
           <span class="size-unit">px</span>
-          <label class="opt" for="resizeLock"><input type="checkbox" id="resizeLock" checked> Keep aspect ratio</label>
         </div>
+        <div class="size-chips">
+          <button type="button" class="size-chip" data-w="" data-h="">Original</button>
+          <button type="button" class="size-chip" data-w="1920" data-h="1080">1920 &times; 1080</button>
+          <button type="button" class="size-chip" data-w="1280" data-h="720">1280 &times; 720</button>
+          <button type="button" class="size-chip" data-w="1080" data-h="1080">1080 &times; 1080</button>
+          <button type="button" class="size-chip" data-w="1080" data-h="1350">1080 &times; 1350</button>
+          <button type="button" class="size-chip" data-w="1340" data-h="1785">1340 &times; 1785</button>
+          <button type="button" class="size-chip" data-w="1200" data-h="1600">1200 &times; 1600</button>
+          <button type="button" class="size-chip" data-w="1200" data-h="628">1200 &times; 628</button>
+          <button type="button" class="size-chip" data-w="800" data-h="800">800 &times; 800</button>
+        </div>        <p class="size-hint" id="sizeHint"></p>
       </div>
       <p class="png-hint" id="pngHint" hidden>PNG is lossless, so it keeps every pixel exact: the file may not shrink, and after resizing it can even be larger than the original. Choose WebP or JPG for a smaller file.</p>
 
@@ -168,15 +178,25 @@
           <option value="custom">Custom size in pixels</option>
         </select>
       </div>
-      <div class="size-row" id="batchCustomSizeRow" hidden>
+            <div class="size-row" id="batchCustomSizeRow">
         <span class="format-label">Exact size</span>
         <div class="size-inputs">
           <input type="number" id="batchResizeWidth" min="1" max="8192" step="1" inputmode="numeric" placeholder="width" aria-label="Output width in pixels">
           <span class="size-x">&times;</span>
           <input type="number" id="batchResizeHeight" min="1" max="8192" step="1" inputmode="numeric" placeholder="height" aria-label="Output height in pixels">
           <span class="size-unit">px</span>
-          <label class="opt" for="batchResizeLock"><input type="checkbox" id="batchResizeLock" checked> Keep aspect ratio (fit inside the box)</label>
         </div>
+        <div class="size-chips">
+          <button type="button" class="size-chip" data-w="" data-h="">Original</button>
+          <button type="button" class="size-chip" data-w="1920" data-h="1080">1920 &times; 1080</button>
+          <button type="button" class="size-chip" data-w="1280" data-h="720">1280 &times; 720</button>
+          <button type="button" class="size-chip" data-w="1080" data-h="1080">1080 &times; 1080</button>
+          <button type="button" class="size-chip" data-w="1080" data-h="1350">1080 &times; 1350</button>
+          <button type="button" class="size-chip" data-w="1340" data-h="1785">1340 &times; 1785</button>
+          <button type="button" class="size-chip" data-w="1200" data-h="1600">1200 &times; 1600</button>
+          <button type="button" class="size-chip" data-w="1200" data-h="628">1200 &times; 628</button>
+          <button type="button" class="size-chip" data-w="800" data-h="800">800 &times; 800</button>
+        </div>        <p class="size-hint" id="batchSizeHint"></p>
       </div>
       <ul class="batch-list" id="batchList"></ul>
       <button class="btn btn-primary download" id="downloadZipBtn" type="button" disabled>Download all as ZIP</button>
@@ -228,7 +248,7 @@
   <section class="content-block">
     <h2>Why image compression matters</h2>
     <p>Images make up a large share of the weight of most web pages. Oversized images slow down load times, consume mobile data, hurt your Core Web Vitals, and push your site down in search rankings. Compressing an image before you upload it is one of the fastest, cheapest ways to make a website faster — and it costs you nothing.</p>
-    <p><strong>How it works.</strong> Choose a compression level — Normal, Strong, or Extreme. If the image is bigger than it needs to be, set a target size under <strong>Resize</strong> as well: fit within 1920, 1280 or 800 pixels, scale it to 50% or 25%, or pick <strong>Custom size in pixels</strong> and type the exact width and height you need — 1340 x 1785, for example. Pick an output format (WebP is recommended for the smallest files). Then drag in one image for a live before-and-after preview, or drop in several at once to batch-compress and download everything as a single ZIP archive. Everything runs locally in your browser, so your images never leave your device.</p>
+    <p><strong>How it works.</strong> Choose a compression level — Normal, Strong, or Extreme. If the image is bigger than it needs to be, set a target size under <strong>Resize</strong> as well: fit within 1920, 1280 or 800 pixels, or scale it to 50% or 25%. For an exact size, type the width and height into the <strong>Exact size</strong> boxes — 1340 x 1785, for example — or press one of the one-click buttons for the sizes people need most. Pick an output format (WebP is recommended for the smallest files). Then drag in one image for a live before-and-after preview, or drop in several at once to batch-compress and download everything as a single ZIP archive. Everything runs locally in your browser, so your images never leave your device.</p>
     <p>Two more tools cover the cases the main box cannot. If a form or portal enforces an exact limit, <a href="/compress-to-size/">Compress to Size</a> searches for the best quality that still fits it, and reports the dimensions and quality it used. If the framing is wrong rather than the size, <a href="/crop-image/">Crop Image</a> cuts the picture to a free selection or a fixed ratio such as 1:1 or 16:9 before you compress.</p>
     <p>Format changes live under the <a href="/convert/">Image Converter</a>, which switches a file between JPG, PNG and WebP and lets you choose the colour that replaces transparency. There are dedicated pages for the conversions people need most — <a href="/png-to-jpg/">PNG to JPG</a>, <a href="/jpg-to-png/">JPG to PNG</a> and <a href="/webp-to-jpg/">WebP to JPG</a>, the last of which converts a whole batch at once. If you need several images inside a single document, <a href="/image-to-pdf/">Image to PDF</a> builds one with A4, Letter or fit-to-image pages.</p>
   </section>
@@ -237,7 +257,7 @@
     <h2>Frequently asked questions</h2>
     <div class="faq-item"><h4>Will this tool save my images?</h4><p>No. All image processing happens locally in your browser. We never upload, save or collect any of your image data.</p></div>
     <div class="faq-item"><h4>Which formats are supported?</h4><p>JPG, PNG and WebP are supported. Output defaults to WebP (smaller files) and can be switched to JPG or PNG.</p></div>
-    <div class="faq-item"><h4>Does this tool resize images too?</h4><p>Yes. After uploading, use the Resize control to fit the image within 1920, 1280 or 800 pixels, scale it to 50% or 25% of the original, or choose <strong>Custom size in pixels</strong> and type an exact width and height such as 1340 x 1785. The output dimensions are shown next to the file size, and there is a dedicated <a href="/resize-image/">image resizer</a> if that is all you need.</p></div>
+    <div class="faq-item"><h4>Does this tool resize images too?</h4><p>Yes. After uploading, use the Resize menu to fit the image within 1920, 1280 or 800 pixels, or scale it to 50% or 25% of the original. For an exact size, type the width and height into the <strong>Exact size</strong> boxes — 1340 x 1785, for example — or just press one of the one-click buttons for common sizes such as 1080 x 1080 or 1920 x 1080. The output dimensions are shown next to the file size, and there is a dedicated <a href="/resize-image/">image resizer</a> if that is all you need.</p></div>
     <div class="faq-item"><h4>Can I compress an image to an exact file size?</h4><p>Yes. The <a href="/compress-to-size/">Compress to Size</a> tool searches for the highest quality that still fits a limit you set — 100 KB, 200 KB, 500 KB or any other number — and shows the dimensions and quality it used. Use it whenever a form or portal enforces a maximum upload size.</p></div>
     <div class="faq-item"><h4>Is there a file size limit?</h4><p>In theory, no. However, very large images (over 50 MB) may process slowly depending on your device; we recommend processing them in batches.</p></div>
     <div class="faq-item"><h4>Is this tool free?</h4><p>Yes, the current version is completely free to use.</p></div>

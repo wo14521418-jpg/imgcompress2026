@@ -50,11 +50,11 @@
   var customSizeRow = $('customSizeRow');
   var resizeWidth = $('resizeWidth');
   var resizeHeight = $('resizeHeight');
-  var resizeLock = $('resizeLock');
+  var sizeHint = $('sizeHint');
   var batchCustomSizeRow = $('batchCustomSizeRow');
   var batchResizeWidth = $('batchResizeWidth');
   var batchResizeHeight = $('batchResizeHeight');
-  var batchResizeLock = $('batchResizeLock');
+  var batchSizeHint = $('batchSizeHint');
   var outDims = $('outDims');
   var pngHint = $('pngHint');
   var singleLevelBtns = Array.prototype.slice.call(document.querySelectorAll('#results .level-btn'));
@@ -137,53 +137,69 @@
     var w = clampDim(parseInt(wEl && wEl.value, 10));
     var h = clampDim(parseInt(hEl && hEl.value, 10));
     if (!w && !h) return null;
-    return { w: w, h: h };
+    return { mode: 'exact', w: w, h: h };
   }
 
-  /* Single image: the two boxes are the exact output size.
-     Batch: with the ratio box ticked each image is scaled to fit inside them instead. */
+  /* What is typed is what comes out.
+     Both boxes empty  -> keep the original size.
+     One box filled    -> scale proportionally so that side matches.
+     Both boxes filled -> exactly these pixel dimensions. */
   function singleSpec() {
-    if (resizeMode === 'custom') {
-      var box = readSizeBox(resizeWidth, resizeHeight);
-      if (!box) return { mode: 'orig', value: 0 };
-      return { mode: 'exact', w: box.w, h: box.h };
-    }
-    return parseResize(resizeMode);
+    var box = readSizeBox(resizeWidth, resizeHeight);
+    if (box) return box;
+    return parseResize(resizeMode === 'custom' ? 'orig' : resizeMode);
   }
 
   function batchSpec() {
-    if (batchResizeMode === 'custom') {
-      var box = readSizeBox(batchResizeWidth, batchResizeHeight);
-      if (!box) return { mode: 'orig', value: 0 };
-      return { mode: (batchResizeLock && batchResizeLock.checked) ? 'box' : 'exact', w: box.w, h: box.h };
+    var box = readSizeBox(batchResizeWidth, batchResizeHeight);
+    if (box) return box;
+    return parseResize(batchResizeMode === 'custom' ? 'orig' : batchResizeMode);
+  }
+
+  function markCustom(sel) {
+    if (sel && sel.value !== 'custom') sel.value = 'custom';
+  }
+
+  function paintChips(row, wEl, hEl) {
+    if (!row) return;
+    var w = String(clampDim(parseInt(wEl && wEl.value, 10)) || '');
+    var h = String(clampDim(parseInt(hEl && hEl.value, 10)) || '');
+    Array.prototype.slice.call(row.querySelectorAll('.size-chip')).forEach(function (chip) {
+      var cw = chip.getAttribute('data-w') || '';
+      var ch = chip.getAttribute('data-h') || '';
+      chip.classList.toggle('active', (w !== '' || h !== '') && cw === w && ch === h);
+    });
+  }
+
+  function singleSizeHint() {
+    if (!sizeHint) return;
+    if (!currentImg) { sizeHint.textContent = 'Upload an image and its size will show up here.'; return; }
+    var w0 = currentImg.naturalWidth, h0 = currentImg.naturalHeight;
+    var w = clampDim(parseInt(resizeWidth && resizeWidth.value, 10));
+    var h = clampDim(parseInt(resizeHeight && resizeHeight.value, 10));
+    if (!w && !h) {
+      sizeHint.textContent = 'The original is ' + w0 + ' x ' + h0 + ' px. Fill one box to scale it proportionally, or both for exact numbers.';
+      return;
     }
-    return parseResize(batchResizeMode);
+    var out = targetDims(w0, h0, { mode: 'exact', w: w, h: h });
+    if (w && h) {
+      var stretched = Math.abs((w0 / h0) - (w / h)) / (w0 / h0) > 0.01;
+      sizeHint.textContent = 'Output ' + out.w + ' x ' + out.h + ' px' +
+        (stretched ? ' - stretched, because the original is ' + w0 + ' x ' + h0 + ' px.' : '.');
+    } else {
+      sizeHint.textContent = 'Output ' + out.w + ' x ' + out.h + ' px, proportions kept.';
+    }
   }
 
-  function updateCustomRows() {
-    if (customSizeRow) customSizeRow.hidden = resizeMode !== 'custom';
-    if (batchCustomSizeRow) batchCustomSizeRow.hidden = batchResizeMode !== 'custom';
-  }
-
-  function prefillSize(wEl, hEl, w0, h0) {
-    if (!wEl || !hEl || !w0 || !h0) return;
-    if (wEl.value || hEl.value) return;
-    wEl.value = String(Math.min(MAX_DIM, w0));
-    hEl.value = String(Math.min(MAX_DIM, h0));
-  }
-
-  /* With "keep aspect ratio" ticked the other box follows the one being typed in.
-     'changed' says which box the input event came from, so no guessing from focus. */
-  function linkSizeFields(changed) {
-    if (!resizeWidth || !resizeHeight || !resizeLock || !resizeLock.checked) return;
-    if (!currentImg) return;
-    var ratio = currentImg.naturalWidth / currentImg.naturalHeight;
-    if (!ratio) return;
-    var w = clampDim(parseInt(resizeWidth.value, 10));
-    var h = clampDim(parseInt(resizeHeight.value, 10));
-    if (changed === 'h' && h) resizeWidth.value = String(clampDim(Math.round(h * ratio)));
-    else if (w) resizeHeight.value = String(clampDim(Math.round(w / ratio)));
-    else if (h) resizeWidth.value = String(clampDim(Math.round(h * ratio)));
+  function batchSizeHintText() {
+    if (!batchSizeHint) return;
+    if (!batchItems.length) { batchSizeHint.textContent = ''; return; }
+    var w = clampDim(parseInt(batchResizeWidth && batchResizeWidth.value, 10));
+    var h = clampDim(parseInt(batchResizeHeight && batchResizeHeight.value, 10));
+    if (w && h) batchSizeHint.textContent = 'Every image comes out exactly ' + w + ' x ' + h + ' px; a different shape is stretched.';
+    else if (w) batchSizeHint.textContent = 'Every image is scaled to ' + w + ' px wide, keeping its own proportions.';
+    else if (h) batchSizeHint.textContent = 'Every image is scaled to ' + h + ' px tall, keeping its own proportions.';
+    else batchSizeHint.textContent = 'Leave both boxes empty to keep every image at its original size.';
   }
 
   function targetDims(w0, h0, spec) {
@@ -199,18 +215,9 @@
         h = h0 * s;
       }
     } else if (spec && spec.mode === 'exact') {
-      if (spec.w) w = spec.w;
-      if (spec.h) h = spec.h;
-    } else if (spec && spec.mode === 'box') {
-      var boxW = spec.w || 0, boxH = spec.h || 0;
-      if (boxW && boxH) {
-        var sBox = Math.min(boxW / w0, boxH / h0);
-        w = w0 * sBox; h = h0 * sBox;
-      } else if (boxW) {
-        var sW = boxW / w0; w = w0 * sW; h = h0 * sW;
-      } else if (boxH) {
-        var sH = boxH / h0; w = w0 * sH; h = h0 * sH;
-      }
+      if (spec.w && spec.h) { w = spec.w; h = spec.h; }
+      else if (spec.w) { var sW = spec.w / w0; w = w0 * sW; h = h0 * sW; }
+      else if (spec.h) { var sH = spec.h / h0; w = w0 * sH; h = h0 * sH; }
     }
     var cap = Math.min(1, MAX_DIM / Math.max(w, h));
     return { w: Math.max(1, Math.round(w * cap)), h: Math.max(1, Math.round(h * cap)) };
@@ -433,7 +440,7 @@
       fileName.textContent = file.name;
       origSize.textContent = formatBytes(file.size);
       results.hidden = false;
-      prefillSize(resizeWidth, resizeHeight, img.naturalWidth, img.naturalHeight);
+      singleSizeHint();
       await recompress();
     };
     img.onerror = function () { showError('Could not load this image, please try another'); };
@@ -525,11 +532,7 @@
     });
     renderBatchList();
     downloadZipBtn.disabled = true;
-    if (batchResizeWidth && batchResizeHeight && !batchResizeWidth.value && !batchResizeHeight.value) {
-      loadImage(files[0]).then(function (img) {
-        prefillSize(batchResizeWidth, batchResizeHeight, img.naturalWidth, img.naturalHeight);
-      }).catch(function () { /* leave the boxes empty */ });
-    }
+    batchSizeHintText();
     runBatch();
   }
 
@@ -641,46 +644,79 @@
 
   var sizeTimer = null;
   function scheduleRecompress() {
-    if (resizeMode !== 'custom') return;
     clearTimeout(sizeTimer);
-    sizeTimer = setTimeout(function () { recompress(); }, 250);
+    sizeTimer = setTimeout(function () { recompress(); }, 300);
   }
   function scheduleBatchResize() {
-    if (batchResizeMode !== 'custom') return;
     clearTimeout(sizeTimer);
-    sizeTimer = setTimeout(function () { if (batchItems.length) runBatch(); }, 250);
+    sizeTimer = setTimeout(function () { if (batchItems.length) runBatch(); }, 300);
+  }
+
+  function sizeChanged(isBatch) {
+    if (isBatch) {
+      markCustom(batchResizeSelect);
+      batchResizeMode = batchResizeSelect.value;
+      paintChips(batchCustomSizeRow, batchResizeWidth, batchResizeHeight);
+      batchSizeHintText();
+      if (batchItems.length) scheduleBatchResize();
+    } else {
+      markCustom(resizeSelect);
+      resizeMode = resizeSelect.value;
+      paintChips(customSizeRow, resizeWidth, resizeHeight);
+      singleSizeHint();
+      scheduleRecompress();
+    }
+  }
+
+  function sizeChipClick(e, isBatch) {
+    var chip = e.target && e.target.closest ? e.target.closest('.size-chip') : null;
+    if (!chip) return;
+    e.preventDefault();
+    var wEl = isBatch ? batchResizeWidth : resizeWidth;
+    var hEl = isBatch ? batchResizeHeight : resizeHeight;
+    if (wEl) wEl.value = chip.getAttribute('data-w') || '';
+    if (hEl) hEl.value = chip.getAttribute('data-h') || '';
+    sizeChanged(isBatch);
   }
 
   if (resizeSelect) {
     resizeSelect.addEventListener('change', function () {
       resizeMode = resizeSelect.value;
-      updateCustomRows();
-      if (resizeMode === 'custom' && currentImg) {
-        prefillSize(resizeWidth, resizeHeight, currentImg.naturalWidth, currentImg.naturalHeight);
+      if (resizeMode !== 'custom') {
+        if (resizeWidth) resizeWidth.value = '';
+        if (resizeHeight) resizeHeight.value = '';
       }
+      paintChips(customSizeRow, resizeWidth, resizeHeight);
+      singleSizeHint();
       recompress();
     });
   }
   if (batchResizeSelect) {
     batchResizeSelect.addEventListener('change', function () {
       batchResizeMode = batchResizeSelect.value;
-      updateCustomRows();
+      if (batchResizeMode !== 'custom') {
+        if (batchResizeWidth) batchResizeWidth.value = '';
+        if (batchResizeHeight) batchResizeHeight.value = '';
+      }
+      paintChips(batchCustomSizeRow, batchResizeWidth, batchResizeHeight);
+      batchSizeHintText();
       if (batchItems.length) runBatch();
     });
   }
   if (resizeWidth) {
-    resizeWidth.addEventListener('input', function () { linkSizeFields('w'); scheduleRecompress(); });
+    resizeWidth.addEventListener('input', function () { sizeChanged(false); });
   }
   if (resizeHeight) {
-    resizeHeight.addEventListener('input', function () { linkSizeFields('h'); scheduleRecompress(); });
+    resizeHeight.addEventListener('input', function () { sizeChanged(false); });
   }
-  if (resizeLock) {
-    resizeLock.addEventListener('change', function () { linkSizeFields('w'); scheduleRecompress(); });
+  if (batchResizeWidth) {
+    batchResizeWidth.addEventListener('input', function () { sizeChanged(true); });
   }
-  [batchResizeWidth, batchResizeHeight].forEach(function (el) {
-    if (!el) return;
-    el.addEventListener('input', scheduleBatchResize);
-  });
-  if (batchResizeLock) batchResizeLock.addEventListener('change', scheduleBatchResize);
-  updateCustomRows();
+  if (batchResizeHeight) {
+    batchResizeHeight.addEventListener('input', function () { sizeChanged(true); });
+  }
+  if (customSizeRow) customSizeRow.addEventListener('click', function (e) { sizeChipClick(e, false); });
+  if (batchCustomSizeRow) batchCustomSizeRow.addEventListener('click', function (e) { sizeChipClick(e, true); });
+  singleSizeHint();
+  batchSizeHintText();
 })();

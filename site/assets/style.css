@@ -379,3 +379,15 @@
   .size-unit { color: var(--ink-600); font-size: .875rem; font-weight: 600; }
   .opt { display: inline-flex; align-items: center; gap: 7px; font-size: .9rem; color: var(--ink-600); cursor: pointer; }
   .opt input[type="checkbox"] { width: 16px; height: 16px; margin: 0; accent-color: var(--blue-600); }
+  .size-chips { display: flex; flex-wrap: wrap; gap: 6px; width: 100%; margin-top: 2px; }
+  .size-chip {
+    font: inherit; font-size: .8125rem; font-weight: 600;
+    color: var(--ink-600); background: var(--white);
+    border: 1px solid var(--line); border-radius: 999px;
+    padding: 5px 11px; cursor: pointer;
+    transition: border-color .15s, color .15s, background .15s;
+  }
+  .size-chip:hover { border-color: var(--blue-600); color: var(--blue-600); }
+  .size-chip:focus-visible { outline: 2px solid var(--blue-600); outline-offset: 1px; }
+  .size-chip.active { background: var(--blue-600); border-color: var(--blue-600); color: var(--white); }
+  .size-hint { width: 100%; margin: 2px 0 0; font-size: .8125rem; color: var(--ink-400); }
