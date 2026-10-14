@@ -44,6 +44,9 @@
   var batchProgressText = $('batchProgressText');
   var batchProgressFill = $('batchProgressFill');
   var downloadZipBtn = $('downloadZipBtn');
+  var addMoreBtn = $('addMoreBtn');
+  var addFilesInput = $('addFilesInput');
+  var clearAllBtn = $('clearAllBtn');
   var formatSelect = $('formatSelect');
   var resizeSelect = $('resizeSelect');
   var batchResizeSelect = $('batchResizeSelect');
@@ -441,6 +444,7 @@
       origSize.textContent = formatBytes(file.size);
       results.hidden = false;
       singleSizeHint();
+      updatePickActions();
       await recompress();
     };
     img.onerror = function () { showError('Could not load this image, please try another'); };
@@ -448,11 +452,7 @@
   }
 
   function handleFiles(fileList) {
-    var valid = [];
-    for (var i = 0; i < fileList.length; i++) {
-      var f = fileList[i];
-      if (f && /^image\/(jpeg|png|webp)$/.test(f.type)) valid.push(f);
-    }
+    var valid = validImages(fileList);
     if (!valid.length) { showError('Unsupported format — please upload a JPG / PNG / WebP image'); return; }
     hideError();
     batchRunToken++;
@@ -471,6 +471,19 @@
     if (fileInput.files && fileInput.files.length) handleFiles(fileInput.files);
     fileInput.value = '';
   });
+  if (addMoreBtn) {
+    addMoreBtn.addEventListener('click', function () { if (addFilesInput) addFilesInput.click(); });
+  }
+  if (addFilesInput) {
+    addFilesInput.addEventListener('change', function () {
+      if (addFilesInput.files && addFilesInput.files.length) appendFiles(addFilesInput.files);
+      addFilesInput.value = '';
+    });
+  }
+  if (clearAllBtn) {
+    clearAllBtn.addEventListener('click', clearAll);
+  }
+  updatePickActions();
   ['dragenter', 'dragover'].forEach(function (ev) {
     dropzone.addEventListener(ev, function (e) { e.preventDefault(); dropzone.classList.add('drag'); });
   });
@@ -523,16 +536,122 @@
     setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
   });
 
+  /* ============ Add and remove images ============ */
+  function validImages(fileList) {
+    var valid = [];
+    for (var i = 0; i < fileList.length; i++) {
+      var f = fileList[i];
+      if (f && /^image\/(jpeg|png|webp)$/.test(f.type)) valid.push(f);
+    }
+    return valid;
+  }
+
+  function newBatchItem(file) {
+    return { file: file, name: file.name, size: file.size, state: 'processing', blob: null, el: null };
+  }
+
+  function updatePickActions() {
+    var busy = !!(currentImg || batchItems.length);
+    if (clearAllBtn) clearAllBtn.hidden = !busy;
+    if (addMoreBtn) addMoreBtn.textContent = busy ? 'Add more images' : 'Choose images';
+  }
+
+  /* Add tops up what is already here; dropping onto the box above starts a new set. */
+  function appendFiles(fileList) {
+    var valid = validImages(fileList);
+    if (!valid.length) { showError('Unsupported format — please upload a JPG / PNG / WebP image'); return; }
+    hideError();
+    if (batchItems.length) {
+      batchItems = batchItems.concat(valid.map(newBatchItem));
+      renderBatchList();
+      downloadZipBtn.disabled = true;
+      batchSizeHintText();
+      updatePickActions();
+      runBatch(true);
+      return;
+    }
+    if (currentImg && originalFile) { startBatch([originalFile].concat(valid)); return; }
+    if (valid.length === 1) handleFile(valid[0]);
+    else startBatch(valid);
+  }
+
+  function removeBatchItem(item) {
+    var idx = batchItems.indexOf(item);
+    if (idx === -1) return;
+    batchItems.splice(idx, 1);
+    batchRunToken++;
+    if (item.el && item.el.parentNode) item.el.parentNode.removeChild(item.el);
+    batchDone = batchItems.filter(function (it) { return !!it.blob; }).length;
+    updateBatchProgress();
+    batchSizeHintText();
+    updatePickActions();
+    if (!batchItems.length) {
+      batchResults.hidden = true;
+      batchProgressText.textContent = '0/0 Done';
+      batchProgressFill.style.width = '0%';
+      downloadZipBtn.disabled = true;
+      return;
+    }
+    if (batchItems.some(function (it) { return !it.blob; })) runBatch(true);
+    else downloadZipBtn.disabled = false;
+  }
+
+  /* Start over without reloading the page. */
+  function clearAll() {
+    batchRunToken++;
+    recompressToken++;
+    batchItems = [];
+    batchList.innerHTML = '';
+    batchResults.hidden = true;
+    results.hidden = true;
+    currentImg = null;
+    originalFile = null;
+    originalSize = 0;
+    currentBlob = null;
+    if (beforeUrl) { URL.revokeObjectURL(beforeUrl); beforeUrl = null; }
+    if (afterUrl) { URL.revokeObjectURL(afterUrl); afterUrl = null; }
+    beforeImg.removeAttribute('src');
+    afterImg.removeAttribute('src');
+    beforeImg.hidden = true;
+    afterImg.hidden = true;
+    beforeEmpty.hidden = false;
+    afterEmpty.hidden = false;
+    beforeSize.textContent = '';
+    afterSize.textContent = '';
+    fileName.textContent = '—';
+    origSize.textContent = '—';
+    compressedSize.textContent = '—';
+    outDims.textContent = '—';
+    savedVal.textContent = '—';
+    savedVal.className = 'stat-value badge is-none';
+    downloadBtn.disabled = true;
+    downloadZipBtn.disabled = true;
+    batchProgressText.textContent = '0/0 Done';
+    batchProgressFill.style.width = '0%';
+    hideError();
+    setStatus(null);
+    singleSizeHint();
+    batchSizeHintText();
+    updatePickActions();
+  }
+
   /* ============ Batch ============ */
   function startBatch(files) {
     results.hidden = true;
     batchResults.hidden = false;
+    currentImg = null;
+    originalFile = null;
+    originalSize = 0;
+    currentBlob = null;
+    if (beforeUrl) { URL.revokeObjectURL(beforeUrl); beforeUrl = null; }
+    if (afterUrl) { URL.revokeObjectURL(afterUrl); afterUrl = null; }
     batchItems = files.map(function (f) {
       return { file: f, name: f.name, size: f.size, state: 'processing', blob: null, el: null };
     });
     renderBatchList();
     downloadZipBtn.disabled = true;
     batchSizeHintText();
+    updatePickActions();
     runBatch();
   }
 
@@ -544,24 +663,29 @@
       li.innerHTML =
         '<span class="bi-name"></span>' +
         '<span class="bi-sizes notranslate" translate="no"><span class="bi-orig"></span> → <span class="bi-comp">—</span></span>' +
-        '<span class="bi-status"></span>';
+        '<span class="bi-status"></span>' +
+        '<button type="button" class="bi-remove" aria-label="Remove this image">Remove</button>';
       li.querySelector('.bi-name').textContent = item.name;
       li.querySelector('.bi-orig').textContent = formatBytes(item.size);
       li.querySelector('.bi-status').textContent = 'Compressing…';
+      li.querySelector('.bi-remove').addEventListener('click', function () { removeBatchItem(item); });
       batchList.appendChild(li);
       item.el = li;
     });
     updateBatchProgress();
   }
 
-  async function runBatch() {
+  async function runBatch(resume) {
     var token = ++batchRunToken;
     var q = batchQualityLevel;
     batchDone = 0;
-    batchItems.forEach(function (item) { item.state = 'processing'; item.blob = null; });
+    batchItems.forEach(function (item) {
+      if (!resume || !item.blob) { item.state = 'processing'; item.blob = null; }
+    });
     refreshBatchTexts();
     for (var i = 0; i < batchItems.length; i++) {
       var item = batchItems[i];
+      if (resume && item.blob) { batchDone++; refreshBatchItem(item); updateBatchProgress(); continue; }
       try {
         var img = await loadImage(item.file);
         if (token !== batchRunToken) return;

@@ -49,7 +49,12 @@
       <p class="dz-title">Drag &amp; drop a PNG here, or click to upload</p>
       <p class="dz-hint">Supports JPG / PNG / WebP — processed locally, never uploaded</p>
     </div>
-    <p class="error" id="errorMsg" hidden></p>
+    <div class="pick-actions">
+      <button class="btn btn-ghost pick-btn" id="addMoreBtn" type="button">Choose images</button>
+      <button class="btn btn-ghost pick-btn" id="clearAllBtn" type="button" hidden>Remove all</button>
+      <input type="file" id="addFilesInput" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" multiple hidden>
+      <span class="pick-hint">Add more keeps the images already here; dropping onto the box above replaces them.</span>
+    </div>    <p class="error" id="errorMsg" hidden></p>
 
     <div class="results" id="results" hidden>
       <div class="file-info">
