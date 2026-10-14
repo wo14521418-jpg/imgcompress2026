@@ -365,3 +365,17 @@
     border-radius: 8px; background: var(--white); cursor: pointer;
   }
   .action-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+
+  /* ---------- Exact output size ---------- */
+  .size-row { display: flex; align-items: center; gap: 12px; margin-top: 12px; flex-wrap: wrap; }
+  .size-inputs { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .size-inputs input[type="number"] {
+    width: 96px; font: inherit; font-weight: 600; text-align: center;
+    padding: 8px 10px; border: 1px solid var(--line); border-radius: 10px;
+    background: var(--white); color: var(--ink-900);
+  }
+  .size-inputs input[type="number"]:focus-visible { outline: 2px solid var(--blue-600); outline-offset: 1px; }
+  .size-x { color: var(--ink-400); font-weight: 700; }
+  .size-unit { color: var(--ink-600); font-size: .875rem; font-weight: 600; }
+  .opt { display: inline-flex; align-items: center; gap: 7px; font-size: .9rem; color: var(--ink-600); cursor: pointer; }
+  .opt input[type="checkbox"] { width: 16px; height: 16px; margin: 0; accent-color: var(--blue-600); }

@@ -82,7 +82,18 @@
           <option value="fit800">Fit within 800 px</option>
           <option value="pct50">50% of original</option>
           <option value="pct25">25% of original</option>
+          <option value="custom">Custom size in pixels</option>
         </select>
+      </div>
+      <div class="size-row" id="customSizeRow" hidden>
+        <span class="format-label">Exact size</span>
+        <div class="size-inputs">
+          <input type="number" id="resizeWidth" min="1" max="8192" step="1" inputmode="numeric" placeholder="width" aria-label="Output width in pixels">
+          <span class="size-x">&times;</span>
+          <input type="number" id="resizeHeight" min="1" max="8192" step="1" inputmode="numeric" placeholder="height" aria-label="Output height in pixels">
+          <span class="size-unit">px</span>
+          <label class="opt" for="resizeLock"><input type="checkbox" id="resizeLock" checked> Keep aspect ratio</label>
+        </div>
       </div>
       <p class="png-hint" id="pngHint" hidden>PNG is lossless, so it keeps every pixel exact: the file may not shrink, and after resizing it can even be larger than the original. Choose WebP or JPG for a smaller file.</p>
       <div class="compare">
@@ -118,7 +129,18 @@
           <option value="fit800">Fit within 800 px</option>
           <option value="pct50">50% of original</option>
           <option value="pct25">25% of original</option>
+          <option value="custom">Custom size in pixels</option>
         </select>
+      </div>
+      <div class="size-row" id="batchCustomSizeRow" hidden>
+        <span class="format-label">Exact size</span>
+        <div class="size-inputs">
+          <input type="number" id="batchResizeWidth" min="1" max="8192" step="1" inputmode="numeric" placeholder="width" aria-label="Output width in pixels">
+          <span class="size-x">&times;</span>
+          <input type="number" id="batchResizeHeight" min="1" max="8192" step="1" inputmode="numeric" placeholder="height" aria-label="Output height in pixels">
+          <span class="size-unit">px</span>
+          <label class="opt" for="batchResizeLock"><input type="checkbox" id="batchResizeLock" checked> Keep aspect ratio (fit inside the box)</label>
+        </div>
       </div>
       <ul class="batch-list" id="batchList"></ul>
       <button class="btn btn-primary download" id="downloadZipBtn" type="button" disabled>Download all as ZIP</button>

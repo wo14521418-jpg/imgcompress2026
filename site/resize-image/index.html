@@ -4,15 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Resize Image Online - Free Image Resizer</title>
-<meta name="description" content="Resize images online for free. Set a maximum width or height and download the resized JPG, PNG or WebP - processed in your browser, nothing uploaded.">
+<meta name="description" content="Resize images online for free. Type an exact width and height such as 1340 x 1785, or set a maximum size, and download the resized JPG, PNG or WebP - processed in your browser, nothing uploaded.">
 <link rel="canonical" href="https://imgcompress2026.netlify.app/resize-image/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Resize Image Online - Free Image Resizer">
-<meta property="og:description" content="Resize images online for free. Set a maximum width or height and download the resized file.">
+<meta property="og:description" content="Resize images online for free. Type an exact width and height, or set a maximum size, and download the resized file.">
 <meta property="og:url" content="https://imgcompress2026.netlify.app/resize-image/">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20rx='22'%20fill='%232563eb'/%3E%3Ctext%20x='50'%20y='50'%20font-size='58'%20text-anchor='middle'%20dominant-baseline='central'%20fill='white'%20font-weight='bold'%3EIC%3C/text%3E%3C/svg%3E">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"Resize Image Online","url":"https://imgcompress2026.netlify.app/resize-image/","applicationCategory":"MultimediaApplication","operatingSystem":"Any","description":"Resize JPG, PNG and WebP images to a target width or height in the browser."}
+{"@context":"https://schema.org","@type":"WebApplication","name":"Resize Image Online","url":"https://imgcompress2026.netlify.app/resize-image/","applicationCategory":"MultimediaApplication","operatingSystem":"Any","description":"Resize JPG, PNG and WebP images to an exact pixel size such as 1340 x 1785, or to a maximum width or height, in the browser."}
 </script>
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9000494688678902" crossorigin="anonymous"></script>
@@ -82,7 +82,18 @@
           <option value="fit800">Fit within 800 px</option>
           <option value="pct50">50% of original</option>
           <option value="pct25">25% of original</option>
+          <option value="custom">Custom size in pixels</option>
         </select>
+      </div>
+      <div class="size-row" id="customSizeRow" hidden>
+        <span class="format-label">Exact size</span>
+        <div class="size-inputs">
+          <input type="number" id="resizeWidth" min="1" max="8192" step="1" inputmode="numeric" placeholder="width" aria-label="Output width in pixels">
+          <span class="size-x">&times;</span>
+          <input type="number" id="resizeHeight" min="1" max="8192" step="1" inputmode="numeric" placeholder="height" aria-label="Output height in pixels">
+          <span class="size-unit">px</span>
+          <label class="opt" for="resizeLock"><input type="checkbox" id="resizeLock" checked> Keep aspect ratio</label>
+        </div>
       </div>
       <p class="png-hint" id="pngHint" hidden>PNG is lossless, so it keeps every pixel exact: the file may not shrink, and after resizing it can even be larger than the original. Choose WebP or JPG for a smaller file.</p>
       <div class="compare">
@@ -118,7 +129,18 @@
           <option value="fit800">Fit within 800 px</option>
           <option value="pct50">50% of original</option>
           <option value="pct25">25% of original</option>
+          <option value="custom">Custom size in pixels</option>
         </select>
+      </div>
+      <div class="size-row" id="batchCustomSizeRow" hidden>
+        <span class="format-label">Exact size</span>
+        <div class="size-inputs">
+          <input type="number" id="batchResizeWidth" min="1" max="8192" step="1" inputmode="numeric" placeholder="width" aria-label="Output width in pixels">
+          <span class="size-x">&times;</span>
+          <input type="number" id="batchResizeHeight" min="1" max="8192" step="1" inputmode="numeric" placeholder="height" aria-label="Output height in pixels">
+          <span class="size-unit">px</span>
+          <label class="opt" for="batchResizeLock"><input type="checkbox" id="batchResizeLock" checked> Keep aspect ratio (fit inside the box)</label>
+        </div>
       </div>
       <ul class="batch-list" id="batchList"></ul>
       <button class="btn btn-primary download" id="downloadZipBtn" type="button" disabled>Download all as ZIP</button>
@@ -129,7 +151,7 @@
     <h2>How to resize an image</h2>
     <ol>
       <li>Upload a JPG, PNG or WebP image. WebP is selected as the output format by default because a resized photo stays smallest as WebP; switch to JPG or PNG under <strong>Output format</strong> if you need a specific file type.</li>
-      <li>Pick a target size under <strong>Resize</strong> — fit within 1920, 1280 or 800 pixels, or scale to 50% or 25% of the original.</li>
+      <li>Pick a target size under <strong>Resize</strong> — fit within 1920, 1280 or 800 pixels, scale to 50% or 25% of the original, or choose <strong>Custom size in pixels</strong> and type an exact width and height.</li>
       <li>Check the before-and-after preview. The output dimensions are shown next to the compressed size.</li>
       <li>Download the resized image.</li>
     </ol>
@@ -148,6 +170,7 @@
       <li><strong>Fit within 1280 px</strong> — in-article images and blog headers.</li>
       <li><strong>Fit within 800 px</strong> — thumbnails, cards, and anything only viewed on a phone.</li>
       <li><strong>50% / 25%</strong> — keep the original proportions and just make a smaller copy.</li>
+      <li><strong>Custom size in pixels</strong> — for when something demands exact numbers, such as a form that only accepts 1340 × 1785 px. With <em>Keep aspect ratio</em> ticked the second box follows the first as you type; untick it to stretch the image to the numbers you enter.</li>
     </ul>
   </section>
 

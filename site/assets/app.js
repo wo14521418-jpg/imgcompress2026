@@ -47,6 +47,14 @@
   var formatSelect = $('formatSelect');
   var resizeSelect = $('resizeSelect');
   var batchResizeSelect = $('batchResizeSelect');
+  var customSizeRow = $('customSizeRow');
+  var resizeWidth = $('resizeWidth');
+  var resizeHeight = $('resizeHeight');
+  var resizeLock = $('resizeLock');
+  var batchCustomSizeRow = $('batchCustomSizeRow');
+  var batchResizeWidth = $('batchResizeWidth');
+  var batchResizeHeight = $('batchResizeHeight');
+  var batchResizeLock = $('batchResizeLock');
   var outDims = $('outDims');
   var pngHint = $('pngHint');
   var singleLevelBtns = Array.prototype.slice.call(document.querySelectorAll('#results .level-btn'));
@@ -103,7 +111,7 @@
   function setStatus(msg) {
     statusKey = msg;
     if (msg) { statusEl.textContent = msg; statusEl.hidden = false; }
-    else { statusEl.hidden = true; }
+    else { statusEl.textContent = ''; statusEl.hidden = true; }
   }
 
   function showError(msg) { errorMsg.textContent = msg; errorMsg.hidden = false; }
@@ -119,6 +127,65 @@
     return { mode: 'orig', value: 0 };
   }
 
+  /* ---------- Exact output size (typed width x height) ---------- */
+  function clampDim(n) {
+    if (!n || !isFinite(n) || n < 1) return 0;
+    return Math.min(MAX_DIM, Math.round(n));
+  }
+
+  function readSizeBox(wEl, hEl) {
+    var w = clampDim(parseInt(wEl && wEl.value, 10));
+    var h = clampDim(parseInt(hEl && hEl.value, 10));
+    if (!w && !h) return null;
+    return { w: w, h: h };
+  }
+
+  /* Single image: the two boxes are the exact output size.
+     Batch: with the ratio box ticked each image is scaled to fit inside them instead. */
+  function singleSpec() {
+    if (resizeMode === 'custom') {
+      var box = readSizeBox(resizeWidth, resizeHeight);
+      if (!box) return { mode: 'orig', value: 0 };
+      return { mode: 'exact', w: box.w, h: box.h };
+    }
+    return parseResize(resizeMode);
+  }
+
+  function batchSpec() {
+    if (batchResizeMode === 'custom') {
+      var box = readSizeBox(batchResizeWidth, batchResizeHeight);
+      if (!box) return { mode: 'orig', value: 0 };
+      return { mode: (batchResizeLock && batchResizeLock.checked) ? 'box' : 'exact', w: box.w, h: box.h };
+    }
+    return parseResize(batchResizeMode);
+  }
+
+  function updateCustomRows() {
+    if (customSizeRow) customSizeRow.hidden = resizeMode !== 'custom';
+    if (batchCustomSizeRow) batchCustomSizeRow.hidden = batchResizeMode !== 'custom';
+  }
+
+  function prefillSize(wEl, hEl, w0, h0) {
+    if (!wEl || !hEl || !w0 || !h0) return;
+    if (wEl.value || hEl.value) return;
+    wEl.value = String(Math.min(MAX_DIM, w0));
+    hEl.value = String(Math.min(MAX_DIM, h0));
+  }
+
+  /* With "keep aspect ratio" ticked the other box follows the one being typed in.
+     'changed' says which box the input event came from, so no guessing from focus. */
+  function linkSizeFields(changed) {
+    if (!resizeWidth || !resizeHeight || !resizeLock || !resizeLock.checked) return;
+    if (!currentImg) return;
+    var ratio = currentImg.naturalWidth / currentImg.naturalHeight;
+    if (!ratio) return;
+    var w = clampDim(parseInt(resizeWidth.value, 10));
+    var h = clampDim(parseInt(resizeHeight.value, 10));
+    if (changed === 'h' && h) resizeWidth.value = String(clampDim(Math.round(h * ratio)));
+    else if (w) resizeHeight.value = String(clampDim(Math.round(w / ratio)));
+    else if (h) resizeWidth.value = String(clampDim(Math.round(h * ratio)));
+  }
+
   function targetDims(w0, h0, spec) {
     var w = w0, h = h0;
     if (spec && spec.mode === 'pct') {
@@ -130,6 +197,19 @@
         var s = spec.value / longest;
         w = w0 * s;
         h = h0 * s;
+      }
+    } else if (spec && spec.mode === 'exact') {
+      if (spec.w) w = spec.w;
+      if (spec.h) h = spec.h;
+    } else if (spec && spec.mode === 'box') {
+      var boxW = spec.w || 0, boxH = spec.h || 0;
+      if (boxW && boxH) {
+        var sBox = Math.min(boxW / w0, boxH / h0);
+        w = w0 * sBox; h = h0 * sBox;
+      } else if (boxW) {
+        var sW = boxW / w0; w = w0 * sW; h = h0 * sW;
+      } else if (boxH) {
+        var sH = boxH / h0; w = w0 * sH; h = h0 * sH;
       }
     }
     var cap = Math.min(1, MAX_DIM / Math.max(w, h));
@@ -192,10 +272,13 @@
     setStatus('Compressing…');
     try {
       var q = qualityLevel;
-      var out = await compressImage(currentImg, q, null, parseResize(resizeMode));
+      var out = await compressImage(currentImg, q, null, singleSpec());
       if (token !== recompressToken) return;
       updateResult(out.blob, out.w, out.h);
-      setStatus(null);
+      var upscaled = out.w > currentImg.naturalWidth || out.h > currentImg.naturalHeight;
+      setStatus(upscaled
+        ? 'Upscaled from ' + currentImg.naturalWidth + ' x ' + currentImg.naturalHeight + ' px — expect a bigger, softer file.'
+        : null);
     } catch (err) {
       if (token !== recompressToken) return;
       setStatus('Compression failed, please retry');
@@ -350,6 +433,7 @@
       fileName.textContent = file.name;
       origSize.textContent = formatBytes(file.size);
       results.hidden = false;
+      prefillSize(resizeWidth, resizeHeight, img.naturalWidth, img.naturalHeight);
       await recompress();
     };
     img.onerror = function () { showError('Could not load this image, please try another'); };
@@ -441,6 +525,11 @@
     });
     renderBatchList();
     downloadZipBtn.disabled = true;
+    if (batchResizeWidth && batchResizeHeight && !batchResizeWidth.value && !batchResizeHeight.value) {
+      loadImage(files[0]).then(function (img) {
+        prefillSize(batchResizeWidth, batchResizeHeight, img.naturalWidth, img.naturalHeight);
+      }).catch(function () { /* leave the boxes empty */ });
+    }
     runBatch();
   }
 
@@ -473,7 +562,7 @@
       try {
         var img = await loadImage(item.file);
         if (token !== batchRunToken) return;
-        var out = await compressImage(img, q, 'image/webp', parseResize(batchResizeMode));
+        var out = await compressImage(img, q, 'image/webp', batchSpec());
         if (token !== batchRunToken) return;
         item.blob = out.blob;
         item.state = 'done';
@@ -549,16 +638,49 @@
   applySingleLevelUI();
   applyFormatUI();
   applyBatchLevelUI();
+
+  var sizeTimer = null;
+  function scheduleRecompress() {
+    if (resizeMode !== 'custom') return;
+    clearTimeout(sizeTimer);
+    sizeTimer = setTimeout(function () { recompress(); }, 250);
+  }
+  function scheduleBatchResize() {
+    if (batchResizeMode !== 'custom') return;
+    clearTimeout(sizeTimer);
+    sizeTimer = setTimeout(function () { if (batchItems.length) runBatch(); }, 250);
+  }
+
   if (resizeSelect) {
     resizeSelect.addEventListener('change', function () {
       resizeMode = resizeSelect.value;
+      updateCustomRows();
+      if (resizeMode === 'custom' && currentImg) {
+        prefillSize(resizeWidth, resizeHeight, currentImg.naturalWidth, currentImg.naturalHeight);
+      }
       recompress();
     });
   }
   if (batchResizeSelect) {
     batchResizeSelect.addEventListener('change', function () {
       batchResizeMode = batchResizeSelect.value;
+      updateCustomRows();
       if (batchItems.length) runBatch();
     });
   }
+  if (resizeWidth) {
+    resizeWidth.addEventListener('input', function () { linkSizeFields('w'); scheduleRecompress(); });
+  }
+  if (resizeHeight) {
+    resizeHeight.addEventListener('input', function () { linkSizeFields('h'); scheduleRecompress(); });
+  }
+  if (resizeLock) {
+    resizeLock.addEventListener('change', function () { linkSizeFields('w'); scheduleRecompress(); });
+  }
+  [batchResizeWidth, batchResizeHeight].forEach(function (el) {
+    if (!el) return;
+    el.addEventListener('input', scheduleBatchResize);
+  });
+  if (batchResizeLock) batchResizeLock.addEventListener('change', scheduleBatchResize);
+  updateCustomRows();
 })();
