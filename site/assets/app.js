@@ -547,7 +547,11 @@
   }
 
   function newBatchItem(file) {
-    return { file: file, name: file.name, size: file.size, state: 'processing', blob: null, el: null };
+    return { file: file, name: file.name, size: file.size, state: 'processing', blob: null, el: null, thumbUrl: null };
+  }
+
+  function releaseThumb(item) {
+    if (item && item.thumbUrl) { URL.revokeObjectURL(item.thumbUrl); item.thumbUrl = null; }
   }
 
   function updatePickActions() {
@@ -580,6 +584,7 @@
     if (idx === -1) return;
     batchItems.splice(idx, 1);
     batchRunToken++;
+    releaseThumb(item);
     if (item.el && item.el.parentNode) item.el.parentNode.removeChild(item.el);
     batchDone = batchItems.filter(function (it) { return !!it.blob; }).length;
     updateBatchProgress();
@@ -600,6 +605,7 @@
   function clearAll() {
     batchRunToken++;
     recompressToken++;
+    batchItems.forEach(releaseThumb);
     batchItems = [];
     batchList.innerHTML = '';
     batchResults.hidden = true;
@@ -645,9 +651,7 @@
     currentBlob = null;
     if (beforeUrl) { URL.revokeObjectURL(beforeUrl); beforeUrl = null; }
     if (afterUrl) { URL.revokeObjectURL(afterUrl); afterUrl = null; }
-    batchItems = files.map(function (f) {
-      return { file: f, name: f.name, size: f.size, state: 'processing', blob: null, el: null };
-    });
+    batchItems = files.map(newBatchItem);
     renderBatchList();
     downloadZipBtn.disabled = true;
     batchSizeHintText();
@@ -669,6 +673,14 @@
       li.querySelector('.bi-orig').textContent = formatBytes(item.size);
       li.querySelector('.bi-status').textContent = 'Compressing…';
       li.querySelector('.bi-remove').addEventListener('click', function () { removeBatchItem(item); });
+      var thumb = document.createElement('img');
+      thumb.className = 'bi-thumb';
+      thumb.alt = '';
+      thumb.width = 48;
+      thumb.height = 48;
+      if (!item.thumbUrl) item.thumbUrl = URL.createObjectURL(item.file);
+      thumb.src = item.thumbUrl;
+      li.insertBefore(thumb, li.firstChild);
       batchList.appendChild(li);
       item.el = li;
     });

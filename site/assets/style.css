@@ -159,7 +159,12 @@
   .progress-fill { height: 100%; width: 0%; background: var(--blue-600); border-radius: 999px; transition: width .2s ease; }
   .progress-text { font-size: .875rem; font-weight: 600; color: var(--ink-600); white-space: nowrap; }
   .batch-list { list-style: none; margin: 16px 0 0; display: grid; gap: 8px; max-height: 340px; overflow: auto; }
-  .batch-item { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); }
+  .batch-item { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 10px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); }
+  .bi-thumb {
+    width: 48px; height: 48px; flex-shrink: 0; display: block;
+    object-fit: cover; border-radius: 8px;
+    border: 1px solid var(--line); background: var(--white);
+  }
   .bi-remove {
     font: inherit; font-size: .8125rem; font-weight: 600; flex-shrink: 0;
     color: var(--ink-600); background: var(--white);

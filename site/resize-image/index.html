@@ -108,7 +108,8 @@
           <button type="button" class="size-chip notranslate" translate="no" data-w="1200" data-h="1600">1200 &times; 1600</button>
           <button type="button" class="size-chip notranslate" translate="no" data-w="1200" data-h="628">1200 &times; 628</button>
           <button type="button" class="size-chip notranslate" translate="no" data-w="800" data-h="800">800 &times; 800</button>
-        </div>        <p class="size-hint" id="sizeHint"></p>
+        </div>
+        <p class="size-hint" id="sizeHint"></p>
       </div>
       <p class="png-hint" id="pngHint" hidden>PNG is lossless, so it keeps every pixel exact: the file may not shrink, and after resizing it can even be larger than the original. Choose WebP or JPG for a smaller file.</p>
       <div class="compare">
@@ -127,6 +128,7 @@
     <div class="batch-results" id="batchResults" hidden>
       <h3 class="batch-title">Batch compression</h3>
       <div class="batch-progress"><div class="progress-bar"><div class="progress-fill" id="batchProgressFill"></div></div><span class="progress-text" id="batchProgressText">0/0</span></div>
+      <ul class="batch-list" id="batchList"></ul>
       <div class="level-row">
         <span class="level-label">Compression level</span>
         <div class="level-options" role="radiogroup" aria-label="Compression level">
@@ -165,9 +167,9 @@
           <button type="button" class="size-chip notranslate" translate="no" data-w="1200" data-h="1600">1200 &times; 1600</button>
           <button type="button" class="size-chip notranslate" translate="no" data-w="1200" data-h="628">1200 &times; 628</button>
           <button type="button" class="size-chip notranslate" translate="no" data-w="800" data-h="800">800 &times; 800</button>
-        </div>        <p class="size-hint" id="batchSizeHint"></p>
+        </div>
+        <p class="size-hint" id="batchSizeHint"></p>
       </div>
-      <ul class="batch-list" id="batchList"></ul>
       <button class="btn btn-primary download" id="downloadZipBtn" type="button" disabled>Download all as ZIP</button>
     </div>
   </section>
