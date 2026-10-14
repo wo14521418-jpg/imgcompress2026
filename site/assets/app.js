@@ -543,7 +543,7 @@
       li.className = 'batch-item';
       li.innerHTML =
         '<span class="bi-name"></span>' +
-        '<span class="bi-sizes"><span class="bi-orig"></span> → <span class="bi-comp">—</span></span>' +
+        '<span class="bi-sizes notranslate" translate="no"><span class="bi-orig"></span> → <span class="bi-comp">—</span></span>' +
         '<span class="bi-status"></span>';
       li.querySelector('.bi-name').textContent = item.name;
       li.querySelector('.bi-orig').textContent = formatBytes(item.size);
